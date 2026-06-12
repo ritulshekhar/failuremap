@@ -1,7 +1,16 @@
 from fastapi import FastAPI
 
-app = FastAPI(title="FailureMap")
+from app.api.upload import router as upload_router
+
+app = FastAPI(
+    title="FailureMap"
+)
+
+app.include_router(upload_router)
+
 
 @app.get("/")
 def root():
-    return {"status": "running"}
+    return {
+        "status": "running"
+    }
