@@ -34,6 +34,13 @@ app.include_router(
     target_router
 )
 
+from app.api.train import (
+    router as train_router
+)
+
+app.include_router(
+    train_router
+)
 
 @app.get("/")
 def root():

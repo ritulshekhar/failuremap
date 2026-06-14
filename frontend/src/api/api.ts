@@ -27,14 +27,14 @@ async (
 };
 
 
-export const selectTarget =
+export const trainModel =
 async (
   target: string
 ) => {
 
   const response =
     await axios.post(
-      `${API_URL}/select-target`,
+      `${API_URL}/train`,
       {
         target
       }
