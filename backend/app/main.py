@@ -1,7 +1,16 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.upload import router as upload_router
+from fastapi.middleware.cors import (
+    CORSMiddleware
+)
+
+from app.api.upload import (
+    router as upload_router
+)
+
+from app.api.target import (
+    router as target_router
+)
 
 app = FastAPI(
     title="FailureMap"
@@ -17,4 +26,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(upload_router)
+app.include_router(
+    upload_router
+)
+
+app.include_router(
+    target_router
+)
+
+
+@app.get("/")
+def root():
+
+    return {
+        "status": "running"
+    }
