@@ -8,6 +8,10 @@ from app.services.training_service import (
     train_model,
 )
 
+from app.services.failure_map_service import (
+    generate_failure_map,
+)
+
 router = APIRouter()
 
 
@@ -15,12 +19,14 @@ router = APIRouter()
 def train_model_endpoint():
 
     if state.CURRENT_DATASET is None:
+
         raise HTTPException(
             status_code=400,
             detail="No dataset has been uploaded.",
         )
 
     if state.CURRENT_TARGET is None:
+
         raise HTTPException(
             status_code=400,
             detail="Target column has not been selected.",
@@ -58,6 +64,21 @@ def train_model_endpoint():
 
         state.CURRENT_PREDICTIONS = result["predictions"]
 
+        state.CURRENT_LABEL_ENCODER = result["label_encoder"]
+
+        failure_map = generate_failure_map(
+            X_test=result["X_test"],
+            y_true=result["y_test"],
+            y_pred=result["predictions"],
+            label_encoder=result["label_encoder"],
+        )
+
+        state.CURRENT_FAILURE_MAP = failure_map
+
+        print("Failure map stored successfully")
+
+        print(state.CURRENT_FAILURE_MAP["summary"])
+
         return {
 
             "success": True,
@@ -69,6 +90,8 @@ def train_model_endpoint():
                 "task": result["task"],
 
                 "metrics": result["metrics"],
+
+                "failure_summary": failure_map["summary"],
 
             },
 
