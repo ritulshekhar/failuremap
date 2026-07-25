@@ -3,7 +3,10 @@ import pandas as pd
 from fastapi import APIRouter, HTTPException
 
 import app.utils.state as state
-from app.services.training_service import train_model
+
+from app.services.training_service import (
+    train_model,
+)
 
 router = APIRouter()
 
@@ -24,9 +27,13 @@ def train_model_endpoint():
         )
 
     try:
-        df = pd.read_csv(state.CURRENT_DATASET)
+
+        df = pd.read_csv(
+            state.CURRENT_DATASET
+        )
 
     except Exception as e:
+
         raise HTTPException(
             status_code=500,
             detail=f"Unable to load dataset: {str(e)}",
@@ -39,13 +46,32 @@ def train_model_endpoint():
             target_column=state.CURRENT_TARGET,
         )
 
-        state.CURRENT_MODEL = result.get("model")
-        state.CURRENT_METRICS = result.get("metrics")
+        state.CURRENT_TASK = result["task"]
+
+        state.CURRENT_MODEL = result["model"]
+
+        state.CURRENT_METRICS = result["metrics"]
+
+        state.CURRENT_X_TEST = result["X_test"]
+
+        state.CURRENT_Y_TEST = result["y_test"]
+
+        state.CURRENT_PREDICTIONS = result["predictions"]
 
         return {
+
             "success": True,
+
             "message": "Model trained successfully.",
-            "data": result,
+
+            "data": {
+
+                "task": result["task"],
+
+                "metrics": result["metrics"],
+
+            },
+
         }
 
     except Exception as e:
