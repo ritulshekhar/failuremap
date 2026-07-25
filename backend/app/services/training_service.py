@@ -6,9 +6,13 @@ from sklearn.pipeline import (
     Pipeline,
 )
 
-from xgboost import (
-    XGBClassifier,
-    XGBRegressor,
+from sklearn.preprocessing import (
+    LabelEncoder,
+)
+
+from sklearn.ensemble import (
+    RandomForestClassifier,
+    RandomForestRegressor,
 )
 
 from app.utils.preprocessing import (
@@ -37,6 +41,14 @@ def train_model(
         else "regression"
     )
 
+    label_encoder = None
+
+    if task_type == "classification":
+
+        label_encoder = LabelEncoder()
+
+        y = label_encoder.fit_transform(y)
+
     preprocessor = (
         build_preprocessor(X)
     )
@@ -52,17 +64,16 @@ def train_model(
 
     if task_type == "classification":
 
-        model = XGBClassifier(
+        model = RandomForestClassifier(
+            n_estimators=200,
             random_state=42,
-            eval_metric="logloss",
-            n_estimators=100,
         )
 
     else:
 
-        model = XGBRegressor(
+        model = RandomForestRegressor(
+            n_estimators=200,
             random_state=42,
-            n_estimators=100,
         )
 
     pipeline = Pipeline(
@@ -106,5 +117,7 @@ def train_model(
         "X_test": X_test,
 
         "y_test": y_test,
+
+        "label_encoder": label_encoder,
 
     }
