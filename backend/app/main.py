@@ -1,32 +1,20 @@
 from fastapi import FastAPI
-
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.upload import (
-    router as upload_router,
-)
+from app.api.upload import router as upload_router
+from app.api.target import router as target_router
+from app.api.train import router as train_router
+from app.api.explain import router as explain_router
+from app.api.failure_map import router as failure_map_router
+from app.api.failure_regions import router as failure_regions_router
 
-from app.api.target import (
-    router as target_router,
-)
-
-from app.api.train import (
-    router as train_router,
-)
-
-from app.api.explain import (
-    router as explain_router,
-)
-
-from app.api.failure_map import (
-    router as failure_map_router,
-)
 
 app = FastAPI(
-    title="FailureMap",
-    description="AI-powered ML Model Failure Analysis Platform",
-    version="0.3.0",
+    title="FailureMap API",
+    description="An AI-powered platform for identifying machine learning failure regions.",
+    version="0.4.0",
 )
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -36,55 +24,55 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(
-    upload_router,
-    prefix="/api",
-)
-
-app.include_router(
-    target_router,
-    prefix="/api",
-)
-
-app.include_router(
-    train_router,
-    prefix="/api",
-)
-
-app.include_router(
-    explain_router,
-    prefix="/api",
-)
-
-app.include_router(
-    failure_map_router,
-    prefix="/api",
-)
-
 
 @app.get("/")
 def root():
-
     return {
-
         "success": True,
-
         "message": "Welcome to FailureMap API 🚀",
-
-        "version": "0.3.0",
-
+        "version": "0.4.0",
     }
 
 
 @app.get("/health")
 def health():
-
     return {
-
         "status": "healthy",
-
-        "service": "FailureMap Backend",
-
-        "version": "0.3.0",
-
     }
+
+
+app.include_router(
+    upload_router,
+    prefix="/api",
+    tags=["Upload"],
+)
+
+app.include_router(
+    target_router,
+    prefix="/api",
+    tags=["Target"],
+)
+
+app.include_router(
+    train_router,
+    prefix="/api",
+    tags=["Training"],
+)
+
+app.include_router(
+    explain_router,
+    prefix="/api",
+    tags=["Explainability"],
+)
+
+app.include_router(
+    failure_map_router,
+    prefix="/api",
+    tags=["Failure Map"],
+)
+
+app.include_router(
+    failure_regions_router,
+    prefix="/api",
+    tags=["Failure Regions"],
+)

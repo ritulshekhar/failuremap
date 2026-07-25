@@ -12,6 +12,10 @@ from app.services.failure_map_service import (
     generate_failure_map,
 )
 
+from app.services.failure_region_service import (
+    discover_failure_regions,
+)
+
 router = APIRouter()
 
 
@@ -19,27 +23,23 @@ router = APIRouter()
 def train_model_endpoint():
 
     if state.CURRENT_DATASET is None:
-
         raise HTTPException(
             status_code=400,
             detail="No dataset has been uploaded.",
         )
 
     if state.CURRENT_TARGET is None:
-
         raise HTTPException(
             status_code=400,
             detail="Target column has not been selected.",
         )
 
     try:
-
         df = pd.read_csv(
             state.CURRENT_DATASET
         )
 
     except Exception as e:
-
         raise HTTPException(
             status_code=500,
             detail=f"Unable to load dataset: {str(e)}",
@@ -66,6 +66,10 @@ def train_model_endpoint():
 
         state.CURRENT_LABEL_ENCODER = result["label_encoder"]
 
+        # -----------------------------
+        # Generate Failure Map
+        # -----------------------------
+
         failure_map = generate_failure_map(
             X_test=result["X_test"],
             y_true=result["y_test"],
@@ -75,9 +79,21 @@ def train_model_endpoint():
 
         state.CURRENT_FAILURE_MAP = failure_map
 
-        print("Failure map stored successfully")
+        # -----------------------------
+        # Discover Failure Regions
+        # -----------------------------
 
-        print(state.CURRENT_FAILURE_MAP["summary"])
+        failure_regions = discover_failure_regions(
+            failure_map["failure_dataframe"]
+        )
+
+        state.CURRENT_FAILURE_REGIONS = failure_regions
+
+        print("Failure map stored successfully.")
+        print(failure_map["summary"])
+
+        print("Failure regions discovered.")
+        print(f"Regions found: {len(failure_regions)}")
 
         return {
 
@@ -92,6 +108,10 @@ def train_model_endpoint():
                 "metrics": result["metrics"],
 
                 "failure_summary": failure_map["summary"],
+
+                "failure_regions_found": len(
+                    failure_regions
+                ),
 
             },
 
