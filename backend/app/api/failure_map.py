@@ -7,32 +7,25 @@ router = APIRouter()
 
 @router.get("/failure-map")
 def get_failure_map():
+    """
+    Returns the generated failure map after model training.
+    """
 
     if state.CURRENT_FAILURE_MAP is None:
-
         raise HTTPException(
             status_code=400,
             detail="No failure map available. Train a model first.",
         )
 
-    failure_df = state.CURRENT_FAILURE_MAP["failure_dataframe"]
-
-    summary = state.CURRENT_FAILURE_MAP["summary"]
+    failure_map = state.CURRENT_FAILURE_MAP
 
     return {
-
         "success": True,
-
-        "message": "Failure map generated.",
-
+        "message": "Failure map generated successfully.",
         "data": {
-
-            "summary": summary,
-
-            "samples": failure_df.to_dict(
-                orient="records"
-            ),
-
+            "summary": failure_map["summary"],
+            "samples": failure_map["failure_dataframe"]
+            .head(20)
+            .to_dict(orient="records"),
         },
-
     }
