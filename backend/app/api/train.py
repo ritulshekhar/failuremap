@@ -12,6 +12,9 @@ from app.services.visualization_service import (
     generate_failure_region_chart,
     generate_feature_importance_chart,
     generate_prediction_distribution_chart,
+    generate_correlation_heatmap,
+    generate_error_distribution_chart,
+    generate_failed_feature_distribution,
 )
 
 router = APIRouter()
@@ -19,6 +22,10 @@ router = APIRouter()
 
 @router.post("/train")
 def train_model_endpoint():
+
+    # ----------------------------------------
+    # Validation
+    # ----------------------------------------
 
     if state.CURRENT_DATASET is None:
         raise HTTPException(
@@ -32,14 +39,26 @@ def train_model_endpoint():
             detail="Target column has not been selected.",
         )
 
+    # ----------------------------------------
+    # Load Dataset
+    # ----------------------------------------
+
     try:
-        df = pd.read_csv(state.CURRENT_DATASET)
+
+        df = pd.read_csv(
+            state.CURRENT_DATASET
+        )
 
     except Exception as e:
+
         raise HTTPException(
             status_code=500,
             detail=f"Unable to load dataset: {str(e)}",
         )
+
+    # ----------------------------------------
+    # Training Pipeline
+    # ----------------------------------------
 
     try:
 
@@ -48,21 +67,27 @@ def train_model_endpoint():
             target_column=state.CURRENT_TARGET,
         )
 
-        # -----------------------------
-        # Store training results
-        # -----------------------------
+        # ----------------------------------------
+        # Store Model State
+        # ----------------------------------------
 
         state.CURRENT_TASK = result["task"]
+
         state.CURRENT_MODEL = result["model"]
+
         state.CURRENT_METRICS = result["metrics"]
+
         state.CURRENT_X_TEST = result["X_test"]
+
         state.CURRENT_Y_TEST = result["y_test"]
+
         state.CURRENT_PREDICTIONS = result["predictions"]
+
         state.CURRENT_LABEL_ENCODER = result["label_encoder"]
 
-        # -----------------------------
+        # ----------------------------------------
         # Failure Map
-        # -----------------------------
+        # ----------------------------------------
 
         failure_map = generate_failure_map(
             X_test=result["X_test"],
@@ -73,9 +98,9 @@ def train_model_endpoint():
 
         state.CURRENT_FAILURE_MAP = failure_map
 
-        # -----------------------------
+        # ----------------------------------------
         # Failure Regions
-        # -----------------------------
+        # ----------------------------------------
 
         failure_regions = discover_failure_regions(
             failure_map["failure_dataframe"]
@@ -83,24 +108,34 @@ def train_model_endpoint():
 
         state.CURRENT_FAILURE_REGIONS = failure_regions
 
-        # -----------------------------
+        # ----------------------------------------
         # Visualizations
-        # -----------------------------
+        # ----------------------------------------
 
         failure_chart = generate_failure_region_chart(
             failure_regions
         )
 
-        feature_importance_chart = (
-            generate_feature_importance_chart(
-                result["model"],
-                result["X_test"].columns,
-            )
+        feature_chart = generate_feature_importance_chart(
+            result["model"],
+            result["X_test"].columns,
         )
 
-        prediction_distribution_chart = (
-            generate_prediction_distribution_chart(
-                result["predictions"]
+        prediction_chart = generate_prediction_distribution_chart(
+            result["predictions"]
+        )
+
+        correlation_chart = generate_correlation_heatmap(
+            df
+        )
+
+        error_chart = generate_error_distribution_chart(
+            failure_map["failure_dataframe"]
+        )
+
+        failed_distribution_chart = (
+            generate_failed_feature_distribution(
+                failure_map["failure_dataframe"]
             )
         )
 
@@ -108,35 +143,44 @@ def train_model_endpoint():
 
             "failure_region_chart": failure_chart,
 
-            "feature_importance_chart": feature_importance_chart,
+            "feature_importance_chart": feature_chart,
 
-            "prediction_distribution_chart": prediction_distribution_chart,
+            "prediction_distribution_chart": prediction_chart,
+
+            "correlation_heatmap": correlation_chart,
+
+            "error_distribution_chart": error_chart,
+
+            "failed_feature_distribution": failed_distribution_chart,
 
         }
 
-        # -----------------------------
+        # ----------------------------------------
         # Console Logs
-        # -----------------------------
+        # ----------------------------------------
 
         print("\n========== TRAINING COMPLETE ==========")
 
-        print("Task:", result["task"])
+        print("Task:")
+        print(result["task"])
 
-        print("Metrics:", result["metrics"])
+        print("\nMetrics:")
+        print(result["metrics"])
 
-        print("Failure Summary:")
+        print("\nFailure Summary:")
         print(failure_map["summary"])
 
-        print(f"Failure Regions: {len(failure_regions)}")
+        print("\nFailure Regions:")
+        print(len(failure_regions))
 
-        print("Visualizations:")
+        print("\nVisualizations:")
         print(state.CURRENT_VISUALIZATIONS)
 
         print("=======================================\n")
 
-        # -----------------------------
+        # ----------------------------------------
         # API Response
-        # -----------------------------
+        # ----------------------------------------
 
         return {
 
