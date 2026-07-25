@@ -4,20 +4,14 @@ from fastapi import APIRouter, HTTPException
 
 import app.utils.state as state
 
-from app.services.training_service import (
-    train_model,
-)
-
-from app.services.failure_map_service import (
-    generate_failure_map,
-)
-
-from app.services.failure_region_service import (
-    discover_failure_regions,
-)
+from app.services.training_service import train_model
+from app.services.failure_map_service import generate_failure_map
+from app.services.failure_region_service import discover_failure_regions
 
 from app.services.visualization_service import (
     generate_failure_region_chart,
+    generate_feature_importance_chart,
+    generate_prediction_distribution_chart,
 )
 
 router = APIRouter()
@@ -39,9 +33,7 @@ def train_model_endpoint():
         )
 
     try:
-        df = pd.read_csv(
-            state.CURRENT_DATASET
-        )
+        df = pd.read_csv(state.CURRENT_DATASET)
 
     except Exception as e:
         raise HTTPException(
@@ -56,18 +48,16 @@ def train_model_endpoint():
             target_column=state.CURRENT_TARGET,
         )
 
+        # -----------------------------
+        # Store training results
+        # -----------------------------
+
         state.CURRENT_TASK = result["task"]
-
         state.CURRENT_MODEL = result["model"]
-
         state.CURRENT_METRICS = result["metrics"]
-
         state.CURRENT_X_TEST = result["X_test"]
-
         state.CURRENT_Y_TEST = result["y_test"]
-
         state.CURRENT_PREDICTIONS = result["predictions"]
-
         state.CURRENT_LABEL_ENCODER = result["label_encoder"]
 
         # -----------------------------
@@ -97,22 +87,56 @@ def train_model_endpoint():
         # Visualizations
         # -----------------------------
 
-        chart = generate_failure_region_chart(
+        failure_chart = generate_failure_region_chart(
             failure_regions
         )
 
+        feature_importance_chart = (
+            generate_feature_importance_chart(
+                result["model"],
+                result["X_test"].columns,
+            )
+        )
+
+        prediction_distribution_chart = (
+            generate_prediction_distribution_chart(
+                result["predictions"]
+            )
+        )
+
         state.CURRENT_VISUALIZATIONS = {
-            "failure_region_chart": chart
+
+            "failure_region_chart": failure_chart,
+
+            "feature_importance_chart": feature_importance_chart,
+
+            "prediction_distribution_chart": prediction_distribution_chart,
+
         }
 
-        print("Failure map stored successfully.")
+        # -----------------------------
+        # Console Logs
+        # -----------------------------
+
+        print("\n========== TRAINING COMPLETE ==========")
+
+        print("Task:", result["task"])
+
+        print("Metrics:", result["metrics"])
+
+        print("Failure Summary:")
         print(failure_map["summary"])
 
-        print("Failure regions discovered.")
-        print(f"Regions found: {len(failure_regions)}")
+        print(f"Failure Regions: {len(failure_regions)}")
 
-        print("Visualization generated.")
-        print(chart)
+        print("Visualizations:")
+        print(state.CURRENT_VISUALIZATIONS)
+
+        print("=======================================\n")
+
+        # -----------------------------
+        # API Response
+        # -----------------------------
 
         return {
 
