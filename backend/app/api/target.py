@@ -1,51 +1,57 @@
 import pandas as pd
 
-import app.utils.state as state
-
 from fastapi import APIRouter, HTTPException
 
+import app.utils.state as state
 from app.models.target import TargetRequest
 
 router = APIRouter()
 
 
 @router.post("/select-target")
-def select_target(
-    request: TargetRequest
-):
+def select_target(request: TargetRequest):
 
     if state.CURRENT_DATASET is None:
-
         raise HTTPException(
             status_code=400,
-            detail="No dataset uploaded"
+            detail="No dataset has been uploaded.",
         )
 
-    df = pd.read_csv(
-        state.CURRENT_DATASET
-    )
+    try:
+        df = pd.read_csv(state.CURRENT_DATASET)
 
-    target_col = request.target
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Unable to load dataset: {str(e)}",
+        )
 
-    if target_col not in df.columns:
+    target = request.target
 
+    if target not in df.columns:
         raise HTTPException(
             status_code=400,
-            detail="Invalid target column"
+            detail="Invalid target column.",
         )
 
-    unique_values = (
-        df[target_col]
-        .nunique()
-    )
+    unique_values = df[target].nunique(dropna=True)
 
-    task_type = (
+    task = (
         "classification"
         if unique_values < 20
         else "regression"
     )
 
+    # Save project state
+    state.CURRENT_TARGET = target
+    state.CURRENT_TASK = task
+
     return {
-        "target": target_col,
-        "task": task_type
+        "success": True,
+        "message": "Target selected successfully.",
+        "data": {
+            "target": target,
+            "task": task,
+            "unique_values": int(unique_values),
+        },
     }
