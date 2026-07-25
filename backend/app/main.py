@@ -7,12 +7,13 @@ from app.api.train import router as train_router
 from app.api.explain import router as explain_router
 from app.api.failure_map import router as failure_map_router
 from app.api.failure_regions import router as failure_regions_router
+from app.api.visualizations import router as visualizations_router
 
 
 app = FastAPI(
     title="FailureMap API",
     description="An AI-powered platform for identifying machine learning failure regions.",
-    version="0.4.0",
+    version="0.6.1",
 )
 
 
@@ -30,7 +31,7 @@ def root():
     return {
         "success": True,
         "message": "Welcome to FailureMap API 🚀",
-        "version": "0.4.0",
+        "version": "0.6.1",
     }
 
 
@@ -75,4 +76,10 @@ app.include_router(
     failure_regions_router,
     prefix="/api",
     tags=["Failure Regions"],
+)
+
+app.include_router(
+    visualizations_router,
+    prefix="/api",
+    tags=["Visualizations"],
 )

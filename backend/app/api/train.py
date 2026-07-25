@@ -16,6 +16,10 @@ from app.services.failure_region_service import (
     discover_failure_regions,
 )
 
+from app.services.visualization_service import (
+    generate_failure_region_chart,
+)
+
 router = APIRouter()
 
 
@@ -67,7 +71,7 @@ def train_model_endpoint():
         state.CURRENT_LABEL_ENCODER = result["label_encoder"]
 
         # -----------------------------
-        # Generate Failure Map
+        # Failure Map
         # -----------------------------
 
         failure_map = generate_failure_map(
@@ -80,7 +84,7 @@ def train_model_endpoint():
         state.CURRENT_FAILURE_MAP = failure_map
 
         # -----------------------------
-        # Discover Failure Regions
+        # Failure Regions
         # -----------------------------
 
         failure_regions = discover_failure_regions(
@@ -89,11 +93,26 @@ def train_model_endpoint():
 
         state.CURRENT_FAILURE_REGIONS = failure_regions
 
+        # -----------------------------
+        # Visualizations
+        # -----------------------------
+
+        chart = generate_failure_region_chart(
+            failure_regions
+        )
+
+        state.CURRENT_VISUALIZATIONS = {
+            "failure_region_chart": chart
+        }
+
         print("Failure map stored successfully.")
         print(failure_map["summary"])
 
         print("Failure regions discovered.")
         print(f"Regions found: {len(failure_regions)}")
+
+        print("Visualization generated.")
+        print(chart)
 
         return {
 
@@ -112,6 +131,8 @@ def train_model_endpoint():
                 "failure_regions_found": len(
                     failure_regions
                 ),
+
+                "visualizations": state.CURRENT_VISUALIZATIONS,
 
             },
 
