@@ -54,34 +54,92 @@ def generate_failure_region_chart(failure_regions):
 # ---------------------------------------------------
 
 def generate_feature_importance_chart(
-    model,
-    feature_names,
+    pipeline,
+    feature_names=None,
 ):
 
     ensure_output_dir()
+
+    # Extract trained model
+    if hasattr(pipeline, "named_steps"):
+
+        model = pipeline.named_steps["model"]
+
+        preprocessor = pipeline.named_steps["preprocessor"]
+
+    else:
+
+        model = pipeline
+
+        preprocessor = None
 
     if not hasattr(model, "feature_importances_"):
         return None
 
     importance = model.feature_importances_
 
-    df = pd.DataFrame(
+    # -----------------------------
+    # Get transformed feature names
+    # -----------------------------
+
+    try:
+
+        feature_names = preprocessor.get_feature_names_out()
+
+    except Exception:
+
+        if feature_names is None:
+
+            feature_names = [
+                f"Feature {i+1}"
+                for i in range(len(importance))
+            ]
+
+    # -----------------------------
+    # Make lengths match
+    # -----------------------------
+
+    if len(feature_names) != len(importance):
+
+        feature_names = [
+            f"Feature {i+1}"
+            for i in range(len(importance))
+        ]
+
+    feature_names = [
+        name.replace("num__", "")
+            .replace("cat__", "")
+        for name in feature_names
+    ]
+
+    importance_df = pd.DataFrame(
         {
             "Feature": feature_names,
             "Importance": importance,
         }
     )
 
-    df = df.sort_values(
-        "Importance",
+    importance_df = importance_df.sort_values(
+        by="Importance",
         ascending=False,
     )
 
-    plt.figure(figsize=(10, 6))
-    plt.bar(df["Feature"], df["Importance"])
-    plt.xticks(rotation=45, ha="right")
+    plt.figure(figsize=(10,6))
+
+    plt.bar(
+        importance_df["Feature"],
+        importance_df["Importance"],
+    )
+
+    plt.xticks(
+        rotation=45,
+        ha="right",
+    )
+
     plt.ylabel("Importance")
+
     plt.title("Feature Importance")
+
     plt.tight_layout()
 
     path = os.path.join(
@@ -90,10 +148,10 @@ def generate_feature_importance_chart(
     )
 
     plt.savefig(path)
+
     plt.close()
 
     return path
-
 
 # ---------------------------------------------------
 # Prediction Distribution

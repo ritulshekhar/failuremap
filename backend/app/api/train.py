@@ -117,8 +117,7 @@ def train_model_endpoint():
         )
 
         feature_chart = generate_feature_importance_chart(
-            result["model"],
-            result["X_test"].columns,
+            result["model"]
         )
 
         prediction_chart = generate_prediction_distribution_chart(
