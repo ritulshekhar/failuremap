@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+from app.api.ai_analysis import router as ai_analysis_router
 from app.api.upload import router as upload_router
 from app.api.target import router as target_router
 from app.api.train import router as train_router
@@ -82,4 +82,10 @@ app.include_router(
     visualizations_router,
     prefix="/api",
     tags=["Visualizations"],
+)
+
+app.include_router(
+    ai_analysis_router,
+    prefix="/api",
+    tags=["AI Analysis"],
 )
