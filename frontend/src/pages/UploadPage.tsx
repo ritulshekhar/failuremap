@@ -185,9 +185,15 @@ function UploadPage() {
               ? `Selected: ${file.name}`
               : "No file selected"}
           </div>
-          <br />
-          <br />
-          <div style={{ height: "28px" }} />
+          <button
+            style={{
+              ...primaryButtonStyle,
+              marginTop: "28px",
+            }}
+            onClick={handleUpload}
+          >
+            Upload Dataset
+          </button>
 
           <button style={primaryButtonStyle}
             onClick={handleUpload}
