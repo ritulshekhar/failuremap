@@ -651,6 +651,69 @@ function ReportPage() {
 
             </table>
 
+            <h3>
+                SHAP Feature Importance
+            </h3>
+
+            <table
+                style={{
+                    width: "100%",
+                    borderCollapse: "collapse",
+                    marginBottom: "40px",
+                }}
+            >
+
+                <thead>
+
+                    <tr
+                        style={{
+                            background: "#f5f5f5",
+                        }}
+                    >
+
+                        <th style={cellStyle}>
+                            Feature
+                        </th>
+
+                        <th style={cellStyle}>
+                            SHAP Importance
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {explainability?.shap_summary?.map(
+
+                        (
+                            item: any,
+                            index: number
+                        ) => (
+
+                            <tr
+                                key={index}
+                            >
+
+                                <td style={cellStyle}>
+                                    {item.feature}
+                                </td>
+
+                                <td style={cellStyle}>
+                                    {item.importance.toFixed(4)}
+                                </td>
+
+                            </tr>
+
+                        )
+
+                    )}
+
+                </tbody>
+
+            </table>
+
             <h2>
                 Visualizations
             </h2>
