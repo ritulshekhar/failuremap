@@ -46,12 +46,12 @@ def generate_ai_failure_analysis(
 
         if region["failure_rate"] > 0:
 
-        insights.append(
+            insights.append(
             f"Highest risk region detected: {region['condition']} "
             f"(Failure Rate: {region['failure_rate']:.2%})"
-        )
+            )
 
-        insights.append(
+            insights.append(
             "Collecting more training samples in this region may improve model performance."
         )
 
