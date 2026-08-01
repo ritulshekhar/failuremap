@@ -14,10 +14,34 @@ import VisualizationCard from "../components/VisualizationCard";
 
 import Navbar from "../components/Navbar";
 
+const tableContainerStyle = {
+    background: "#ffffff",
+    borderRadius: "16px",
+    overflow: "hidden" as const,
+    border: "1px solid #e5e7eb",
+    boxShadow: "0 8px 24px rgba(0,0,0,0.06)",
+    marginTop: "20px",
+    marginBottom: "40px",
+};
+
 const cellStyle = {
     border: "1px solid #ddd",
     padding: "12px",
     textAlign: "left" as const,
+};
+
+const headerCellStyle = {
+    ...cellStyle,
+    background: "#f9fafb",
+    color: "#111827",
+    fontWeight: 700,
+    padding: "16px",
+};
+
+const bodyCellStyle = {
+    cellStyle,
+    padding: "16px",
+    color: "#374151",
 };
 
 function ReportPage() {
@@ -385,105 +409,105 @@ function ReportPage() {
             <h2>
                 Failure Regions
             </h2>
+            <div style={tableContainerStyle}>
+                <table
+                    style={{
+                        width: "100%",
+                        borderCollapse: "collapse"
+                    }}
+                >
 
-            <table
-                style={{
-                    width: "100%",
-                    borderCollapse: "collapse",
-                    marginTop: "20px",
-                }}
-            >
+                    <thead>
 
-                <thead>
+                        <tr
+                            style={{
+                                background: "#f5f5f5",
+                            }}
+                        >
 
-                    <tr
-                        style={{
-                            background: "#f5f5f5",
-                        }}
-                    >
+                            <th style={cellStyle}>
+                                Feature
+                            </th>
 
-                        <th style={cellStyle}>
-                            Feature
-                        </th>
+                            <th style={cellStyle}>
+                                Condition
+                            </th>
 
-                        <th style={cellStyle}>
-                            Condition
-                        </th>
+                            <th style={cellStyle}>
+                                Samples
+                            </th>
 
-                        <th style={cellStyle}>
-                            Samples
-                        </th>
+                            <th style={cellStyle}>
+                                Errors
+                            </th>
 
-                        <th style={cellStyle}>
-                            Errors
-                        </th>
+                            <th style={cellStyle}>
+                                Failure Rate
+                            </th>
 
-                        <th style={cellStyle}>
-                            Failure Rate
-                        </th>
+                            <th style={cellStyle}>
+                                Severity
+                            </th>
 
-                        <th style={cellStyle}>
-                            Severity
-                        </th>
+                            <th style={cellStyle}>
+                                Confidence
+                            </th>
 
-                        <th style={cellStyle}>
-                            Confidence
-                        </th>
+                        </tr>
 
-                    </tr>
+                    </thead>
 
-                </thead>
+                    <tbody>
 
-                <tbody>
+                        {failureRegions?.regions?.map(
 
-                    {failureRegions?.regions?.map(
+                            (
+                                region: any,
+                                index: number
+                            ) => (
 
-                        (
-                            region: any,
-                            index: number
-                        ) => (
+                                <tr
+                                    key={index}
+                                >
 
-                            <tr
-                                key={index}
-                            >
+                                    <td style={cellStyle}>
+                                        {region.feature}
+                                    </td>
 
-                                <td style={cellStyle}>
-                                    {region.feature}
-                                </td>
+                                    <td style={cellStyle}>
+                                        {region.condition}
+                                    </td>
 
-                                <td style={cellStyle}>
-                                    {region.condition}
-                                </td>
+                                    <td style={cellStyle}>
+                                        {region.samples}
+                                    </td>
 
-                                <td style={cellStyle}>
-                                    {region.samples}
-                                </td>
+                                    <td style={cellStyle}>
+                                        {region.errors}
+                                    </td>
 
-                                <td style={cellStyle}>
-                                    {region.errors}
-                                </td>
+                                    <td style={cellStyle}>
+                                        {(region.failure_rate * 100).toFixed(2)}%
+                                    </td>
 
-                                <td style={cellStyle}>
-                                    {(region.failure_rate * 100).toFixed(2)}%
-                                </td>
+                                    <td style={cellStyle}>
+                                        {region.severity}
+                                    </td>
 
-                                <td style={cellStyle}>
-                                    {region.severity}
-                                </td>
+                                    <td style={cellStyle}>
+                                        {region.confidence}
+                                    </td>
 
-                                <td style={cellStyle}>
-                                    {region.confidence}
-                                </td>
+                                </tr>
 
-                            </tr>
+                            )
 
-                        )
+                        )}
 
-                    )}
+                    </tbody>
 
-                </tbody>
-
-            </table>
+                </table>
+            </div>
 
             <h2
                 style={{
@@ -614,23 +638,23 @@ function ReportPage() {
                         }}
                     >
 
-                        <th style={cellStyle}>
+                        <th style={headerCellStyle}>
                             Class
                         </th>
 
-                        <th style={cellStyle}>
+                        <th style={headerCellStyle}>
                             Precision
                         </th>
 
-                        <th style={cellStyle}>
+                        <th style={headerCellStyle}>
                             Recall
                         </th>
 
-                        <th style={cellStyle}>
+                        <th style={headerCellStyle}>
                             F1 Score
                         </th>
 
-                        <th style={cellStyle}>
+                        <th style={headerCellStyle}>
                             Support
                         </th>
 
@@ -674,23 +698,23 @@ function ReportPage() {
                                         key={label}
                                     >
 
-                                        <td style={cellStyle}>
+                                        <td style={bodyCellStyle}>
                                             {label}
                                         </td>
 
-                                        <td style={cellStyle}>
+                                        <td style={bodyCellStyle}>
                                             {values.precision.toFixed(2)}
                                         </td>
 
-                                        <td style={cellStyle}>
+                                        <td style={bodyCellStyle}>
                                             {values.recall.toFixed(2)}
                                         </td>
 
-                                        <td style={cellStyle}>
+                                        <td style={bodyCellStyle}>
                                             {values["f1-score"].toFixed(2)}
                                         </td>
 
-                                        <td style={cellStyle}>
+                                        <td style={bodyCellStyle}>
                                             {values.support}
                                         </td>
 
