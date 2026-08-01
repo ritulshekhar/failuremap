@@ -1,4 +1,4 @@
-type MetricsCardProps = {
+type Props = {
     title: string;
     value: string | number;
 };
@@ -6,39 +6,81 @@ type MetricsCardProps = {
 function MetricsCard({
     title,
     value,
-}: MetricsCardProps) {
+}: Props) {
+
+    const getIcon = () => {
+
+        switch (title) {
+
+            case "Accuracy":
+                return "🎯";
+
+            case "Total Samples":
+                return "📊";
+
+            case "Correct":
+                return "✅";
+
+            case "Incorrect":
+                return "❌";
+
+            default:
+                return "📈";
+
+        }
+
+    };
+
     return (
+
         <div
             style={{
-                border: "1px solid #ddd",
-                borderRadius: "10px",
-                padding: "20px",
-                minWidth: "180px",
-                backgroundColor: "#fafafa",
-                boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
+                background: "#ffffff",
+                borderRadius: "18px",
+                padding: "24px",
+                border: "1px solid #E5E7EB",
+                boxShadow:
+                    "0 10px 25px rgba(0,0,0,0.06)",
+                minWidth: "220px",
+                flex: 1,
+                transition: "0.25s",
             }}
         >
-            <h3
+
+            <div
                 style={{
-                    margin: 0,
-                    color: "#666",
-                    fontSize: "16px",
+                    fontSize: "32px",
+                    marginBottom: "18px",
+                }}
+            >
+                {getIcon()}
+            </div>
+
+            <div
+                style={{
+                    color: "#6B7280",
+                    fontSize: "15px",
+                    marginBottom: "8px",
+                    fontWeight: 600,
                 }}
             >
                 {title}
-            </h3>
+            </div>
 
-            <h1
+            <div
                 style={{
-                    marginTop: "12px",
-                    marginBottom: 0,
-                    fontSize: "34px",
+                    fontSize: "42px",
+                    fontWeight: 700,
+                    color: "#111827",
                 }}
             >
                 {value}
-            </h1>
+            </div>
+
         </div>
+
     );
+
 }
 
 export default MetricsCard;

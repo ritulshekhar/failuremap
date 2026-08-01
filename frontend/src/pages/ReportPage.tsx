@@ -407,16 +407,23 @@ function ReportPage() {
                 </div>
 
 
-                <h2>
-                    Overview
+                <h2
+                    style={{
+                        fontSize: "34px",
+                        marginBottom: "28px",
+                        color: "#111827",
+                    }}
+                >
+                    Executive Summary
                 </h2>
 
                 <div
                     style={{
-                        display: "flex",
-                        gap: "20px",
-                        flexWrap: "wrap",
-                        marginBottom: "40px",
+                        display: "grid",
+                        gridTemplateColumns:
+                            "repeat(auto-fit,minmax(220px,1fr))",
+                        gap: "24px",
+                        marginBottom: "60px",
                     }}
                 >
 
