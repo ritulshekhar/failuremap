@@ -401,19 +401,125 @@ function ReportPage() {
 
             </div>
 
-            <h2>
+            <h2
+                style={{
+                    marginTop: "40px",
+                }}
+            >
                 Explainability
             </h2>
 
-            <pre>
+            <h3>
+                Classification Report
+            </h3>
 
-                {JSON.stringify(
-                    explainability,
-                    null,
-                    2
-                )}
+            <table
+                style={{
+                    width: "100%",
+                    borderCollapse: "collapse",
+                    marginBottom: "40px",
+                }}
+            >
 
-            </pre>
+                <thead>
+
+                    <tr
+                        style={{
+                            background: "#f5f5f5",
+                        }}
+                    >
+
+                        <th style={cellStyle}>
+                            Class
+                        </th>
+
+                        <th style={cellStyle}>
+                            Precision
+                        </th>
+
+                        <th style={cellStyle}>
+                            Recall
+                        </th>
+
+                        <th style={cellStyle}>
+                            F1 Score
+                        </th>
+
+                        <th style={cellStyle}>
+                            Support
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {
+
+                        Object.entries(
+
+                            explainability
+                                ?.report
+                                ?.classification_report || {}
+
+                        )
+
+                            .filter(
+
+                                ([key]) =>
+
+                                    key !== "accuracy" &&
+                                    key !== "macro avg" &&
+                                    key !== "weighted avg"
+
+                            )
+
+                            .map(
+
+                                ([
+
+                                    label,
+
+                                    values,
+
+                                ]: any) => (
+
+                                    <tr
+                                        key={label}
+                                    >
+
+                                        <td style={cellStyle}>
+                                            {label}
+                                        </td>
+
+                                        <td style={cellStyle}>
+                                            {values.precision.toFixed(2)}
+                                        </td>
+
+                                        <td style={cellStyle}>
+                                            {values.recall.toFixed(2)}
+                                        </td>
+
+                                        <td style={cellStyle}>
+                                            {values["f1-score"].toFixed(2)}
+                                        </td>
+
+                                        <td style={cellStyle}>
+                                            {values.support}
+                                        </td>
+
+                                    </tr>
+
+                                )
+
+                            )
+
+                    }
+
+                </tbody>
+
+            </table>
 
             <h2>
                 Visualizations
