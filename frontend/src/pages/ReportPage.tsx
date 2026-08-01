@@ -12,6 +12,8 @@ import MetricsCard from "../components/MetricsCard";
 
 import VisualizationCard from "../components/VisualizationCard";
 
+import Navbar from "../components/Navbar";
+
 const cellStyle = {
     border: "1px solid #ddd",
     padding: "12px",
@@ -107,19 +109,20 @@ function ReportPage() {
     if (loading) {
 
         return (
+            <>
+                <Navbar />
+                <div
+                    style={{
+                        padding: "30px",
+                    }}
+                >
 
-            <div
-                style={{
-                    padding: "30px",
-                }}
-            >
+                    <h2>
+                        Loading dashboard...
+                    </h2>
 
-                <h2>
-                    Loading dashboard...
-                </h2>
-
-            </div>
-
+                </div>
+            </>
         );
 
     }
