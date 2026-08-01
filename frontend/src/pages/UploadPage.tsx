@@ -427,31 +427,52 @@ function UploadPage() {
                 </div>
               </div>
 
-              <h3>
-                Columns
-              </h3>
+              <div
+                style={{
+                  background: "#ffffff",
+                  borderRadius: "16px",
+                  padding: "28px",
+                  boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
+                  border: "1px solid #e5e7eb",
+                  marginBottom: "40px",
+                }}
+              >
+                <h2
+                  style={{
+                    marginTop: 0,
+                    marginBottom: "20px",
+                    color: "#111827",
+                  }}
+                >
+                  Dataset Columns
+                </h2>
 
-              <ul>
-
-                {
-
-                  summary.column_names.map(
-                    (
-                      col: string
-                    ) => (
-
-                      <li
+                <div
+                  style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    gap: "12px",
+                  }}
+                >
+                  {summary.column_names.map(
+                    (col: string) => (
+                      <div
                         key={col}
+                        style={{
+                          background: "#EEF2FF",
+                          color: "#2563EB",
+                          padding: "10px 18px",
+                          borderRadius: "999px",
+                          fontWeight: 600,
+                          fontSize: "15px",
+                        }}
                       >
                         {col}
-                      </li>
-
+                      </div>
                     )
-                  )
-
-                }
-
-              </ul>
+                  )}
+                </div>
+              </div>
 
               <h3>
                 Select Target
