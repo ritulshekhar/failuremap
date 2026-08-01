@@ -451,17 +451,35 @@ function ReportPage() {
 
                 </div>
 
-                <h2>
-                    Failure Regions
-                </h2>
-                <div style={tableContainerStyle}>
+                <div
+                    style={{
+                        background: "#ffffff",
+                        borderRadius: "18px",
+                        padding: "28px",
+                        border: "1px solid #E5E7EB",
+                        boxShadow:
+                            "0 8px 24px rgba(0,0,0,0.06)",
+                        marginTop: "50px",
+                        overflowX: "auto",
+                    }}
+                >
+
+                    <h2
+                        style={{
+                            fontSize: "34px",
+                            marginBottom: "24px",
+                            color: "#111827",
+                        }}
+                    >
+                        Failure Regions
+                    </h2>
                     <table
                         style={{
                             width: "100%",
-                            borderCollapse: "collapse"
+                            borderCollapse: "collapse",
+                            fontSize: "15px",
                         }}
                     >
-
                         <thead>
 
                             <tr
@@ -470,31 +488,99 @@ function ReportPage() {
                                 }}
                             >
 
-                                <th style={cellStyle}>
-                                    Feature
-                                </th>
+                                <th
+                                    style={{
+                                        background: "#F9FAFB",
+                                        padding: "16px",
+                                        textAlign: "left",
+                                        borderBottom:
+                                            "2px solid #E5E7EB",
+                                        color: "#374151",
+                                        fontWeight: 700,
+                                    }}
+                                > Feature </th>
 
-                                <th style={cellStyle}>
+                                <th
+                                    style={{
+                                        background: "#F9FAFB",
+                                        padding: "16px",
+                                        textAlign: "left",
+                                        borderBottom:
+                                            "2px solid #E5E7EB",
+                                        color: "#374151",
+                                        fontWeight: 700,
+                                    }}
+                                >
                                     Condition
                                 </th>
 
-                                <th style={cellStyle}>
+                                <th
+                                    style={{
+                                        background: "#F9FAFB",
+                                        padding: "16px",
+                                        textAlign: "left",
+                                        borderBottom:
+                                            "2px solid #E5E7EB",
+                                        color: "#374151",
+                                        fontWeight: 700,
+                                    }}
+                                >
                                     Samples
                                 </th>
 
-                                <th style={cellStyle}>
+                                <th
+                                    style={{
+                                        background: "#F9FAFB",
+                                        padding: "16px",
+                                        textAlign: "left",
+                                        borderBottom:
+                                            "2px solid #E5E7EB",
+                                        color: "#374151",
+                                        fontWeight: 700,
+                                    }}
+                                >
                                     Errors
                                 </th>
 
-                                <th style={cellStyle}>
+                                <th
+                                    style={{
+                                        background: "#F9FAFB",
+                                        padding: "16px",
+                                        textAlign: "left",
+                                        borderBottom:
+                                            "2px solid #E5E7EB",
+                                        color: "#374151",
+                                        fontWeight: 700,
+                                    }}
+                                >
                                     Failure Rate
                                 </th>
 
-                                <th style={cellStyle}>
+                                <th
+                                    style={{
+                                        background: "#F9FAFB",
+                                        padding: "16px",
+                                        textAlign: "left",
+                                        borderBottom:
+                                            "2px solid #E5E7EB",
+                                        color: "#374151",
+                                        fontWeight: 700,
+                                    }}
+                                >
                                     Severity
                                 </th>
 
-                                <th style={cellStyle}>
+                                <th
+                                    style={{
+                                        background: "#F9FAFB",
+                                        padding: "16px",
+                                        textAlign: "left",
+                                        borderBottom:
+                                            "2px solid #E5E7EB",
+                                        color: "#374151",
+                                        fontWeight: 700,
+                                    }}
+                                >
                                     Confidence
                                 </th>
 
@@ -552,6 +638,7 @@ function ReportPage() {
                         </tbody>
 
                     </table>
+
                 </div>
 
                 <h2
@@ -1026,8 +1113,7 @@ function ReportPage() {
                     />
 
                 </div>
-
-            </div>
+            </div >
         </>
     );
 
