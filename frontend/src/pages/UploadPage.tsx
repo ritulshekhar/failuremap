@@ -50,6 +50,10 @@ function UploadPage() {
 
   const [uploading, setUploading] =
     useState(false);
+
+  const [uploadSuccess, setUploadSuccess] =
+    useState(false);
+
   const handleUpload = async () => {
 
     if (!file) return;
@@ -64,7 +68,7 @@ function UploadPage() {
       setSummary(
         result.data.summary
       );
-
+      setUploadSuccess(true);
     } catch (error) {
 
       console.error(error);
@@ -168,6 +172,7 @@ function UploadPage() {
             style={{ display: "none" }}
             onChange={(e) => {
               if (e.target.files?.[0]) {
+                setUploadSuccess(false);
                 setFile(e.target.files[0]);
               }
             }}
@@ -249,6 +254,31 @@ function UploadPage() {
               ? "Uploading..."
               : "Upload Dataset"}
           </button>
+          {uploadSuccess && (
+            <div
+              style={{
+                marginTop: "24px",
+                padding: "16px",
+                background: "#ECFDF3",
+                border: "1px solid #BBF7D0",
+                color: "#166534",
+                borderRadius: "12px",
+                fontWeight: 600,
+              }}
+            >
+              Dataset uploaded successfully!
+
+              <div
+                style={{
+                  marginTop: "8px",
+                  fontWeight: 400,
+                }}
+              >
+                Your dataset has been profiled and is ready for
+                analysis.
+              </div>
+            </div>
+          )}
         </div>
         {
 
