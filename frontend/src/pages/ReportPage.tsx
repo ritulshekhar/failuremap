@@ -49,26 +49,50 @@ function ReportPage() {
                     exp,
                     vis,
                 ] = await Promise.all([
+
                     getFailureMap(),
                     getFailureRegions(),
                     getAIAnalysis(),
                     getExplainability(),
                     getVisualizations(),
+
                 ]);
 
-                setFailureMap(fm.data);
-                setFailureRegions(fr.data);
-                setAIAnalysis(ai.data);
-                setExplainability(exp.data);
-                setVisualizations(vis.data);
+                setFailureMap(
+                    fm.data
+                );
 
-            } catch (error) {
+                setFailureRegions(
+                    fr.data
+                );
 
-                console.error(error);
+                setAIAnalysis(
+                    ai.data
+                );
 
-            } finally {
+                setExplainability(
+                    exp.data
+                );
 
-                setLoading(false);
+                setVisualizations(
+                    vis.data
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    error
+                );
+
+            }
+
+            finally {
+
+                setLoading(
+                    false
+                );
 
             }
 
@@ -228,12 +252,15 @@ function ReportPage() {
                 <tbody>
 
                     {failureRegions?.regions?.map(
+
                         (
                             region: any,
                             index: number
                         ) => (
 
-                            <tr key={index}>
+                            <tr
+                                key={index}
+                            >
 
                                 <td style={cellStyle}>
                                     {region.feature}
@@ -266,25 +293,113 @@ function ReportPage() {
                             </tr>
 
                         )
+
                     )}
 
                 </tbody>
 
             </table>
 
-            <h2>
+            <h2
+                style={{
+                    marginTop: "40px",
+                }}
+            >
                 AI Analysis
             </h2>
 
-            <pre>
+            <div
+                style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: "25px",
+                    marginBottom: "40px",
+                }}
+            >
 
-                {JSON.stringify(
-                    aiAnalysis,
-                    null,
-                    2
-                )}
+                <div
+                    style={{
+                        border: "1px solid #ddd",
+                        borderRadius: "10px",
+                        padding: "20px",
+                        background: "#fafafa",
+                    }}
+                >
 
-            </pre>
+                    <h3>
+                        Insights
+                    </h3>
+
+                    <ul>
+
+                        {aiAnalysis?.insights?.map(
+
+                            (
+                                item: string,
+                                index: number
+                            ) => (
+
+                                <li
+                                    key={index}
+                                    style={{
+                                        marginBottom: "12px",
+                                    }}
+                                >
+
+                                    {item}
+
+                                </li>
+
+                            )
+
+                        )}
+
+                    </ul>
+
+                </div>
+
+                <div
+                    style={{
+                        border: "1px solid #ddd",
+                        borderRadius: "10px",
+                        padding: "20px",
+                        background: "#fafafa",
+                    }}
+                >
+
+                    <h3>
+                        Recommendations
+                    </h3>
+
+                    <ul>
+
+                        {aiAnalysis?.recommendations?.map(
+
+                            (
+                                item: string,
+                                index: number
+                            ) => (
+
+                                <li
+                                    key={index}
+                                    style={{
+                                        marginBottom: "12px",
+                                    }}
+                                >
+
+                                    {item}
+
+                                </li>
+
+                            )
+
+                        )}
+
+                    </ul>
+
+                </div>
+
+            </div>
 
             <h2>
                 Explainability
