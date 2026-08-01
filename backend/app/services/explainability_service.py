@@ -122,10 +122,8 @@ def generate_shap_explanation(
         "model"
     ]
 
-    X_processed = (
-        preprocessor.transform(
-            X_test
-        )
+    X_processed = preprocessor.transform(
+        X_test
     )
 
     feature_names = (
@@ -140,10 +138,9 @@ def generate_shap_explanation(
         X_processed
     )
 
-    if isinstance(
-        shap_values,
-        list,
-    ):
+    # Handle different SHAP output formats
+
+    if isinstance(shap_values, list):
 
         values = abs(
             shap_values[0]
@@ -151,19 +148,37 @@ def generate_shap_explanation(
 
     else:
 
-        values = abs(
+        import numpy as np
+
+        shap_values = np.asarray(
             shap_values
-        ).mean(axis=0)
+        )
 
-    shap_df = pd.DataFrame(
-        {
+        if shap_values.ndim == 3:
 
-            "feature": feature_names,
+            values = abs(
+                shap_values
+            ).mean(axis=(0, 2))
 
-            "importance": values,
+        elif shap_values.ndim == 2:
 
-        }
-    )
+            values = abs(
+                shap_values
+            ).mean(axis=0)
+
+        else:
+
+            values = abs(
+                shap_values
+            )
+
+    shap_df = pd.DataFrame({
+
+        "feature": feature_names,
+
+        "importance": values,
+
+    })
 
     shap_df = (
         shap_df
