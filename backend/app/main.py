@@ -8,7 +8,8 @@ from app.api.explain import router as explain_router
 from app.api.failure_map import router as failure_map_router
 from app.api.failure_regions import router as failure_regions_router
 from app.api.visualizations import router as visualizations_router
-
+from fastapi.staticfiles import StaticFiles
+import os
 
 app = FastAPI(
     title="FailureMap API",
@@ -88,4 +89,19 @@ app.include_router(
     ai_analysis_router,
     prefix="/api",
     tags=["AI Analysis"],
+)
+
+OUTPUT_DIR = "outputs"
+
+os.makedirs(
+    OUTPUT_DIR,
+    exist_ok=True,
+)
+
+app.mount(
+    "/outputs",
+    StaticFiles(
+        directory=OUTPUT_DIR
+    ),
+    name="outputs",
 )
