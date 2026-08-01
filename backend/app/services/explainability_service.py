@@ -1,3 +1,4 @@
+import shap
 import pandas as pd
 
 from sklearn.metrics import (
@@ -5,6 +6,8 @@ from sklearn.metrics import (
     classification_report,
 )
 
+
+# Classification Report
 
 def generate_classification_report(
     y_true,
@@ -24,40 +27,40 @@ def generate_classification_report(
     )
 
     return {
+
         "classification_report": report,
+
         "confusion_matrix": matrix.tolist(),
+
     }
 
+
+# Regression Report
 
 def generate_regression_report(
     y_true,
     predictions,
 ):
 
-    errors = (
-        y_true - predictions
-    )
+    errors = y_true - predictions
 
     return {
 
-        "mean_error":
-        float(errors.mean()),
+        "mean_error": float(errors.mean()),
 
-        "max_error":
-        float(errors.max()),
+        "max_error": float(errors.max()),
 
-        "min_error":
-        float(errors.min()),
+        "min_error": float(errors.min()),
 
-        "absolute_error":
-        float(errors.abs().mean()),
+        "absolute_error": float(errors.abs().mean()),
 
     }
 
 
+# Feature Importance
+
 def get_feature_importance(
     pipeline,
-    feature_names,
 ):
 
     model = pipeline.named_steps["model"]
@@ -66,29 +69,23 @@ def get_feature_importance(
         model,
         "feature_importances_",
     ):
-
         return []
 
     preprocessor = pipeline.named_steps[
         "preprocessor"
     ]
 
-    transformed_names = (
+    feature_names = (
         preprocessor.get_feature_names_out()
-    )
-
-    importances = (
-        model.feature_importances_
     )
 
     importance_df = pd.DataFrame(
         {
 
-            "feature":
-            transformed_names,
+            "feature": feature_names,
 
             "importance":
-            importances,
+            model.feature_importances_,
 
         }
     )
@@ -103,6 +100,81 @@ def get_feature_importance(
 
     return (
         importance_df
+        .head(15)
+        .to_dict(
+            orient="records"
+        )
+    )
+
+
+# SHAP Explainability
+
+def generate_shap_explanation(
+    pipeline,
+    X_test,
+):
+
+    preprocessor = pipeline.named_steps[
+        "preprocessor"
+    ]
+
+    model = pipeline.named_steps[
+        "model"
+    ]
+
+    X_processed = (
+        preprocessor.transform(
+            X_test
+        )
+    )
+
+    feature_names = (
+        preprocessor.get_feature_names_out()
+    )
+
+    explainer = shap.TreeExplainer(
+        model
+    )
+
+    shap_values = explainer.shap_values(
+        X_processed
+    )
+
+    if isinstance(
+        shap_values,
+        list,
+    ):
+
+        values = abs(
+            shap_values[0]
+        ).mean(axis=0)
+
+    else:
+
+        values = abs(
+            shap_values
+        ).mean(axis=0)
+
+    shap_df = pd.DataFrame(
+        {
+
+            "feature": feature_names,
+
+            "importance": values,
+
+        }
+    )
+
+    shap_df = (
+        shap_df
+        .sort_values(
+            by="importance",
+            ascending=False,
+        )
+    )
+
+    return (
+        shap_df
         .head(15)
         .to_dict(
             orient="records"
