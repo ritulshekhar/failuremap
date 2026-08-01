@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   uploadDataset,
-  selectTarget
-}
-from "../api/api";
+  selectTarget,
+} from "../api/api";
 
 function UploadPage() {
+
+  const navigate =
+    useNavigate();
 
   const [file, setFile] =
     useState<File | null>(null);
@@ -21,60 +24,76 @@ function UploadPage() {
     useState("");
 
   const handleUpload =
-  async () => {
+    async () => {
 
-    if (!file) return;
+      if (!file)
+        return;
 
-    try {
+      try {
 
-      const result =
-        await uploadDataset(
-          file
+        const result =
+          await uploadDataset(
+            file
+          );
+
+        setSummary(
+          result.summary
         );
 
-      setSummary(
-        result.summary
-      );
+      }
 
-    } catch (error) {
+      catch (error) {
 
-      console.error(
-        error
-      );
+        console.error(
+          error
+        );
 
-    }
-  };
+      }
+
+    };
 
   const handleAnalyze =
-  async () => {
+    async () => {
 
-    if (!target) return;
+      if (!target)
+        return;
 
-    try {
+      try {
 
-      const result =
-        await selectTarget(
-          target
+        const result =
+          await selectTarget(
+            target
+          );
+
+        setTaskType(
+          result.task
         );
 
-      setTaskType(
-        result.task
-      );
+        setTimeout(() => {
 
-    } catch (error) {
+          navigate(
+            "/train"
+          );
 
-      console.error(
-        error
-      );
+        }, 800);
 
-    }
-  };
+      }
+
+      catch (error) {
+
+        console.error(
+          error
+        );
+
+      }
+
+    };
 
   return (
 
     <div
       style={{
-        padding: "20px"
+        padding: "20px",
       }}
     >
 
@@ -96,6 +115,7 @@ function UploadPage() {
             );
 
           }
+
         }}
       />
 
@@ -112,137 +132,147 @@ function UploadPage() {
 
       {
 
-      summary && (
+        summary && (
 
-      <div>
+          <div>
 
-        <h2>
-          Dataset Summary
-        </h2>
+            <h2>
+              Dataset Summary
+            </h2>
 
-        <p>
-          Rows:
-          {summary.rows}
-        </p>
+            <p>
+              Rows:
+              {" "}
+              {summary.rows}
+            </p>
 
-        <p>
-          Columns:
-          {summary.columns}
-        </p>
+            <p>
+              Columns:
+              {" "}
+              {summary.columns}
+            </p>
 
-        <p>
-          Missing Values:
-          {summary.missing_values}
-        </p>
+            <p>
+              Missing Values:
+              {" "}
+              {summary.missing_values}
+            </p>
 
-        <p>
-          Duplicates:
-          {summary.duplicates}
-        </p>
+            <p>
+              Duplicates:
+              {" "}
+              {summary.duplicates}
+            </p>
 
-        <h3>
-          Columns
-        </h3>
+            <h3>
+              Columns
+            </h3>
 
-        <ul>
+            <ul>
 
-          {
-            summary.column_names.map(
-            (
-              col: string
-            ) => (
+              {
 
-            <li
-            key={col}
+                summary.column_names.map(
+                  (
+                    col: string
+                  ) => (
+
+                    <li
+                      key={col}
+                    >
+                      {col}
+                    </li>
+
+                  )
+                )
+
+              }
+
+            </ul>
+
+            <h3>
+              Select Target
+            </h3>
+
+            <select
+              value={target}
+              onChange={(e) =>
+                setTarget(
+                  e.target.value
+                )
+              }
             >
-              {col}
-            </li>
 
-            ))
-          }
+              <option value="">
+                Select Target
+              </option>
 
-        </ul>
+              {
 
-        <h3>
-          Select Target
-        </h3>
+                summary.column_names.map(
+                  (
+                    col: string
+                  ) => (
 
-        <select
-          value={target}
-          onChange={(e) =>
-            setTarget(
-              e.target.value
-            )
-          }
-        >
+                    <option
+                      key={col}
+                      value={col}
+                    >
+                      {col}
+                    </option>
 
-          <option value="">
-            Select Target
-          </option>
+                  )
+                )
 
-          {
+              }
 
-          summary.column_names.map(
-          (
-            col: string
-          ) => (
+            </select>
 
-          <option
-          key={col}
-          value={col}
-          >
+            <br />
+            <br />
 
-          {col}
+            <button
+              onClick={
+                handleAnalyze
+              }
+            >
+              Analyze Target
+            </button>
 
-          </option>
+            {
 
-          ))
-          }
+              taskType && (
 
-        </select>
+                <div>
 
-        <br />
-        <br />
+                  <h3>
+                    Target Analysis
+                  </h3>
 
-        <button
-          onClick={
-            handleAnalyze
-          }
-        >
-          Analyze Target
-        </button>
+                  <p>
+                    Target:
+                    {" "}
+                    {target}
+                  </p>
 
-        {
+                  <p>
+                    Task:
+                    {" "}
+                    {taskType}
+                  </p>
 
-        taskType && (
+                </div>
 
-        <div>
+              )}
 
-          <h3>
-            Target Analysis
-          </h3>
-
-          <p>
-            Target:
-            {target}
-          </p>
-
-          <p>
-            Task:
-            {taskType}
-          </p>
-
-        </div>
+          </div>
 
         )}
-
-      </div>
-
-      )}
 
     </div>
 
   );
+
 }
 
 export default UploadPage;
