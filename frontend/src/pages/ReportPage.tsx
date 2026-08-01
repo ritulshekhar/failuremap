@@ -521,6 +521,73 @@ function ReportPage() {
 
             </table>
 
+            <h3>
+                Confusion Matrix
+            </h3>
+
+            <table
+                style={{
+                    width: "100%",
+                    borderCollapse: "collapse",
+                    marginBottom: "40px",
+                }}
+            >
+
+                <tbody>
+
+                    {
+
+                        explainability?.report?.confusion_matrix?.map(
+
+                            (
+                                row: number[],
+                                rowIndex: number
+                            ) => (
+
+                                <tr
+                                    key={rowIndex}
+                                >
+
+                                    {
+
+                                        row.map(
+
+                                            (
+                                                value: number,
+                                                columnIndex: number
+                                            ) => (
+
+                                                <td
+                                                    key={columnIndex}
+                                                    style={{
+                                                        ...cellStyle,
+                                                        textAlign: "center",
+                                                        fontWeight: "bold",
+                                                    }}
+                                                >
+
+                                                    {value}
+
+                                                </td>
+
+                                            )
+
+                                        )
+
+                                    }
+
+                                </tr>
+
+                            )
+
+                        )
+
+                    }
+
+                </tbody>
+
+            </table>
+
             <h2>
                 Visualizations
             </h2>
