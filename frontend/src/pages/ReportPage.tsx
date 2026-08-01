@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 
 import {
-
     getFailureMap,
-
     getFailureRegions,
-
-    getVisualizations,
-
     getAIAnalysis,
-
     getExplainability,
-
+    getVisualizations,
 } from "../api/api";
+
+import MetricsCard from "../components/MetricsCard";
+
+const cellStyle = {
+    border: "1px solid #ddd",
+    padding: "12px",
+    textAlign: "left" as const,
+};
 
 function ReportPage() {
 
@@ -22,13 +24,13 @@ function ReportPage() {
     const [failureRegions, setFailureRegions] =
         useState<any>(null);
 
-    const [visualizations, setVisualizations] =
-        useState<any>(null);
-
     const [aiAnalysis, setAIAnalysis] =
         useState<any>(null);
 
-    const [explanation, setExplanation] =
+    const [explainability, setExplainability] =
+        useState<any>(null);
+
+    const [visualizations, setVisualizations] =
         useState<any>(null);
 
     const [loading, setLoading] =
@@ -41,66 +43,32 @@ function ReportPage() {
             try {
 
                 const [
-
-                    map,
-
-                    regions,
-
-                    visuals,
-
+                    fm,
+                    fr,
                     ai,
-
-                    explain,
-
+                    exp,
+                    vis,
                 ] = await Promise.all([
-
                     getFailureMap(),
-
                     getFailureRegions(),
-
-                    getVisualizations(),
-
                     getAIAnalysis(),
-
                     getExplainability(),
-
+                    getVisualizations(),
                 ]);
 
-                setFailureMap(
-                    map.data
-                );
+                setFailureMap(fm.data);
+                setFailureRegions(fr.data);
+                setAIAnalysis(ai.data);
+                setExplainability(exp.data);
+                setVisualizations(vis.data);
 
-                setFailureRegions(
-                    regions.data
-                );
+            } catch (error) {
 
-                setVisualizations(
-                    visuals.data
-                );
+                console.error(error);
 
-                setAIAnalysis(
-                    ai.data
-                );
+            } finally {
 
-                setExplanation(
-                    explain.data
-                );
-
-            }
-
-            catch (error) {
-
-                console.error(
-                    error
-                );
-
-            }
-
-            finally {
-
-                setLoading(
-                    false
-                );
+                setLoading(false);
 
             }
 
@@ -116,12 +84,12 @@ function ReportPage() {
 
             <div
                 style={{
-                    padding: "20px",
+                    padding: "30px",
                 }}
             >
 
                 <h2>
-                    Loading Report...
+                    Loading dashboard...
                 </h2>
 
             </div>
@@ -130,11 +98,35 @@ function ReportPage() {
 
     }
 
+    if (!failureMap) {
+
+        return (
+
+            <div
+                style={{
+                    padding: "30px",
+                }}
+            >
+
+                <h2>
+                    No report available.
+                </h2>
+
+            </div>
+
+        );
+
+    }
+
+    const summary =
+        failureMap.summary;
+
     return (
 
         <div
             style={{
-                padding: "20px",
+                padding: "30px",
+                fontFamily: "Arial",
             }}
         >
 
@@ -145,44 +137,140 @@ function ReportPage() {
             <hr />
 
             <h2>
-                Failure Summary
+                Overview
             </h2>
 
-            <pre>
+            <div
+                style={{
+                    display: "flex",
+                    gap: "20px",
+                    flexWrap: "wrap",
+                    marginBottom: "40px",
+                }}
+            >
 
-                {
+                <MetricsCard
+                    title="Accuracy"
+                    value={`${(
+                        summary.accuracy * 100
+                    ).toFixed(2)}%`}
+                />
 
-                    JSON.stringify(
-                        failureMap,
-                        null,
-                        2
-                    )
+                <MetricsCard
+                    title="Total Samples"
+                    value={summary.total_samples}
+                />
 
-                }
+                <MetricsCard
+                    title="Correct"
+                    value={summary.correct_predictions}
+                />
 
-            </pre>
+                <MetricsCard
+                    title="Incorrect"
+                    value={summary.incorrect_predictions}
+                />
 
-            <hr />
+            </div>
 
             <h2>
                 Failure Regions
             </h2>
 
-            <pre>
+            <table
+                style={{
+                    width: "100%",
+                    borderCollapse: "collapse",
+                    marginTop: "20px",
+                }}
+            >
 
-                {
+                <thead>
 
-                    JSON.stringify(
-                        failureRegions,
-                        null,
-                        2
-                    )
+                    <tr
+                        style={{
+                            background: "#f5f5f5",
+                        }}
+                    >
 
-                }
+                        <th style={cellStyle}>
+                            Feature
+                        </th>
 
-            </pre>
+                        <th style={cellStyle}>
+                            Condition
+                        </th>
 
-            <hr />
+                        <th style={cellStyle}>
+                            Samples
+                        </th>
+
+                        <th style={cellStyle}>
+                            Errors
+                        </th>
+
+                        <th style={cellStyle}>
+                            Failure Rate
+                        </th>
+
+                        <th style={cellStyle}>
+                            Severity
+                        </th>
+
+                        <th style={cellStyle}>
+                            Confidence
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {failureRegions?.regions?.map(
+                        (
+                            region: any,
+                            index: number
+                        ) => (
+
+                            <tr key={index}>
+
+                                <td style={cellStyle}>
+                                    {region.feature}
+                                </td>
+
+                                <td style={cellStyle}>
+                                    {region.condition}
+                                </td>
+
+                                <td style={cellStyle}>
+                                    {region.samples}
+                                </td>
+
+                                <td style={cellStyle}>
+                                    {region.errors}
+                                </td>
+
+                                <td style={cellStyle}>
+                                    {(region.failure_rate * 100).toFixed(2)}%
+                                </td>
+
+                                <td style={cellStyle}>
+                                    {region.severity}
+                                </td>
+
+                                <td style={cellStyle}>
+                                    {region.confidence}
+                                </td>
+
+                            </tr>
+
+                        )
+                    )}
+
+                </tbody>
+
+            </table>
 
             <h2>
                 AI Analysis
@@ -190,19 +278,13 @@ function ReportPage() {
 
             <pre>
 
-                {
-
-                    JSON.stringify(
-                        aiAnalysis,
-                        null,
-                        2
-                    )
-
-                }
+                {JSON.stringify(
+                    aiAnalysis,
+                    null,
+                    2
+                )}
 
             </pre>
-
-            <hr />
 
             <h2>
                 Explainability
@@ -210,19 +292,13 @@ function ReportPage() {
 
             <pre>
 
-                {
-
-                    JSON.stringify(
-                        explanation,
-                        null,
-                        2
-                    )
-
-                }
+                {JSON.stringify(
+                    explainability,
+                    null,
+                    2
+                )}
 
             </pre>
-
-            <hr />
 
             <h2>
                 Visualizations
@@ -230,15 +306,11 @@ function ReportPage() {
 
             <pre>
 
-                {
-
-                    JSON.stringify(
-                        visualizations,
-                        null,
-                        2
-                    )
-
-                }
+                {JSON.stringify(
+                    visualizations,
+                    null,
+                    2
+                )}
 
             </pre>
 
