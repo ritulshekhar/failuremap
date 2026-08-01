@@ -16,6 +16,9 @@ function TrainPage() {
     const [result, setResult] =
         useState<any>(null);
 
+    const [countdown, setCountdown] =
+        useState(3);
+
     const handleTrain = async () => {
         try {
             setLoading(true);
@@ -27,8 +30,19 @@ function TrainPage() {
 
             setLoading(false);
 
-            setTimeout(() => {
-                navigate("/report");
+            let seconds = 3;
+
+            setCountdown(seconds);
+
+            const interval = setInterval(() => {
+                seconds--;
+
+                setCountdown(seconds);
+
+                if (seconds === 0) {
+                    clearInterval(interval);
+                    navigate("/report");
+                }
             }, 1000);
         } catch (error) {
             console.error(error);
@@ -263,6 +277,18 @@ function TrainPage() {
                                     }}
                                 >
                                     Report Ready
+                                </div>
+                                <div
+                                    style={{
+                                        marginTop: "28px",
+                                        color: "#6B7280",
+                                        fontSize: "15px",
+                                        fontStyle: "italic",
+                                    }}
+                                >
+                                    Redirecting to Report Dashboard in{" "}
+                                    <strong>{countdown}</strong> second
+                                    {countdown !== 1 ? "s" : ""}...
                                 </div>
                             </div>
                         </div>
