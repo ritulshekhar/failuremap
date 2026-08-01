@@ -48,6 +48,11 @@ function UploadPage() {
   const [taskType, setTaskType] =
     useState("");
 
+  const [isAnalyzing, setIsAnalyzing] =
+    useState(false);
+
+  const [analysisComplete, setAnalysisComplete] =
+    useState(false);
   const [uploading, setUploading] =
     useState(false);
 
@@ -85,20 +90,24 @@ function UploadPage() {
 
     if (!target) return;
 
+    setIsAnalyzing(true);
+
     try {
 
       const result =
-        await selectTarget(
-          target
-        );
+        await selectTarget(target);
 
       setTaskType(
         result.data.task
       );
-
+      setAnalysisComplete(true);
     } catch (error) {
 
       console.error(error);
+
+    } finally {
+
+      setIsAnalyzing(false);
 
     }
 
@@ -474,89 +483,206 @@ function UploadPage() {
                 </div>
               </div>
 
-              <h3>
-                Select Target
-              </h3>
-
-              <select
-                value={target}
-                onChange={(e) =>
-                  setTarget(
-                    e.target.value
-                  )
-                }
+              <div
+                style={{
+                  background: "#ffffff",
+                  borderRadius: "16px",
+                  padding: "30px",
+                  boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
+                  border: "1px solid #e5e7eb",
+                  marginBottom: "40px",
+                }}
               >
+                <h2
+                  style={{
+                    marginTop: 0,
+                    marginBottom: "10px",
+                    color: "#111827",
+                  }}
+                >
+                  Target Selection
+                </h2>
 
-                <option value="">
-                  Select Target
-                </option>
+                <p
+                  style={{
+                    color: "#6b7280",
+                    marginBottom: "20px",
+                  }}
+                >
+                  Choose the column you want the model to predict.
+                </p>
 
-                {
+                <select
+                  value={target}
+                  onChange={(e) => {
+                    setTarget(e.target.value);
+                    setAnalysisComplete(false);
+                  }}
+                  style={{
+                    width: "100%",
+                    padding: "14px",
+                    fontSize: "16px",
+                    borderRadius: "10px",
+                    border: "1px solid #d1d5db",
+                    marginBottom: "24px",
+                  }}
+                >
+                  <option value="">
+                    Select Target Column
+                  </option>
 
-                  summary.column_names.map(
-                    (
-                      col: string
-                    ) => (
-
+                  {summary.column_names.map(
+                    (col: string) => (
                       <option
                         key={col}
                         value={col}
                       >
                         {col}
                       </option>
-
                     )
-                  )
+                  )}
+                </select>
 
-                }
+                <button
+                  style={{
+                    ...primaryButtonStyle,
+                    opacity:
+                      !target || isAnalyzing
+                        ? 0.6
+                        : 1,
+                    cursor:
+                      !target || isAnalyzing
+                        ? "not-allowed"
+                        : "pointer",
+                  }}
+                  disabled={
+                    !target || isAnalyzing
+                  }
+                  onClick={handleAnalyze}
+                >
+                  {isAnalyzing
+                    ? "Analyzing..."
+                    : "Analyze Target"}
+                </button>
+              </div>
+              {
+                analysisComplete && (
+                  <div
+                    style={{
+                      marginTop: "30px",
+                      marginBottom: "24px",
+                      padding: "18px",
+                      background: "#ECFDF3",
+                      border: "1px solid #BBF7D0",
+                      borderRadius: "12px",
+                      color: "#166534",
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontWeight: 700,
+                        marginBottom: "6px",
+                      }}
+                    >
+                      Target analysis completed successfully!
+                    </div>
 
-              </select>
-
-              <br />
-              <br />
-
-              <button
-                onClick={
-                  handleAnalyze
-                }
-              >
-                Analyze Target
-              </button>
-
+                    <div>
+                      The system detected a <b>{taskType}</b> problem and is ready for
+                      model training.
+                    </div>
+                  </div>
+                )
+              }
               {
 
+
                 taskType && (
-
-                  <div>
-
-                    <h3>
+                  <div
+                    style={{
+                      background: "#ffffff",
+                      borderRadius: "16px",
+                      padding: "32px",
+                      boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
+                      border: "1px solid #e5e7eb",
+                      marginTop: "40px",
+                    }}
+                  >
+                    <h2
+                      style={{
+                        marginTop: 0,
+                        marginBottom: "20px",
+                        color: "#111827",
+                      }}
+                    >
                       Target Analysis
-                    </h3>
+                    </h2>
 
-                    <p>
-                      Target: {target}
-                    </p>
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: "20px",
+                        flexWrap: "wrap",
+                        marginBottom: "30px",
+                      }}
+                    >
+                      <div>
+                        <div
+                          style={{
+                            color: "#6b7280",
+                            marginBottom: "8px",
+                          }}
+                        >
+                          Selected Target
+                        </div>
 
-                    <p>
-                      Task: {taskType}
-                    </p>
+                        <div
+                          style={{
+                            display: "inline-block",
+                            padding: "10px 18px",
+                            background: "#DBEAFE",
+                            color: "#1D4ED8",
+                            borderRadius: "999px",
+                            fontWeight: 600,
+                          }}
+                        >
+                          {target}
+                        </div>
+                      </div>
 
-                    <br />
+                      <div>
+                        <div
+                          style={{
+                            color: "#6b7280",
+                            marginBottom: "8px",
+                          }}
+                        >
+                          Detected Task
+                        </div>
+
+                        <div
+                          style={{
+                            display: "inline-block",
+                            padding: "10px 18px",
+                            background: "#DCFCE7",
+                            color: "#166534",
+                            borderRadius: "999px",
+                            fontWeight: 600,
+                          }}
+                        >
+                          {taskType}
+                        </div>
+                      </div>
+                    </div>
 
                     <button
-                      onClick={() =>
-                        navigate(
-                          "/train"
-                        )
-                      }
+                      style={primaryButtonStyle}
+                      onClick={() => navigate("/train")}
                     >
                       Continue to Training →
                     </button>
-
                   </div>
-
                 )
-
               }
 
             </div>
