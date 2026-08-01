@@ -720,15 +720,60 @@ function ReportPage() {
                 Visualizations
             </h2>
 
-            <pre>
+            <div
+                style={{
+                    display: "grid",
+                    gridTemplateColumns:
+                        "repeat(auto-fit, minmax(450px, 1fr))",
+                    gap: "25px",
+                    marginTop: "20px",
+                    marginBottom: "40px",
+                }}
+            >
 
-                {JSON.stringify(
-                    visualizations,
-                    null,
-                    2
-                )}
+                <VisualizationCard
+                    title="Failure Regions"
+                    image={
+                        visualizations.failure_region_chart
+                    }
+                />
 
-            </pre>
+                <VisualizationCard
+                    title="Feature Importance"
+                    image={
+                        visualizations.feature_importance_chart
+                    }
+                />
+
+                <VisualizationCard
+                    title="Prediction Distribution"
+                    image={
+                        visualizations.prediction_distribution_chart
+                    }
+                />
+
+                <VisualizationCard
+                    title="Correlation Heatmap"
+                    image={
+                        visualizations.correlation_heatmap
+                    }
+                />
+
+                <VisualizationCard
+                    title="Error Distribution"
+                    image={
+                        visualizations.error_distribution_chart
+                    }
+                />
+
+                <VisualizationCard
+                    title="Failed Feature Distribution"
+                    image={
+                        visualizations.failed_feature_distribution
+                    }
+                />
+
+            </div>
 
         </div>
 
