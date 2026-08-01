@@ -188,36 +188,83 @@ function TrainPage() {
                         <div
                             style={{
                                 marginTop: "32px",
-                                padding: "24px",
-                                borderRadius: "14px",
+                                padding: "28px",
                                 background: "#ECFDF3",
                                 border: "1px solid #BBF7D0",
+                                borderRadius: "16px",
                             }}
                         >
-                            <h3
+                            <h2
                                 style={{
                                     marginTop: 0,
                                     color: "#166534",
                                 }}
                             >
-                                ✅ Training Complete
-                            </h3>
+                                Model Training Complete
+                            </h2>
 
-                            <pre
+                            <p
                                 style={{
-                                    whiteSpace: "pre-wrap",
-                                    wordBreak: "break-word",
-                                    marginBottom: 0,
-                                    fontSize: "14px",
                                     color: "#374151",
+                                    lineHeight: "28px",
                                 }}
                             >
-                                {JSON.stringify(
-                                    result,
-                                    null,
-                                    2
-                                )}
-                            </pre>
+                                Your machine learning model has been trained
+                                successfully.
+
+                                <br />
+                                <br />
+
+                                FailureMap has generated predictions,
+                                evaluated model performance,
+                                discovered failure regions,
+                                and is preparing your analytics dashboard.
+                            </p>
+
+                            <div
+                                style={{
+                                    marginTop: "20px",
+                                    display: "flex",
+                                    gap: "14px",
+                                    flexWrap: "wrap",
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        padding: "10px 18px",
+                                        background: "#DCFCE7",
+                                        borderRadius: "999px",
+                                        color: "#166534",
+                                        fontWeight: 600,
+                                    }}
+                                >
+                                    Model Trained
+                                </div>
+
+                                <div
+                                    style={{
+                                        padding: "10px 18px",
+                                        background: "#DBEAFE",
+                                        borderRadius: "999px",
+                                        color: "#1D4ED8",
+                                        fontWeight: 600,
+                                    }}
+                                >
+                                    Failure Regions Generated
+                                </div>
+
+                                <div
+                                    style={{
+                                        padding: "10px 18px",
+                                        background: "#FEF3C7",
+                                        borderRadius: "999px",
+                                        color: "#92400E",
+                                        fontWeight: 600,
+                                    }}
+                                >
+                                    Report Ready
+                                </div>
+                            </div>
                         </div>
                     )}
                 </div>
