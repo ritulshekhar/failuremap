@@ -74,13 +74,42 @@ function UploadPage() {
 
       <div
         style={{
-          padding: "20px",
+          maxWidth: "1100px",
+          margin: "40px auto",
+          padding: "0 24px",
+          fontFamily: "Arial",
         }}
       >
 
-        <h1>
-          FailureMap
-        </h1>
+        <div
+          style={{
+            marginBottom: "40px",
+          }}
+        >
+          <h1
+            style={{
+              fontSize: "42px",
+              marginBottom: "12px",
+              color: "#111827",
+            }}
+          >
+            Upload Dataset
+          </h1>
+
+          <p
+            style={{
+              fontSize: "18px",
+              color: "#6b7280",
+              maxWidth: "700px",
+              lineHeight: "30px",
+            }}
+          >
+            Upload a CSV dataset to profile your data,
+            train a machine learning model, discover
+            failure regions, and generate a complete
+            FailureMap report.
+          </p>
+        </div>
 
         <input
           type="file"
