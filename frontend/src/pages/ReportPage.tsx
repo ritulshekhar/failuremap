@@ -147,6 +147,100 @@ function ReportPage() {
     const summary =
         failureMap.summary;
 
+    function downloadJSON(
+        data: any,
+        filename: string
+    ) {
+
+        const json =
+            JSON.stringify(
+                data,
+                null,
+                2
+            );
+
+        const blob =
+            new Blob(
+                [json],
+                {
+                    type:
+                        "application/json",
+                }
+            );
+
+        const url =
+            URL.createObjectURL(
+                blob
+            );
+
+        const link =
+            document.createElement(
+                "a"
+            );
+
+        link.href = url;
+
+        link.download =
+            filename;
+
+        document.body.appendChild(
+            link
+        );
+
+        link.click();
+
+        document.body.removeChild(
+            link
+        );
+
+        URL.revokeObjectURL(
+            url
+        );
+
+    }
+
+    function downloadFullReport() {
+
+        downloadJSON(
+            {
+                summary:
+                    failureMap.summary,
+
+                failure_regions:
+                    failureRegions,
+
+                ai_analysis:
+                    aiAnalysis,
+
+                explainability:
+                    explainability,
+
+                visualizations:
+                    visualizations,
+            },
+
+            "FailureMap_Report.json"
+        );
+
+    }
+
+    function downloadFailureRegions() {
+
+        downloadJSON(
+            failureRegions,
+            "Failure_Regions.json"
+        );
+
+    }
+
+    function downloadAIAnalysis() {
+
+        downloadJSON(
+            aiAnalysis,
+            "AI_Analysis.json"
+        );
+
+    }
     return (
 
         <div
@@ -172,15 +266,27 @@ function ReportPage() {
                 }}
             >
 
-                <button>
+                <button
+                    onClick={
+                        downloadFullReport
+                    }
+                >
                     Download Full Report
                 </button>
 
-                <button>
+                <button
+                    onClick={
+                        downloadFailureRegions
+                    }
+                >
                     Download Failure Regions
                 </button>
 
-                <button>
+                <button
+                    onClick={
+                        downloadAIAnalysis
+                    }
+                >
                     Download AI Analysis
                 </button>
 
