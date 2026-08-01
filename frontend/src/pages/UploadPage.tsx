@@ -286,25 +286,146 @@ function UploadPage() {
 
             <div>
 
-              <h2>
+              <h2
+                style={{
+                  marginTop: "50px",
+                  marginBottom: "25px",
+                  fontSize: "32px",
+                  color: "#111827",
+                }}
+              >
                 Dataset Summary
               </h2>
 
-              <p>
-                Rows: {summary.rows}
-              </p>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns:
+                    "repeat(auto-fit, minmax(220px, 1fr))",
+                  gap: "24px",
+                  marginBottom: "40px",
+                }}
+              >
+                <div
+                  style={{
+                    background: "#ffffff",
+                    borderRadius: "16px",
+                    padding: "24px",
+                    boxShadow:
+                      "0 8px 20px rgba(0,0,0,0.08)",
+                    border: "1px solid #e5e7eb",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#6b7280",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    Rows
+                  </div>
 
-              <p>
-                Columns: {summary.columns}
-              </p>
+                  <div
+                    style={{
+                      fontSize: "38px",
+                      fontWeight: 700,
+                      color: "#111827",
+                    }}
+                  >
+                    {summary.rows}
+                  </div>
+                </div>
 
-              <p>
-                Missing Values: {summary.missing_values}
-              </p>
+                <div
+                  style={{
+                    background: "#ffffff",
+                    borderRadius: "16px",
+                    padding: "24px",
+                    boxShadow:
+                      "0 8px 20px rgba(0,0,0,0.08)",
+                    border: "1px solid #e5e7eb",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#6b7280",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    Columns
+                  </div>
 
-              <p>
-                Duplicates: {summary.duplicates}
-              </p>
+                  <div
+                    style={{
+                      fontSize: "38px",
+                      fontWeight: 700,
+                      color: "#111827",
+                    }}
+                  >
+                    {summary.columns}
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    background: "#ffffff",
+                    borderRadius: "16px",
+                    padding: "24px",
+                    boxShadow:
+                      "0 8px 20px rgba(0,0,0,0.08)",
+                    border: "1px solid #e5e7eb",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#6b7280",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    Missing Values
+                  </div>
+
+                  <div
+                    style={{
+                      fontSize: "38px",
+                      fontWeight: 700,
+                      color: "#111827",
+                    }}
+                  >
+                    {summary.missing_values}
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    background: "#ffffff",
+                    borderRadius: "16px",
+                    padding: "24px",
+                    boxShadow:
+                      "0 8px 20px rgba(0,0,0,0.08)",
+                    border: "1px solid #e5e7eb",
+                  }}
+                >
+                  <div
+                    style={{
+                      color: "#6b7280",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    Duplicates
+                  </div>
+
+                  <div
+                    style={{
+                      fontSize: "38px",
+                      fontWeight: 700,
+                      color: "#111827",
+                    }}
+                  >
+                    {summary.duplicates}
+                  </div>
+                </div>
+              </div>
 
               <h3>
                 Columns
