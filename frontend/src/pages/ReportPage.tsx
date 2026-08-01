@@ -162,6 +162,31 @@ function ReportPage() {
 
             <hr />
 
+            <div
+                style={{
+                    display: "flex",
+                    gap: "15px",
+                    marginTop: "25px",
+                    marginBottom: "35px",
+                    flexWrap: "wrap",
+                }}
+            >
+
+                <button>
+                    Download Full Report
+                </button>
+
+                <button>
+                    Download Failure Regions
+                </button>
+
+                <button>
+                    Download AI Analysis
+                </button>
+
+            </div>
+
+
             <h2>
                 Overview
             </h2>
