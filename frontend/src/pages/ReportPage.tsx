@@ -816,113 +816,293 @@ function ReportPage() {
                 </div>
             </div>
 
-            <h2
+            <div
                 style={{
-                    marginTop: "40px",
+                    background: "#ffffff",
+                    borderRadius: "18px",
+                    padding: "30px",
+                    marginTop: "50px",
+                    border: "1px solid #E5E7EB",
+                    boxShadow: "0 8px 24px rgba(0,0,0,0.06)",
                 }}
             >
-                Explainability
-            </h2>
 
-            <h3>
+                <h2
+                    style={{
+                        fontSize: "34px",
+                        color: "#111827",
+                        marginBottom: "12px",
+                    }}
+                >
+                    Explainability
+                </h2>
+
+                <p
+                    style={{
+                        color: "#6B7280",
+                        fontSize: "17px",
+                        lineHeight: "28px",
+                        marginBottom: "36px",
+                    }}
+                >
+                    Understand how the model makes predictions through feature importance,
+                    confusion matrix analysis, and detailed classification metrics.
+                </p>
+            </div>
+
+            <h3
+                style={{
+                    fontSize: "28px",
+                    color: "#111827",
+                    marginBottom: "24px",
+                }}
+            >
                 Classification Report
             </h3>
 
-            <table
+            <div
                 style={{
-                    width: "100%",
-                    borderCollapse: "collapse",
+                    overflowX: "auto",
+                    border: "1px solid #E5E7EB",
+                    borderRadius: "16px",
                     marginBottom: "40px",
                 }}
             >
 
-                <thead>
+                <table
+                    style={{
+                        width: "100%",
+                        borderCollapse: "collapse",
+                        fontSize: "15px",
+                    }}
+                >
 
-                    <tr
-                        style={{
-                            background: "#f5f5f5",
-                        }}
-                    >
+                    <thead>
 
-                        <th style={headerCellStyle}>
-                            Class
-                        </th>
+                        <tr
+                            style={{
+                                background: "#f5f5f5",
+                            }}
+                        >
 
-                        <th style={headerCellStyle}>
-                            Precision
-                        </th>
+                            <th style={{
+                                background: "#F9FAFB",
+                                padding: "16px",
+                                textAlign: "left",
+                                borderBottom: "2px solid #E5E7EB",
+                                color: "#374151",
+                                fontWeight: 700,
+                            }}>
+                                Class
+                            </th>
 
-                        <th style={headerCellStyle}>
-                            Recall
-                        </th>
+                            <th style={{
+                                background: "#F9FAFB",
+                                padding: "16px",
+                                textAlign: "left",
+                                borderBottom: "2px solid #E5E7EB",
+                                color: "#374151",
+                                fontWeight: 700,
+                            }}>
+                                Precision
+                            </th>
 
-                        <th style={headerCellStyle}>
-                            F1 Score
-                        </th>
+                            <th style={{
+                                background: "#F9FAFB",
+                                padding: "16px",
+                                textAlign: "left",
+                                borderBottom: "2px solid #E5E7EB",
+                                color: "#374151",
+                                fontWeight: 700,
+                            }}>
+                                Recall
+                            </th>
 
-                        <th style={headerCellStyle}>
-                            Support
-                        </th>
+                            <th style={{
+                                background: "#F9FAFB",
+                                padding: "16px",
+                                textAlign: "left",
+                                borderBottom: "2px solid #E5E7EB",
+                                color: "#374151",
+                                fontWeight: 700,
+                            }}>
+                                F1 Score
+                            </th>
 
-                    </tr>
+                            <th style={{
+                                background: "#F9FAFB",
+                                padding: "16px",
+                                textAlign: "left",
+                                borderBottom: "2px solid #E5E7EB",
+                                color: "#374151",
+                                fontWeight: 700,
+                            }}>
+                                Support
+                            </th>
 
-                </thead>
+                        </tr>
 
-                <tbody>
+                    </thead>
 
-                    {
+                    <tbody>
 
-                        Object.entries(
+                        {
 
-                            explainability
-                                ?.report
-                                ?.classification_report || {}
+                            Object.entries(
 
-                        )
-
-                            .filter(
-
-                                ([key]) =>
-
-                                    key !== "accuracy" &&
-                                    key !== "macro avg" &&
-                                    key !== "weighted avg"
+                                explainability
+                                    ?.report
+                                    ?.classification_report || {}
 
                             )
 
-                            .map(
+                                .filter(
 
-                                ([
+                                    ([key]) =>
 
-                                    label,
+                                        key !== "accuracy" &&
+                                        key !== "macro avg" &&
+                                        key !== "weighted avg"
 
-                                    values,
+                                )
 
-                                ]: any) => (
+                                .map(
+
+                                    ([
+
+                                        label,
+
+                                        values,
+
+                                    ]: any) => (
+
+                                        <tr
+                                            key={label}
+                                        >
+
+                                            <td style={{
+                                                padding: "16px",
+                                                borderBottom: "1px solid #E5E7EB",
+                                                color: "#374151",
+                                            }}>
+                                                {label}
+                                            </td>
+
+                                            <td style={{
+                                                padding: "16px",
+                                                borderBottom: "1px solid #E5E7EB",
+                                                color: "#374151",
+                                            }}>
+                                                {values.precision.toFixed(2)}
+                                            </td>
+
+                                            <td style={{
+                                                padding: "16px",
+                                                borderBottom: "1px solid #E5E7EB",
+                                                color: "#374151",
+                                            }}>
+                                                {values.recall.toFixed(2)}
+                                            </td>
+
+                                            <td style={{
+                                                padding: "16px",
+                                                borderBottom: "1px solid #E5E7EB",
+                                                color: "#374151",
+                                            }}>
+                                                {values["f1-score"].toFixed(2)}
+                                            </td>
+
+                                            <td style={{
+                                                padding: "16px",
+                                                borderBottom: "1px solid #E5E7EB",
+                                                color: "#374151",
+                                            }}>
+                                                {values.support}
+                                            </td>
+
+                                        </tr>
+
+                                    )
+
+                                )
+
+                        }
+
+                    </tbody>
+
+                </table>
+            </div>
+            <h3
+                style={{
+                    fontSize: "28px",
+                    color: "#111827",
+                    marginTop: "50px",
+                    marginBottom: "24px",
+                }}
+            >
+                Confusion Matrix
+            </h3>
+
+            <div
+                style={{
+                    border: "1px solid #E5E7EB",
+                    borderRadius: "16px",
+                    overflow: "hidden",
+                    marginBottom: "40px",
+                }}
+            >
+
+                <table
+                    style={{
+                        width: "100%",
+                        borderCollapse: "collapse",
+                        textAlign: "center",
+                        fontSize: "16px",
+                    }}
+                >
+
+                    <tbody>
+
+                        {
+
+                            explainability?.report?.confusion_matrix?.map(
+
+                                (
+                                    row: number[],
+                                    rowIndex: number
+                                ) => (
 
                                     <tr
-                                        key={label}
+                                        key={rowIndex}
                                     >
 
-                                        <td style={bodyCellStyle}>
-                                            {label}
-                                        </td>
+                                        {
 
-                                        <td style={bodyCellStyle}>
-                                            {values.precision.toFixed(2)}
-                                        </td>
+                                            row.map(
 
-                                        <td style={bodyCellStyle}>
-                                            {values.recall.toFixed(2)}
-                                        </td>
+                                                (
+                                                    value: number,
+                                                    columnIndex: number
+                                                ) => (
 
-                                        <td style={bodyCellStyle}>
-                                            {values["f1-score"].toFixed(2)}
-                                        </td>
+                                                    <td
+                                                        key={columnIndex}
+                                                        style={{
+                                                            ...cellStyle,
+                                                            textAlign: "center",
+                                                            fontWeight: "bold",
+                                                        }}
+                                                    >
 
-                                        <td style={bodyCellStyle}>
-                                            {values.support}
-                                        </td>
+                                                        {value}
+
+                                                    </td>
+
+                                                )
+
+                                            )
+
+                                        }
 
                                     </tr>
 
@@ -930,206 +1110,236 @@ function ReportPage() {
 
                             )
 
-                    }
+                        }
 
-                </tbody>
+                    </tbody>
 
-            </table>
-
-            <h3>
-                Confusion Matrix
+                </table>
+            </div>
+            <h3
+                style={{
+                    fontSize: "28px",
+                    color: "#111827",
+                    marginTop: "50px",
+                    marginBottom: "24px",
+                }}
+            >
+                Feature Importance
             </h3>
 
-            <table
+            <div
                 style={{
-                    width: "100%",
-                    borderCollapse: "collapse",
+                    border: "1px solid #E5E7EB",
+                    borderRadius: "16px",
+                    overflow: "hidden",
                     marginBottom: "40px",
                 }}
             >
 
-                <tbody>
+                <table
+                    style={{
+                        width: "100%",
+                        borderCollapse: "collapse",
+                        fontSize: "15px",
+                    }}
+                >
 
-                    {
+                    <thead>
 
-                        explainability?.report?.confusion_matrix?.map(
+                        <tr
+                            style={{
+                                background: "#f5f5f5",
+                            }}
+                        >
+
+                            <th style={{
+                                background: "#F9FAFB",
+                                padding: "16px",
+                                textAlign: "left",
+                                borderBottom: "2px solid #E5E7EB",
+                                color: "#374151",
+                                fontWeight: 700,
+                            }}>
+                                Feature
+                            </th>
+
+                            <th style={{
+                                background: "#F9FAFB",
+                                padding: "16px",
+                                textAlign: "left",
+                                borderBottom: "2px solid #E5E7EB",
+                                color: "#374151",
+                                fontWeight: 700,
+                            }}>
+                                Importance
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {explainability?.feature_importance?.map(
 
                             (
-                                row: number[],
-                                rowIndex: number
+                                item: any,
+                                index: number
                             ) => (
 
                                 <tr
-                                    key={rowIndex}
+                                    key={index}
                                 >
 
-                                    {
+                                    <td style={{
+                                        padding: "20px",
+                                        borderBottom: "1px solid #E5E7EB",
+                                        fontWeight: 700,
+                                        color: "#111827",
+                                    }}>
+                                        {item.feature}
+                                    </td>
 
-                                        row.map(
-
-                                            (
-                                                value: number,
-                                                columnIndex: number
-                                            ) => (
-
-                                                <td
-                                                    key={columnIndex}
-                                                    style={{
-                                                        ...cellStyle,
-                                                        textAlign: "center",
-                                                        fontWeight: "bold",
-                                                    }}
-                                                >
-
-                                                    {value}
-
-                                                </td>
-
-                                            )
-
-                                        )
-
-                                    }
+                                    <td
+                                        style={{
+                                            padding: "20px",
+                                            borderBottom: "1px solid #E5E7EB",
+                                        }}
+                                    >
+                                        <span
+                                            style={{
+                                                color: "#2563EB",
+                                                fontWeight: 700,
+                                            }}
+                                        >
+                                            {item.importance.toFixed(4)}
+                                        </span>
+                                    </td>
 
                                 </tr>
 
                             )
 
-                        )
+                        )}
 
-                    }
+                    </tbody>
 
-                </tbody>
-
-            </table>
-
-            <h3>
-                Feature Importance
-            </h3>
-
-            <table
+                </table>
+            </div>
+            <h3
                 style={{
-                    width: "100%",
-                    borderCollapse: "collapse",
-                    marginBottom: "40px",
+                    fontSize: "28px",
+                    color: "#111827",
+                    marginTop: "50px",
+                    marginBottom: "24px",
                 }}
             >
-
-                <thead>
-
-                    <tr
-                        style={{
-                            background: "#f5f5f5",
-                        }}
-                    >
-
-                        <th style={cellStyle}>
-                            Feature
-                        </th>
-
-                        <th style={cellStyle}>
-                            Importance
-                        </th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    {explainability?.feature_importance?.map(
-
-                        (
-                            item: any,
-                            index: number
-                        ) => (
-
-                            <tr
-                                key={index}
-                            >
-
-                                <td style={cellStyle}>
-                                    {item.feature}
-                                </td>
-
-                                <td style={cellStyle}>
-                                    {item.importance.toFixed(4)}
-                                </td>
-
-                            </tr>
-
-                        )
-
-                    )}
-
-                </tbody>
-
-            </table>
-
-            <h3>
                 SHAP Feature Importance
             </h3>
 
-            <table
+            <div
                 style={{
-                    width: "100%",
-                    borderCollapse: "collapse",
+                    border: "1px solid #E5E7EB",
+                    borderRadius: "16px",
+                    overflow: "hidden",
                     marginBottom: "40px",
                 }}
             >
 
-                <thead>
+                <table
+                    style={{
+                        width: "100%",
+                        borderCollapse: "collapse",
+                        fontSize: "15px",
+                    }}
+                >
 
-                    <tr
-                        style={{
-                            background: "#f5f5f5",
-                        }}
-                    >
+                    <thead>
 
-                        <th style={cellStyle}>
-                            Feature
-                        </th>
+                        <tr>
 
-                        <th style={cellStyle}>
-                            SHAP Importance
-                        </th>
+                            <th style={{
+                                background: "#F9FAFB",
+                                padding: "16px",
+                                textAlign: "left",
+                                borderBottom: "2px solid #E5E7EB",
+                                color: "#374151",
+                                fontWeight: 700,
+                            }}>
+                                Feature
+                            </th>
 
-                    </tr>
+                            <th style={{
+                                background: "#F9FAFB",
+                                padding: "16px",
+                                textAlign: "left",
+                                borderBottom: "2px solid #E5E7EB",
+                                color: "#374151",
+                                fontWeight: 700,
+                            }}>
+                                SHAP Importance
+                            </th>
 
-                </thead>
+                        </tr>
 
-                <tbody>
+                    </thead>
 
-                    {explainability?.shap_summary?.map(
+                    <tbody>
 
-                        (
-                            item: any,
-                            index: number
-                        ) => (
+                        {explainability?.shap_summary?.map(
 
-                            <tr
-                                key={index}
-                            >
+                            (
+                                item: any,
+                                index: number
+                            ) => (
 
-                                <td style={cellStyle}>
-                                    {item.feature}
-                                </td>
+                                <tr key={index}>
 
-                                <td style={cellStyle}>
-                                    {item.importance.toFixed(4)}
-                                </td>
+                                    <td
+                                        style={{
+                                            padding: "20px",
+                                            borderBottom: "1px solid #E5E7EB",
+                                            fontWeight: 700,
+                                            color: "#111827",
+                                        }}
+                                    >
+                                        {item.feature}
+                                    </td>
 
-                            </tr>
+                                    <td
+                                        style={{
+                                            padding: "20px",
+                                            borderBottom: "1px solid #E5E7EB",
+                                        }}
+                                    >
+                                        <span
+                                            style={{
+                                                color: "#7C3AED",
+                                                fontWeight: 700,
+                                            }}
+                                        >
+                                            {item.importance.toFixed(4)}
+                                        </span>
+                                    </td>
 
-                        )
+                                </tr>
 
-                    )}
+                            )
 
-                </tbody>
+                        )}
 
-            </table>
+                    </tbody>
 
-            <h2>
+                </table>
+            </div>
+            <h2
+                style={{
+                    fontSize: "34px",
+                    color: "#111827",
+                    marginTop: "50px",
+                    marginBottom: "24px",
+                }}
+            >
                 Visualizations
             </h2>
 
