@@ -48,9 +48,13 @@ function UploadPage() {
   const [taskType, setTaskType] =
     useState("");
 
+  const [uploading, setUploading] =
+    useState(false);
   const handleUpload = async () => {
 
     if (!file) return;
+
+    setUploading(true);
 
     try {
 
@@ -64,6 +68,10 @@ function UploadPage() {
     } catch (error) {
 
       console.error(error);
+
+    } finally {
+
+      setUploading(false);
 
     }
 
@@ -232,11 +240,14 @@ function UploadPage() {
           <button
             style={{
               ...primaryButtonStyle,
-              marginTop: "28px",
+              opacity: uploading ? 0.7 : 1,
             }}
             onClick={handleUpload}
+            disabled={uploading}
           >
-            Upload Dataset
+            {uploading
+              ? "Uploading..."
+              : "Upload Dataset"}
           </button>
         </div>
         {
