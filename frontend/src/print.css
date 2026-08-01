@@ -1,0 +1,37 @@
+@media print {
+
+    button {
+
+        display: none !important;
+
+    }
+
+    body {
+
+        background: white;
+
+    }
+
+    img {
+
+        max-width: 100%;
+
+        page-break-inside: avoid;
+
+    }
+
+    table {
+
+        page-break-inside: avoid;
+
+    }
+
+    h1,
+    h2,
+    h3 {
+
+        page-break-after: avoid;
+
+    }
+
+}

@@ -241,6 +241,13 @@ function ReportPage() {
         );
 
     }
+
+    function printDashboard() {
+
+        window.print();
+
+    }
+
     return (
 
         <div
@@ -267,27 +274,69 @@ function ReportPage() {
             >
 
                 <button
-                    onClick={
-                        downloadFullReport
-                    }
+                    onClick={downloadFullReport}
+                    style={{
+                        padding: "12px 22px",
+                        background: "#2563eb",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "8px",
+                        cursor: "pointer",
+                        fontWeight: 600,
+                        fontSize: "15px",
+                    }}
                 >
                     Download Full Report
                 </button>
 
                 <button
-                    onClick={
-                        downloadFailureRegions
-                    }
+                    onClick={downloadFailureRegions}
+                    style={{
+                        padding: "12px 22px",
+                        background: "#16a34a",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "8px",
+                        cursor: "pointer",
+                        fontWeight: 600,
+                        fontSize: "15px",
+                    }}
                 >
                     Download Failure Regions
                 </button>
 
                 <button
-                    onClick={
-                        downloadAIAnalysis
-                    }
+                    onClick={downloadAIAnalysis}
+                    style={{
+                        padding: "12px 22px",
+                        background: "#7c3aed",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "8px",
+                        cursor: "pointer",
+                        fontWeight: 600,
+                        fontSize: "15px",
+                    }}
                 >
                     Download AI Analysis
+                </button>
+
+                <button
+                    onClick={
+                        printDashboard
+                    }
+                    style={{
+                        padding: "12px 22px",
+                        background: "#ea580c",
+                        color: "white",
+                        border: "none",
+                        borderRadius: "8px",
+                        cursor: "pointer",
+                        fontWeight: 600,
+                        fontSize: "15px",
+                    }}
+                >
+                    Print / Save PDF
                 </button>
 
             </div>
