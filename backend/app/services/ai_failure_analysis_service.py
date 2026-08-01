@@ -44,6 +44,8 @@ def generate_ai_failure_analysis(
 
         region = failure_regions[0]
 
+        if region["failure_rate"] > 0:
+
         insights.append(
             f"Highest risk region detected: {region['condition']} "
             f"(Failure Rate: {region['failure_rate']:.2%})"
@@ -56,7 +58,7 @@ def generate_ai_failure_analysis(
     else:
 
         insights.append(
-            "No significant failure regions were detected."
+            "No significant failure regions were detected because the model achieved near-perfect performance on the evaluation dataset."
         )
 
     # -----------------------------------------
