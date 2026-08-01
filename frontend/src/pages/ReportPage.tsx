@@ -680,281 +680,249 @@ function ReportPage() {
 
                 </div>
 
-                <h2
-                    style={{
-                        marginTop: "40px",
-                    }}
-                >
-                    AI Analysis
-                </h2>
-
                 <div
                     style={{
-                        display: "grid",
-                        gridTemplateColumns: "1fr 1fr",
-                        gap: "25px",
-                        marginBottom: "40px",
+                        background: "#ffffff",
+                        borderRadius: "18px",
+                        padding: "30px",
+                        marginTop: "50px",
+                        border: "1px solid #E5E7EB",
+                        boxShadow:
+                            "0 8px 24px rgba(0,0,0,0.06)",
                     }}
                 >
+
+                    <h2
+                        style={{
+                            fontSize: "34px",
+                            marginBottom: "12px",
+                            color: "#111827",
+                        }}
+                    >
+                        AI Analysis
+                    </h2>
+
+                    <p
+                        style={{
+                            color: "#6B7280",
+                            fontSize: "17px",
+                            marginBottom: "36px",
+                            lineHeight: "28px",
+                        }}
+                    >
+                        AI-generated observations and recommendations based on the trained machine learning model.
+                    </p>
 
                     <div
                         style={{
-                            border: "1px solid #ddd",
-                            borderRadius: "10px",
-                            padding: "20px",
-                            background: "#fafafa",
+                            display: "grid",
+                            gridTemplateColumns:
+                                "repeat(auto-fit,minmax(420px,1fr))",
+                            gap: "28px",
+                            marginBottom: "40px",
                         }}
                     >
 
-                        <h3>
-                            Insights
-                        </h3>
-
-                        <ul>
-
-                            {aiAnalysis?.insights?.map(
-
-                                (
-                                    item: string,
-                                    index: number
-                                ) => (
-
-                                    <li
-                                        key={index}
-                                        style={{
-                                            marginBottom: "12px",
-                                        }}
-                                    >
-
-                                        {item}
-
-                                    </li>
-
-                                )
-
-                            )}
-
-                        </ul>
-
-                    </div>
-
-                    <div
-                        style={{
-                            border: "1px solid #ddd",
-                            borderRadius: "10px",
-                            padding: "20px",
-                            background: "#fafafa",
-                        }}
-                    >
-
-                        <h3>
-                            Recommendations
-                        </h3>
-
-                        <ul>
-
-                            {aiAnalysis?.recommendations?.map(
-
-                                (
-                                    item: string,
-                                    index: number
-                                ) => (
-
-                                    <li
-                                        key={index}
-                                        style={{
-                                            marginBottom: "12px",
-                                        }}
-                                    >
-
-                                        {item}
-
-                                    </li>
-
-                                )
-
-                            )}
-
-                        </ul>
-
-                    </div>
-
-                </div>
-
-                <h2
-                    style={{
-                        marginTop: "40px",
-                    }}
-                >
-                    Explainability
-                </h2>
-
-                <h3>
-                    Classification Report
-                </h3>
-
-                <table
-                    style={{
-                        width: "100%",
-                        borderCollapse: "collapse",
-                        marginBottom: "40px",
-                    }}
-                >
-
-                    <thead>
-
-                        <tr
+                        <div
                             style={{
-                                background: "#f5f5f5",
+                                border: "1px solid #ddd",
+                                borderRadius: "10px",
+                                padding: "20px",
+                                background: "#fafafa",
                             }}
                         >
 
-                            <th style={headerCellStyle}>
-                                Class
-                            </th>
+                            <h3>
+                                Insights
+                            </h3>
 
-                            <th style={headerCellStyle}>
-                                Precision
-                            </th>
+                            <ul
+                                style={{
+                                    marginTop: "18px",
+                                    lineHeight: "34px",
+                                    paddingLeft: "24px",
+                                }}>
+                                {aiAnalysis?.insights?.map(
 
-                            <th style={headerCellStyle}>
-                                Recall
-                            </th>
+                                    (
+                                        item: string,
+                                        index: number
+                                    ) => (
 
-                            <th style={headerCellStyle}>
-                                F1 Score
-                            </th>
-
-                            <th style={headerCellStyle}>
-                                Support
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        {
-
-                            Object.entries(
-
-                                explainability
-                                    ?.report
-                                    ?.classification_report || {}
-
-                            )
-
-                                .filter(
-
-                                    ([key]) =>
-
-                                        key !== "accuracy" &&
-                                        key !== "macro avg" &&
-                                        key !== "weighted avg"
-
-                                )
-
-                                .map(
-
-                                    ([
-
-                                        label,
-
-                                        values,
-
-                                    ]: any) => (
-
-                                        <tr
-                                            key={label}
+                                        <li
+                                            key={index}
+                                            style={{
+                                                marginBottom: "12px",
+                                            }}
                                         >
 
-                                            <td style={bodyCellStyle}>
-                                                {label}
-                                            </td>
+                                            {item}
 
-                                            <td style={bodyCellStyle}>
-                                                {values.precision.toFixed(2)}
-                                            </td>
-
-                                            <td style={bodyCellStyle}>
-                                                {values.recall.toFixed(2)}
-                                            </td>
-
-                                            <td style={bodyCellStyle}>
-                                                {values["f1-score"].toFixed(2)}
-                                            </td>
-
-                                            <td style={bodyCellStyle}>
-                                                {values.support}
-                                            </td>
-
-                                        </tr>
+                                        </li>
 
                                     )
 
-                                )
+                                )}
 
-                        }
+                            </ul>
 
-                    </tbody>
+                        </div>
 
-                </table>
+                        <div
+                            style={{
+                                border: "1px solid #ddd",
+                                borderRadius: "10px",
+                                padding: "20px",
+                                background: "#fafafa",
+                            }}
+                        >
 
-                <h3>
-                    Confusion Matrix
-                </h3>
+                            <h3>
+                                Recommendations
+                            </h3>
 
-                <table
-                    style={{
-                        width: "100%",
-                        borderCollapse: "collapse",
-                        marginBottom: "40px",
-                    }}
-                >
+                            <ul
+                                style={{
+                                    marginTop: "18px",
+                                    lineHeight: "34px",
+                                    paddingLeft: "24px",
+                                }}>
+                                {aiAnalysis?.recommendations?.map(
 
-                    <tbody>
+                                    (
+                                        item: string,
+                                        index: number
+                                    ) => (
 
-                        {
+                                        <li
+                                            key={index}
+                                            style={{
+                                                marginBottom: "12px",
+                                            }}
+                                        >
 
-                            explainability?.report?.confusion_matrix?.map(
+                                            {item}
 
-                                (
-                                    row: number[],
-                                    rowIndex: number
-                                ) => (
+                                        </li>
+
+                                    )
+
+                                )}
+
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2
+                style={{
+                    marginTop: "40px",
+                }}
+            >
+                Explainability
+            </h2>
+
+            <h3>
+                Classification Report
+            </h3>
+
+            <table
+                style={{
+                    width: "100%",
+                    borderCollapse: "collapse",
+                    marginBottom: "40px",
+                }}
+            >
+
+                <thead>
+
+                    <tr
+                        style={{
+                            background: "#f5f5f5",
+                        }}
+                    >
+
+                        <th style={headerCellStyle}>
+                            Class
+                        </th>
+
+                        <th style={headerCellStyle}>
+                            Precision
+                        </th>
+
+                        <th style={headerCellStyle}>
+                            Recall
+                        </th>
+
+                        <th style={headerCellStyle}>
+                            F1 Score
+                        </th>
+
+                        <th style={headerCellStyle}>
+                            Support
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {
+
+                        Object.entries(
+
+                            explainability
+                                ?.report
+                                ?.classification_report || {}
+
+                        )
+
+                            .filter(
+
+                                ([key]) =>
+
+                                    key !== "accuracy" &&
+                                    key !== "macro avg" &&
+                                    key !== "weighted avg"
+
+                            )
+
+                            .map(
+
+                                ([
+
+                                    label,
+
+                                    values,
+
+                                ]: any) => (
 
                                     <tr
-                                        key={rowIndex}
+                                        key={label}
                                     >
 
-                                        {
+                                        <td style={bodyCellStyle}>
+                                            {label}
+                                        </td>
 
-                                            row.map(
+                                        <td style={bodyCellStyle}>
+                                            {values.precision.toFixed(2)}
+                                        </td>
 
-                                                (
-                                                    value: number,
-                                                    columnIndex: number
-                                                ) => (
+                                        <td style={bodyCellStyle}>
+                                            {values.recall.toFixed(2)}
+                                        </td>
 
-                                                    <td
-                                                        key={columnIndex}
-                                                        style={{
-                                                            ...cellStyle,
-                                                            textAlign: "center",
-                                                            fontWeight: "bold",
-                                                        }}
-                                                    >
+                                        <td style={bodyCellStyle}>
+                                            {values["f1-score"].toFixed(2)}
+                                        </td>
 
-                                                        {value}
-
-                                                    </td>
-
-                                                )
-
-                                            )
-
-                                        }
+                                        <td style={bodyCellStyle}>
+                                            {values.support}
+                                        </td>
 
                                     </tr>
 
@@ -962,197 +930,264 @@ function ReportPage() {
 
                             )
 
-                        }
+                    }
 
-                    </tbody>
+                </tbody>
 
-                </table>
+            </table>
 
-                <h3>
-                    Feature Importance
-                </h3>
+            <h3>
+                Confusion Matrix
+            </h3>
 
-                <table
-                    style={{
-                        width: "100%",
-                        borderCollapse: "collapse",
-                        marginBottom: "40px",
-                    }}
-                >
+            <table
+                style={{
+                    width: "100%",
+                    borderCollapse: "collapse",
+                    marginBottom: "40px",
+                }}
+            >
 
-                    <thead>
+                <tbody>
 
-                        <tr
-                            style={{
-                                background: "#f5f5f5",
-                            }}
-                        >
+                    {
 
-                            <th style={cellStyle}>
-                                Feature
-                            </th>
-
-                            <th style={cellStyle}>
-                                Importance
-                            </th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        {explainability?.feature_importance?.map(
+                        explainability?.report?.confusion_matrix?.map(
 
                             (
-                                item: any,
-                                index: number
+                                row: number[],
+                                rowIndex: number
                             ) => (
 
                                 <tr
-                                    key={index}
+                                    key={rowIndex}
                                 >
 
-                                    <td style={cellStyle}>
-                                        {item.feature}
-                                    </td>
+                                    {
 
-                                    <td style={cellStyle}>
-                                        {item.importance.toFixed(4)}
-                                    </td>
+                                        row.map(
+
+                                            (
+                                                value: number,
+                                                columnIndex: number
+                                            ) => (
+
+                                                <td
+                                                    key={columnIndex}
+                                                    style={{
+                                                        ...cellStyle,
+                                                        textAlign: "center",
+                                                        fontWeight: "bold",
+                                                    }}
+                                                >
+
+                                                    {value}
+
+                                                </td>
+
+                                            )
+
+                                        )
+
+                                    }
 
                                 </tr>
 
                             )
 
-                        )}
+                        )
 
-                    </tbody>
+                    }
 
-                </table>
+                </tbody>
 
-                <h3>
-                    SHAP Feature Importance
-                </h3>
+            </table>
 
-                <table
-                    style={{
-                        width: "100%",
-                        borderCollapse: "collapse",
-                        marginBottom: "40px",
-                    }}
-                >
+            <h3>
+                Feature Importance
+            </h3>
 
-                    <thead>
+            <table
+                style={{
+                    width: "100%",
+                    borderCollapse: "collapse",
+                    marginBottom: "40px",
+                }}
+            >
 
-                        <tr
-                            style={{
-                                background: "#f5f5f5",
-                            }}
-                        >
+                <thead>
 
-                            <th style={cellStyle}>
-                                Feature
-                            </th>
+                    <tr
+                        style={{
+                            background: "#f5f5f5",
+                        }}
+                    >
 
-                            <th style={cellStyle}>
-                                SHAP Importance
-                            </th>
+                        <th style={cellStyle}>
+                            Feature
+                        </th>
 
-                        </tr>
+                        <th style={cellStyle}>
+                            Importance
+                        </th>
 
-                    </thead>
+                    </tr>
 
-                    <tbody>
+                </thead>
 
-                        {explainability?.shap_summary?.map(
+                <tbody>
 
-                            (
-                                item: any,
-                                index: number
-                            ) => (
+                    {explainability?.feature_importance?.map(
 
-                                <tr
-                                    key={index}
-                                >
+                        (
+                            item: any,
+                            index: number
+                        ) => (
 
-                                    <td style={cellStyle}>
-                                        {item.feature}
-                                    </td>
+                            <tr
+                                key={index}
+                            >
 
-                                    <td style={cellStyle}>
-                                        {item.importance.toFixed(4)}
-                                    </td>
+                                <td style={cellStyle}>
+                                    {item.feature}
+                                </td>
 
-                                </tr>
+                                <td style={cellStyle}>
+                                    {item.importance.toFixed(4)}
+                                </td>
 
-                            )
+                            </tr>
 
-                        )}
+                        )
 
-                    </tbody>
+                    )}
 
-                </table>
+                </tbody>
 
-                <h2>
-                    Visualizations
-                </h2>
+            </table>
 
-                <div
-                    style={{
-                        display: "grid",
-                        gridTemplateColumns:
-                            "repeat(auto-fit, minmax(450px, 1fr))",
-                        gap: "25px",
-                        marginTop: "20px",
-                        marginBottom: "40px",
-                    }}
-                >
+            <h3>
+                SHAP Feature Importance
+            </h3>
 
-                    <VisualizationCard
-                        title="Failure Regions"
-                        image={
-                            visualizations.failure_region_chart
-                        }
-                    />
+            <table
+                style={{
+                    width: "100%",
+                    borderCollapse: "collapse",
+                    marginBottom: "40px",
+                }}
+            >
 
-                    <VisualizationCard
-                        title="Feature Importance"
-                        image={
-                            visualizations.feature_importance_chart
-                        }
-                    />
+                <thead>
 
-                    <VisualizationCard
-                        title="Prediction Distribution"
-                        image={
-                            visualizations.prediction_distribution_chart
-                        }
-                    />
+                    <tr
+                        style={{
+                            background: "#f5f5f5",
+                        }}
+                    >
 
-                    <VisualizationCard
-                        title="Correlation Heatmap"
-                        image={
-                            visualizations.correlation_heatmap
-                        }
-                    />
+                        <th style={cellStyle}>
+                            Feature
+                        </th>
 
-                    <VisualizationCard
-                        title="Error Distribution"
-                        image={
-                            visualizations.error_distribution_chart
-                        }
-                    />
+                        <th style={cellStyle}>
+                            SHAP Importance
+                        </th>
 
-                    <VisualizationCard
-                        title="Failed Feature Distribution"
-                        image={
-                            visualizations.failed_feature_distribution
-                        }
-                    />
+                    </tr>
 
-                </div>
-            </div >
+                </thead>
+
+                <tbody>
+
+                    {explainability?.shap_summary?.map(
+
+                        (
+                            item: any,
+                            index: number
+                        ) => (
+
+                            <tr
+                                key={index}
+                            >
+
+                                <td style={cellStyle}>
+                                    {item.feature}
+                                </td>
+
+                                <td style={cellStyle}>
+                                    {item.importance.toFixed(4)}
+                                </td>
+
+                            </tr>
+
+                        )
+
+                    )}
+
+                </tbody>
+
+            </table>
+
+            <h2>
+                Visualizations
+            </h2>
+
+            <div
+                style={{
+                    display: "grid",
+                    gridTemplateColumns:
+                        "repeat(auto-fit, minmax(450px, 1fr))",
+                    gap: "25px",
+                    marginTop: "20px",
+                    marginBottom: "40px",
+                }}
+            >
+
+                <VisualizationCard
+                    title="Failure Regions"
+                    image={
+                        visualizations.failure_region_chart
+                    }
+                />
+
+                <VisualizationCard
+                    title="Feature Importance"
+                    image={
+                        visualizations.feature_importance_chart
+                    }
+                />
+
+                <VisualizationCard
+                    title="Prediction Distribution"
+                    image={
+                        visualizations.prediction_distribution_chart
+                    }
+                />
+
+                <VisualizationCard
+                    title="Correlation Heatmap"
+                    image={
+                        visualizations.correlation_heatmap
+                    }
+                />
+
+                <VisualizationCard
+                    title="Error Distribution"
+                    image={
+                        visualizations.error_distribution_chart
+                    }
+                />
+
+                <VisualizationCard
+                    title="Failed Feature Distribution"
+                    image={
+                        visualizations.failed_feature_distribution
+                    }
+                />
+
+            </div>
+
         </>
     );
 
