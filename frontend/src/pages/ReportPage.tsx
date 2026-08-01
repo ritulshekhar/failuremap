@@ -25,9 +25,10 @@ const tableContainerStyle = {
 };
 
 const cellStyle = {
-    border: "1px solid #ddd",
-    padding: "12px",
-    textAlign: "left" as const,
+    padding: "16px",
+    borderBottom: "1px solid #E5E7EB",
+    color: "#374151",
+    fontSize: "15px",
 };
 
 const headerCellStyle = {
@@ -599,6 +600,12 @@ function ReportPage() {
 
                                     <tr
                                         key={index}
+                                        style={{
+                                            background:
+                                                index % 2 === 0
+                                                    ? "#FFFFFF"
+                                                    : "#F9FAFB",
+                                        }}
                                     >
 
                                         <td style={cellStyle}>
@@ -622,11 +629,43 @@ function ReportPage() {
                                         </td>
 
                                         <td style={cellStyle}>
-                                            {region.severity}
+                                            <span
+                                                style={{
+                                                    padding: "6px 14px",
+                                                    borderRadius: "999px",
+                                                    background:
+                                                        region.severity === "High"
+                                                            ? "#FEE2E2"
+                                                            : region.severity === "Medium"
+                                                                ? "#FEF3C7"
+                                                                : "#DCFCE7",
+                                                    color:
+                                                        region.severity === "High"
+                                                            ? "#B91C1C"
+                                                            : region.severity === "Medium"
+                                                                ? "#92400E"
+                                                                : "#166534",
+                                                    fontWeight: 600,
+                                                    fontSize: "14px",
+                                                }}
+                                            >
+                                                {region.severity}
+                                            </span>
                                         </td>
 
                                         <td style={cellStyle}>
-                                            {region.confidence}
+                                            <span
+                                                style={{
+                                                    padding: "6px 14px",
+                                                    borderRadius: "999px",
+                                                    background: "#DBEAFE",
+                                                    color: "#1D4ED8",
+                                                    fontWeight: 600,
+                                                    fontSize: "14px",
+                                                }}
+                                            >
+                                                {region.confidence}
+                                            </span>
                                         </td>
 
                                     </tr>
