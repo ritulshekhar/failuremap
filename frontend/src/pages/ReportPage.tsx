@@ -10,6 +10,8 @@ import {
 
 import MetricsCard from "../components/MetricsCard";
 
+import VisualizationCard from "../components/VisualizationCard";
+
 const cellStyle = {
     border: "1px solid #ddd",
     padding: "12px",
