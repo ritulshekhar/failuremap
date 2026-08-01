@@ -154,22 +154,66 @@ function UploadPage() {
             Choose a CSV dataset to begin your machine learning analysis.
           </p>
           <input
+            id="csv-upload"
             type="file"
             accept=".csv"
+            style={{ display: "none" }}
             onChange={(e) => {
-
-              if (
-                e.target.files?.[0]
-              ) {
-
-                setFile(
-                  e.target.files[0]
-                );
-
+              if (e.target.files?.[0]) {
+                setFile(e.target.files[0]);
               }
-
             }}
           />
+          <label
+            htmlFor="csv-upload"
+            style={{
+              display: "block",
+              border: "2px dashed #cbd5e1",
+              borderRadius: "14px",
+              padding: "45px",
+              textAlign: "center",
+              cursor: "pointer",
+              background: "#f8fafc",
+              transition: "0.2s",
+            }}
+          >
+            <div
+              style={{
+                fontSize: "48px",
+                marginBottom: "12px",
+              }}
+            >
+              📂
+            </div>
+
+            <div
+              style={{
+                fontSize: "22px",
+                fontWeight: 700,
+                color: "#111827",
+              }}
+            >
+              Drag & Drop CSV Here
+            </div>
+
+            <div
+              style={{
+                margin: "10px 0",
+                color: "#6b7280",
+              }}
+            >
+              OR
+            </div>
+
+            <div
+              style={{
+                color: "#2563eb",
+                fontWeight: 600,
+              }}
+            >
+              Click to Browse
+            </div>
+          </label>
           <div
             style={{
               marginTop: "18px",
@@ -190,12 +234,6 @@ function UploadPage() {
               ...primaryButtonStyle,
               marginTop: "28px",
             }}
-            onClick={handleUpload}
-          >
-            Upload Dataset
-          </button>
-
-          <button style={primaryButtonStyle}
             onClick={handleUpload}
           >
             Upload Dataset
