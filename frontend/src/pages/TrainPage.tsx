@@ -163,6 +163,25 @@ function TrainPage() {
                                 evaluating predictions, generating failure regions,
                                 and preparing the analytics dashboard.
                             </p>
+                            <div
+                                style={{
+                                    marginTop: "20px",
+                                    width: "100%",
+                                    height: "12px",
+                                    background: "#DBEAFE",
+                                    borderRadius: "999px",
+                                    overflow: "hidden",
+                                }}
+                            >
+                                <div
+                                    style={{
+                                        width: "100%",
+                                        height: "100%",
+                                        background: "#2563EB",
+                                        animation: "progressAnimation 2s linear infinite",
+                                    }}
+                                />
+                            </div>
                         </div>
                     )}
                     {result && (
@@ -203,6 +222,19 @@ function TrainPage() {
                     )}
                 </div>
             </div>
+            <style>
+                {`
+    @keyframes progressAnimation {
+      0% {
+        transform: translateX(-100%);
+      }
+
+      100% {
+        transform: translateX(100%);
+      }
+    }
+  `}
+            </style>
         </>
     );
 }
