@@ -8,6 +8,28 @@ import {
 
 import Navbar from "../components/Navbar";
 
+const primaryButtonStyle = {
+  background: "#2563eb",
+  color: "#ffffff",
+  border: "none",
+  borderRadius: "10px",
+  padding: "12px 24px",
+  fontSize: "16px",
+  fontWeight: 600,
+  cursor: "pointer",
+  boxShadow: "0 4px 12px rgba(37,99,235,0.25)",
+  transition: "0.2s",
+};
+
+const uploadCardStyle = {
+  background: "#ffffff",
+  padding: "32px",
+  borderRadius: "16px",
+  boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
+  border: "1px solid #e5e7eb",
+  maxWidth: "700px",
+};
+
 function UploadPage() {
 
   const navigate = useNavigate();
@@ -110,34 +132,35 @@ function UploadPage() {
             FailureMap report.
           </p>
         </div>
+        <div style={uploadCardStyle}>
+          <input
+            type="file"
+            accept=".csv"
+            onChange={(e) => {
 
-        <input
-          type="file"
-          accept=".csv"
-          onChange={(e) => {
+              if (
+                e.target.files?.[0]
+              ) {
 
-            if (
-              e.target.files?.[0]
-            ) {
+                setFile(
+                  e.target.files[0]
+                );
 
-              setFile(
-                e.target.files[0]
-              );
+              }
 
-            }
+            }}
+          />
 
-          }}
-        />
+          <br />
+          <br />
+          <div style={{ height: "20px" }} />
 
-        <br />
-        <br />
-
-        <button
-          onClick={handleUpload}
-        >
-          Upload Dataset
-        </button>
-
+          <button style={primaryButtonStyle}
+            onClick={handleUpload}
+          >
+            Upload Dataset
+          </button>
+        </div>
         {
 
           summary && (
