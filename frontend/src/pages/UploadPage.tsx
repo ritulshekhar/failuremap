@@ -23,7 +23,7 @@ const primaryButtonStyle = {
 
 const uploadCardStyle = {
   background: "#ffffff",
-  padding: "32px",
+  padding: "40px",
   borderRadius: "16px",
   boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
   border: "1px solid #e5e7eb",
@@ -133,6 +133,24 @@ function UploadPage() {
           </p>
         </div>
         <div style={uploadCardStyle}>
+          <h2
+            style={{
+              marginTop: 0,
+              marginBottom: "10px",
+              color: "#111827",
+            }}
+          >
+            📁 Dataset
+          </h2>
+
+          <p
+            style={{
+              color: "#6b7280",
+              marginBottom: "24px",
+            }}
+          >
+            Choose a CSV dataset to begin your machine learning analysis.
+          </p>
           <input
             type="file"
             accept=".csv"
@@ -150,10 +168,21 @@ function UploadPage() {
 
             }}
           />
-
+          <p
+            style={{
+              marginTop: "16px",
+              color: "#374151",
+              fontWeight: 500,
+            }}
+          >
+            Selected File:{" "}
+            {file
+              ? file.name
+              : "No file selected"}
+          </p>
           <br />
           <br />
-          <div style={{ height: "20px" }} />
+          <div style={{ height: "28px" }} />
 
           <button style={primaryButtonStyle}
             onClick={handleUpload}
