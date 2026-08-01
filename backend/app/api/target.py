@@ -8,7 +8,7 @@ from app.models.target import TargetRequest
 router = APIRouter()
 
 
-@router.post("/select-target")
+@router.post("/target")
 def select_target(request: TargetRequest):
 
     if state.CURRENT_DATASET is None:

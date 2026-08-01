@@ -8,8 +8,7 @@ import {
 
 function UploadPage() {
 
-  const navigate =
-    useNavigate();
+  const navigate = useNavigate();
 
   const [file, setFile] =
     useState<File | null>(null);
@@ -23,71 +22,49 @@ function UploadPage() {
   const [taskType, setTaskType] =
     useState("");
 
-  const handleUpload =
-    async () => {
+  const handleUpload = async () => {
 
-      if (!file)
-        return;
+    if (!file) return;
 
-      try {
+    try {
 
-        const result =
-          await uploadDataset(
-            file
-          );
+      const result =
+        await uploadDataset(file);
 
-        setSummary(
-          result.summary
+      setSummary(
+        result.data.summary
+      );
+
+    } catch (error) {
+
+      console.error(error);
+
+    }
+
+  };
+
+  const handleAnalyze = async () => {
+
+    if (!target) return;
+
+    try {
+
+      const result =
+        await selectTarget(
+          target
         );
 
-      }
+      setTaskType(
+        result.data.task
+      );
 
-      catch (error) {
+    } catch (error) {
 
-        console.error(
-          error
-        );
+      console.error(error);
 
-      }
+    }
 
-    };
-
-  const handleAnalyze =
-    async () => {
-
-      if (!target)
-        return;
-
-      try {
-
-        const result =
-          await selectTarget(
-            target
-          );
-
-        setTaskType(
-          result.task
-        );
-
-        setTimeout(() => {
-
-          navigate(
-            "/train"
-          );
-
-        }, 800);
-
-      }
-
-      catch (error) {
-
-        console.error(
-          error
-        );
-
-      }
-
-    };
+  };
 
   return (
 
@@ -123,9 +100,7 @@ function UploadPage() {
       <br />
 
       <button
-        onClick={
-          handleUpload
-        }
+        onClick={handleUpload}
       >
         Upload Dataset
       </button>
@@ -141,27 +116,19 @@ function UploadPage() {
             </h2>
 
             <p>
-              Rows:
-              {" "}
-              {summary.rows}
+              Rows: {summary.rows}
             </p>
 
             <p>
-              Columns:
-              {" "}
-              {summary.columns}
+              Columns: {summary.columns}
             </p>
 
             <p>
-              Missing Values:
-              {" "}
-              {summary.missing_values}
+              Missing Values: {summary.missing_values}
             </p>
 
             <p>
-              Duplicates:
-              {" "}
-              {summary.duplicates}
+              Duplicates: {summary.duplicates}
             </p>
 
             <h3>
@@ -250,24 +217,36 @@ function UploadPage() {
                   </h3>
 
                   <p>
-                    Target:
-                    {" "}
-                    {target}
+                    Target: {target}
                   </p>
 
                   <p>
-                    Task:
-                    {" "}
-                    {taskType}
+                    Task: {taskType}
                   </p>
+
+                  <br />
+
+                  <button
+                    onClick={() =>
+                      navigate(
+                        "/train"
+                      )
+                    }
+                  >
+                    Continue to Training →
+                  </button>
 
                 </div>
 
-              )}
+              )
+
+            }
 
           </div>
 
-        )}
+        )
+
+      }
 
     </div>
 
