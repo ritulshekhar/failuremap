@@ -28,6 +28,8 @@ const uploadCardStyle = {
   boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
   border: "1px solid #e5e7eb",
   maxWidth: "700px",
+  transition: "0.25s ease",
+  cursor: "pointer",
 };
 
 function UploadPage() {
@@ -168,18 +170,21 @@ function UploadPage() {
 
             }}
           />
-          <p
+          <div
             style={{
-              marginTop: "16px",
-              color: "#374151",
-              fontWeight: 500,
+              marginTop: "18px",
+              padding: "12px 16px",
+              borderRadius: "10px",
+              background: file ? "#ECFDF3" : "#F3F4F6",
+              color: file ? "#047857" : "#6B7280",
+              fontWeight: 600,
+              width: "fit-content",
             }}
           >
-            Selected File:{" "}
             {file
-              ? file.name
+              ? `Selected: ${file.name}`
               : "No file selected"}
-          </p>
+          </div>
           <br />
           <br />
           <div style={{ height: "28px" }} />
