@@ -134,7 +134,37 @@ function TrainPage() {
                             ? "⏳ Training Model..."
                             : "🚀 Train Model"}
                     </button>
+                    {loading && (
+                        <div
+                            style={{
+                                marginTop: "28px",
+                                padding: "24px",
+                                borderRadius: "14px",
+                                background: "#EFF6FF",
+                                border: "1px solid #BFDBFE",
+                            }}
+                        >
+                            <h3
+                                style={{
+                                    marginTop: 0,
+                                    color: "#1D4ED8",
+                                }}
+                            >
+                                ⏳ Training in Progress
+                            </h3>
 
+                            <p
+                                style={{
+                                    color: "#374151",
+                                    marginBottom: 0,
+                                }}
+                            >
+                                FailureMap is currently training an XGBoost model,
+                                evaluating predictions, generating failure regions,
+                                and preparing the analytics dashboard.
+                            </p>
+                        </div>
+                    )}
                     {result && (
                         <div
                             style={{
