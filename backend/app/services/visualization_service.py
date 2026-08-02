@@ -43,7 +43,11 @@ def generate_failure_region_chart(failure_regions):
         "failure_regions.png",
     )
 
-    plt.savefig(path)
+    plt.savefig(
+        path,
+        dpi=300,
+        bbox_inches="tight",
+    )
     plt.close()
 
     return path
@@ -147,7 +151,11 @@ def generate_feature_importance_chart(
         "feature_importance.png",
     )
 
-    plt.savefig(path)
+    plt.savefig(
+        path,
+        dpi=300,
+        bbox_inches="tight",
+    )
 
     plt.close()
 
@@ -169,7 +177,7 @@ def generate_prediction_distribution_chart(
         .sort_index()
     )
 
-    plt.figure(figsize=(6, 5))
+    plt.figure(figsize=(10, 6))
     plt.bar(
         counts.index.astype(str),
         counts.values,
@@ -184,7 +192,11 @@ def generate_prediction_distribution_chart(
         "prediction_distribution.png",
     )
 
-    plt.savefig(path)
+    plt.savefig(
+        path,
+        dpi=300,
+        bbox_inches="tight",
+    )
     plt.close()
 
     return path
@@ -231,7 +243,11 @@ def generate_correlation_heatmap(df):
         "correlation_heatmap.png",
     )
 
-    plt.savefig(path)
+    plt.savefig(
+        path,
+        dpi=300,
+        bbox_inches="tight",
+    )
 
     plt.close()
 
@@ -260,7 +276,7 @@ def generate_error_distribution_chart(
         counts.get(True, 0),
     ]
 
-    plt.figure(figsize=(6, 5))
+    plt.figure(figsize=(10, 6))
 
     plt.bar(labels, values)
 
@@ -275,7 +291,11 @@ def generate_error_distribution_chart(
         "error_distribution.png",
     )
 
-    plt.savefig(path)
+    plt.savefig(
+        path,
+        dpi=300,
+        bbox_inches="tight",
+    )
 
     plt.close()
 
@@ -316,7 +336,7 @@ def generate_failed_feature_distribution(
 
     feature = numeric_cols[0]
 
-    plt.figure(figsize=(8, 5))
+    plt.figure(figsize=(10, 6))
 
     plt.hist(
         failed[feature],
@@ -338,7 +358,11 @@ def generate_failed_feature_distribution(
         "failed_feature_distribution.png",
     )
 
-    plt.savefig(path)
+    plt.savefig(
+        path,
+        dpi=300,
+        bbox_inches="tight",
+    )
 
     plt.close()
 
