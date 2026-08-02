@@ -45,6 +45,18 @@ const bodyCellStyle = {
     color: "#374151",
 };
 
+const buttonStyle = {
+    background: "#2563EB",
+    color: "white",
+    border: "none",
+    padding: "12px 22px",
+    borderRadius: "10px",
+    fontSize: "15px",
+    fontWeight: 600,
+    cursor: "pointer",
+    boxShadow: "0 3px 8px rgba(37,99,235,0.2)",
+};
+
 function ReportPage() {
 
     const [failureMap, setFailureMap] =
@@ -712,7 +724,45 @@ function ReportPage() {
                     >
                         AI-generated observations and recommendations based on the trained machine learning model.
                     </p>
+                    <div
+                        style={{
+                            display: "flex",
+                            gap: "16px",
+                            flexWrap: "wrap",
+                            marginTop: "28px",
+                            marginBottom: "40px",
+                        }}
+                    >
 
+                        <button
+                            onClick={downloadFullReport}
+                            style={buttonStyle}
+                        >
+                            Download Report
+                        </button>
+
+                        <button
+                            onClick={downloadFailureRegions}
+                            style={buttonStyle}
+                        >
+                            Failure Regions
+                        </button>
+
+                        <button
+                            onClick={downloadAIAnalysis}
+                            style={buttonStyle}
+                        >
+                            AI Analysis
+                        </button>
+
+                        <button
+                            onClick={printDashboard}
+                            style={buttonStyle}
+                        >
+                            Print Dashboard
+                        </button>
+
+                    </div>
                     <div
                         style={{
                             display: "grid",
