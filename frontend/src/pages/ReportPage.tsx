@@ -64,6 +64,9 @@ function ReportPage() {
     const [failureMap, setFailureMap] =
         useState<any>(null);
 
+    const [error, setError] =
+        useState<string | null>(null);
+
     const [failureRegions, setFailureRegions] =
         useState<any>(null);
 
@@ -125,8 +128,10 @@ function ReportPage() {
 
             catch (error) {
 
-                console.error(
-                    error
+                console.error(error);
+
+                setError(
+                    "Unable to load the analytics dashboard. Please try again."
                 );
 
             }
@@ -157,6 +162,74 @@ function ReportPage() {
                 />
 
             </>
+        );
+
+    }
+
+    if (error) {
+
+        return (
+
+            <>
+                <Navbar />
+
+                <div
+                    style={{
+                        minHeight: "80vh",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        padding: "40px",
+                        background: "#F9FAFB",
+                    }}
+                >
+
+                    <div
+                        style={{
+                            background: "#FFFFFF",
+                            border: "1px solid #FECACA",
+                            borderRadius: "18px",
+                            padding: "40px",
+                            maxWidth: "520px",
+                            textAlign: "center",
+                            boxShadow:
+                                "0 8px 24px rgba(0,0,0,0.06)",
+                        }}
+                    >
+
+                        <div
+                            style={{
+                                fontSize: "60px",
+                                marginBottom: "18px",
+                            }}
+                        >
+                            ⚠️
+                        </div>
+
+                        <h2
+                            style={{
+                                color: "#B91C1C",
+                                marginBottom: "12px",
+                            }}
+                        >
+                            Something went wrong
+                        </h2>
+
+                        <p
+                            style={{
+                                color: "#6B7280",
+                                lineHeight: "28px",
+                            }}
+                        >
+                            {error}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </>
+
         );
 
     }
