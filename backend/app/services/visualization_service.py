@@ -133,6 +133,9 @@ def generate_feature_importance_chart(
     plt.bar(
         importance_df["Feature"],
         importance_df["Importance"],
+        color="#2563EB",
+        edgecolor="black",
+        linewidth=0.8,
     )
 
     plt.xticks(
@@ -140,7 +143,11 @@ def generate_feature_importance_chart(
         ha="right",
     )
 
-    plt.ylabel("Importance")
+    plt.grid(
+        axis="y",
+        linestyle="--",
+        alpha=0.4,
+    )
 
     plt.title("Feature Importance")
 
@@ -177,11 +184,19 @@ def generate_prediction_distribution_chart(
         .sort_index()
     )
 
-    plt.figure(figsize=(10, 6))
+    plt.figure(
+        figsize=(10, 6),
+        facecolor="white",
+    )
+    
     plt.bar(
         counts.index.astype(str),
         counts.values,
+        color="#3B82F6",
+        edgecolor="black",
+        linewidth=0.8,
     )
+
     plt.xlabel("Predicted Class")
     plt.ylabel("Count")
     plt.title("Prediction Distribution")
