@@ -550,210 +550,250 @@ function ReportPage() {
                     >
                         Failure Regions
                     </h2>
-                    <table
-                        style={{
-                            width: "100%",
-                            borderCollapse: "collapse",
-                            fontSize: "15px",
-                        }}
-                    >
-                        <thead>
+                    {failureRegions?.regions?.length === 0 ? (
 
-                            <tr
+                        <div
+                            style={{
+                                textAlign: "center",
+                                padding: "60px 20px",
+                            }}
+                        >
+
+                            <div
                                 style={{
-                                    background: "#f5f5f5",
+                                    fontSize: "54px",
+                                    marginBottom: "18px",
                                 }}
                             >
+                                🎉
+                            </div>
 
-                                <th
-                                    style={{
-                                        background: "#F9FAFB",
-                                        padding: "16px",
-                                        textAlign: "left",
-                                        borderBottom:
-                                            "2px solid #E5E7EB",
-                                        color: "#374151",
-                                        fontWeight: 700,
-                                    }}
-                                > Feature </th>
+                            <h3
+                                style={{
+                                    color: "#111827",
+                                }}
+                            >
+                                No Failure Regions Found
+                            </h3>
 
-                                <th
-                                    style={{
-                                        background: "#F9FAFB",
-                                        padding: "16px",
-                                        textAlign: "left",
-                                        borderBottom:
-                                            "2px solid #E5E7EB",
-                                        color: "#374151",
-                                        fontWeight: 700,
-                                    }}
-                                >
-                                    Condition
-                                </th>
+                            <p
+                                style={{
+                                    color: "#6B7280",
+                                    marginTop: "10px",
+                                    lineHeight: "28px",
+                                }}
+                            >
+                                Excellent! The trained model did not produce any
+                                significant failure regions for this dataset.
+                            </p>
 
-                                <th
-                                    style={{
-                                        background: "#F9FAFB",
-                                        padding: "16px",
-                                        textAlign: "left",
-                                        borderBottom:
-                                            "2px solid #E5E7EB",
-                                        color: "#374151",
-                                        fontWeight: 700,
-                                    }}
-                                >
-                                    Samples
-                                </th>
+                        </div>
 
-                                <th
+                    ) : (
+                        <table
+                            style={{
+                                width: "100%",
+                                borderCollapse: "collapse",
+                                fontSize: "15px",
+                            }}
+                        >
+                            <thead>
+
+                                <tr
                                     style={{
-                                        background: "#F9FAFB",
-                                        padding: "16px",
-                                        textAlign: "left",
-                                        borderBottom:
-                                            "2px solid #E5E7EB",
-                                        color: "#374151",
-                                        fontWeight: 700,
+                                        background: "#f5f5f5",
                                     }}
                                 >
-                                    Errors
-                                </th>
 
-                                <th
-                                    style={{
-                                        background: "#F9FAFB",
-                                        padding: "16px",
-                                        textAlign: "left",
-                                        borderBottom:
-                                            "2px solid #E5E7EB",
-                                        color: "#374151",
-                                        fontWeight: 700,
-                                    }}
-                                >
-                                    Failure Rate
-                                </th>
-
-                                <th
-                                    style={{
-                                        background: "#F9FAFB",
-                                        padding: "16px",
-                                        textAlign: "left",
-                                        borderBottom:
-                                            "2px solid #E5E7EB",
-                                        color: "#374151",
-                                        fontWeight: 700,
-                                    }}
-                                >
-                                    Severity
-                                </th>
-
-                                <th
-                                    style={{
-                                        background: "#F9FAFB",
-                                        padding: "16px",
-                                        textAlign: "left",
-                                        borderBottom:
-                                            "2px solid #E5E7EB",
-                                        color: "#374151",
-                                        fontWeight: 700,
-                                    }}
-                                >
-                                    Confidence
-                                </th>
-
-                            </tr>
-
-                        </thead>
-
-                        <tbody>
-
-                            {failureRegions?.regions?.map(
-
-                                (
-                                    region: any,
-                                    index: number
-                                ) => (
-
-                                    <tr
-                                        key={index}
+                                    <th
                                         style={{
-                                            background:
-                                                index % 2 === 0
-                                                    ? "#FFFFFF"
-                                                    : "#F9FAFB",
+                                            background: "#F9FAFB",
+                                            padding: "16px",
+                                            textAlign: "left",
+                                            borderBottom:
+                                                "2px solid #E5E7EB",
+                                            color: "#374151",
+                                            fontWeight: 700,
+                                        }}
+                                    > Feature </th>
+
+                                    <th
+                                        style={{
+                                            background: "#F9FAFB",
+                                            padding: "16px",
+                                            textAlign: "left",
+                                            borderBottom:
+                                                "2px solid #E5E7EB",
+                                            color: "#374151",
+                                            fontWeight: 700,
                                         }}
                                     >
+                                        Condition
+                                    </th>
 
-                                        <td style={cellStyle}>
-                                            {region.feature}
-                                        </td>
+                                    <th
+                                        style={{
+                                            background: "#F9FAFB",
+                                            padding: "16px",
+                                            textAlign: "left",
+                                            borderBottom:
+                                                "2px solid #E5E7EB",
+                                            color: "#374151",
+                                            fontWeight: 700,
+                                        }}
+                                    >
+                                        Samples
+                                    </th>
 
-                                        <td style={cellStyle}>
-                                            {region.condition}
-                                        </td>
+                                    <th
+                                        style={{
+                                            background: "#F9FAFB",
+                                            padding: "16px",
+                                            textAlign: "left",
+                                            borderBottom:
+                                                "2px solid #E5E7EB",
+                                            color: "#374151",
+                                            fontWeight: 700,
+                                        }}
+                                    >
+                                        Errors
+                                    </th>
 
-                                        <td style={cellStyle}>
-                                            {region.samples}
-                                        </td>
+                                    <th
+                                        style={{
+                                            background: "#F9FAFB",
+                                            padding: "16px",
+                                            textAlign: "left",
+                                            borderBottom:
+                                                "2px solid #E5E7EB",
+                                            color: "#374151",
+                                            fontWeight: 700,
+                                        }}
+                                    >
+                                        Failure Rate
+                                    </th>
 
-                                        <td style={cellStyle}>
-                                            {region.errors}
-                                        </td>
+                                    <th
+                                        style={{
+                                            background: "#F9FAFB",
+                                            padding: "16px",
+                                            textAlign: "left",
+                                            borderBottom:
+                                                "2px solid #E5E7EB",
+                                            color: "#374151",
+                                            fontWeight: 700,
+                                        }}
+                                    >
+                                        Severity
+                                    </th>
 
-                                        <td style={cellStyle}>
-                                            {(region.failure_rate * 100).toFixed(2)}%
-                                        </td>
+                                    <th
+                                        style={{
+                                            background: "#F9FAFB",
+                                            padding: "16px",
+                                            textAlign: "left",
+                                            borderBottom:
+                                                "2px solid #E5E7EB",
+                                            color: "#374151",
+                                            fontWeight: 700,
+                                        }}
+                                    >
+                                        Confidence
+                                    </th>
 
-                                        <td style={cellStyle}>
-                                            <span
-                                                style={{
-                                                    padding: "6px 14px",
-                                                    borderRadius: "999px",
-                                                    background:
-                                                        region.severity === "High"
-                                                            ? "#FEE2E2"
-                                                            : region.severity === "Medium"
-                                                                ? "#FEF3C7"
-                                                                : "#DCFCE7",
-                                                    color:
-                                                        region.severity === "High"
-                                                            ? "#B91C1C"
-                                                            : region.severity === "Medium"
-                                                                ? "#92400E"
-                                                                : "#166534",
-                                                    fontWeight: 600,
-                                                    fontSize: "14px",
-                                                }}
-                                            >
-                                                {region.severity}
-                                            </span>
-                                        </td>
+                                </tr>
 
-                                        <td style={cellStyle}>
-                                            <span
-                                                style={{
-                                                    padding: "6px 14px",
-                                                    borderRadius: "999px",
-                                                    background: "#DBEAFE",
-                                                    color: "#1D4ED8",
-                                                    fontWeight: 600,
-                                                    fontSize: "14px",
-                                                }}
-                                            >
-                                                {region.confidence}
-                                            </span>
-                                        </td>
+                            </thead>
 
-                                    </tr>
+                            <tbody>
 
-                                )
+                                {failureRegions?.regions?.map(
 
-                            )}
+                                    (
+                                        region: any,
+                                        index: number
+                                    ) => (
 
-                        </tbody>
+                                        <tr
+                                            key={index}
+                                            style={{
+                                                background:
+                                                    index % 2 === 0
+                                                        ? "#FFFFFF"
+                                                        : "#F9FAFB",
+                                            }}
+                                        >
 
-                    </table>
+                                            <td style={cellStyle}>
+                                                {region.feature}
+                                            </td>
 
+                                            <td style={cellStyle}>
+                                                {region.condition}
+                                            </td>
+
+                                            <td style={cellStyle}>
+                                                {region.samples}
+                                            </td>
+
+                                            <td style={cellStyle}>
+                                                {region.errors}
+                                            </td>
+
+                                            <td style={cellStyle}>
+                                                {(region.failure_rate * 100).toFixed(2)}%
+                                            </td>
+
+                                            <td style={cellStyle}>
+                                                <span
+                                                    style={{
+                                                        padding: "6px 14px",
+                                                        borderRadius: "999px",
+                                                        background:
+                                                            region.severity === "High"
+                                                                ? "#FEE2E2"
+                                                                : region.severity === "Medium"
+                                                                    ? "#FEF3C7"
+                                                                    : "#DCFCE7",
+                                                        color:
+                                                            region.severity === "High"
+                                                                ? "#B91C1C"
+                                                                : region.severity === "Medium"
+                                                                    ? "#92400E"
+                                                                    : "#166534",
+                                                        fontWeight: 600,
+                                                        fontSize: "14px",
+                                                    }}
+                                                >
+                                                    {region.severity}
+                                                </span>
+                                            </td>
+
+                                            <td style={cellStyle}>
+                                                <span
+                                                    style={{
+                                                        padding: "6px 14px",
+                                                        borderRadius: "999px",
+                                                        background: "#DBEAFE",
+                                                        color: "#1D4ED8",
+                                                        fontWeight: 600,
+                                                        fontSize: "14px",
+                                                    }}
+                                                >
+                                                    {region.confidence}
+                                                </span>
+                                            </td>
+
+                                        </tr>
+
+                                    )
+
+                                )}
+
+                            </tbody>
+
+                        </table>
+                    )}
                 </div>
 
                 <div
