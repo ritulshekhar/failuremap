@@ -165,17 +165,84 @@ function ReportPage() {
 
         return (
 
-            <div
-                style={{
-                    padding: "30px",
-                }}
-            >
+            <>
+                <Navbar />
 
-                <h2>
-                    No report available.
-                </h2>
+                <div
+                    style={{
+                        minHeight: "80vh",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        padding: "40px",
+                        background: "#F9FAFB",
+                    }}
+                >
 
-            </div>
+                    <div
+                        style={{
+                            background: "#FFFFFF",
+                            padding: "40px",
+                            borderRadius: "18px",
+                            boxShadow:
+                                "0 8px 24px rgba(0,0,0,0.06)",
+                            textAlign: "center",
+                            maxWidth: "500px",
+                            border: "1px solid #E5E7EB",
+                        }}
+                    >
+
+                        <div
+                            style={{
+                                fontSize: "64px",
+                                marginBottom: "20px",
+                            }}
+                        >
+                            📊
+                        </div>
+
+                        <h2
+                            style={{
+                                color: "#111827",
+                                marginBottom: "12px",
+                            }}
+                        >
+                            No Analytics Report Found
+                        </h2>
+
+                        <p
+                            style={{
+                                color: "#6B7280",
+                                lineHeight: "28px",
+                                marginBottom: "28px",
+                            }}
+                        >
+                            Train a machine learning model first to
+                            generate analytics, explainability,
+                            failure regions and visualizations.
+                        </p>
+
+                        <button
+                            onClick={() => window.history.back()}
+                            style={{
+                                background: "#2563EB",
+                                color: "#FFFFFF",
+                                border: "none",
+                                padding: "12px 24px",
+                                borderRadius: "10px",
+                                cursor: "pointer",
+                                fontWeight: 600,
+                                fontSize: "15px",
+                            }}
+                        >
+                            Go Back
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </>
 
         );
 
