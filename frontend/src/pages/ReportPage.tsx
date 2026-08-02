@@ -765,6 +765,41 @@ function ReportPage() {
                     </div>
                     <div
                         style={{
+                            background: "#F9FAFB",
+                            border: "1px solid #E5E7EB",
+                            borderRadius: "12px",
+                            padding: "20px",
+                            marginBottom: "35px",
+                        }}
+                    >
+
+                        <h3
+                            style={{
+                                marginTop: 0,
+                                color: "#111827",
+                            }}
+                        >
+                            Report Information
+                        </h3>
+
+                        <p>
+                            <strong>Generated:</strong>{" "}
+                            {new Date().toLocaleString()}
+                        </p>
+
+                        <p>
+                            <strong>Task:</strong>{" "}
+                            Classification
+                        </p>
+
+                        <p>
+                            <strong>Model:</strong>{" "}
+                            XGBoost
+                        </p>
+
+                    </div>
+                    <div
+                        style={{
                             display: "grid",
                             gridTemplateColumns:
                                 "repeat(auto-fit,minmax(420px,1fr))",
