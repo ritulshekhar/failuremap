@@ -394,11 +394,20 @@ def generate_failed_feature_distribution(
     plt.hist(
         failed[feature],
         bins=10,
+        color="#EF4444",
+        edgecolor="black",
+        linewidth=0.8,
     )
 
     plt.xlabel(feature)
 
     plt.ylabel("Frequency")
+
+    plt.grid(
+        axis="y",
+        linestyle="--",
+        alpha=0.4,
+    )
 
     plt.title(
         f"Failed Sample Distribution ({feature})"
