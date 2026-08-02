@@ -16,18 +16,22 @@ function VisualizationCard({
 
         <div
             style={{
-                border: "1px solid #ddd",
-                borderRadius: "12px",
-                padding: "20px",
-                background: "#fff",
+                background: "#FFFFFF",
+                border: "1px solid #E5E7EB",
+                borderRadius: "18px",
+                padding: "22px",
                 boxShadow:
-                    "0 2px 8px rgba(0,0,0,0.08)",
+                    "0 8px 24px rgba(0,0,0,0.08)",
+                transition: "0.3s ease",
             }}
         >
 
             <h3
                 style={{
-                    marginBottom: "15px",
+                    fontSize: "22px",
+                    fontWeight: 700,
+                    color: "#111827",
+                    marginBottom: "18px",
                 }}
             >
                 {title}
@@ -38,7 +42,8 @@ function VisualizationCard({
                 alt={title}
                 style={{
                     width: "100%",
-                    borderRadius: "8px",
+                    borderRadius: "12px",
+                    border: "1px solid #E5E7EB",
                 }}
             />
 
