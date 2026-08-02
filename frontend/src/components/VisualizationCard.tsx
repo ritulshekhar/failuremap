@@ -9,7 +9,59 @@ function VisualizationCard({
 }: Props) {
 
     if (!image) {
-        return null;
+
+        return (
+
+            <div
+                style={{
+                    background: "#FFFFFF",
+                    border: "1px solid #E5E7EB",
+                    borderRadius: "18px",
+                    padding: "30px",
+                    boxShadow:
+                        "0 8px 24px rgba(0,0,0,0.08)",
+                    minHeight: "320px",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    textAlign: "center",
+                }}
+            >
+
+                <div
+                    style={{
+                        fontSize: "56px",
+                        marginBottom: "18px",
+                    }}
+                >
+                    📈
+                </div>
+
+                <h3
+                    style={{
+                        color: "#111827",
+                        marginBottom: "12px",
+                    }}
+                >
+                    {title}
+                </h3>
+
+                <p
+                    style={{
+                        color: "#6B7280",
+                        lineHeight: "26px",
+                        maxWidth: "280px",
+                    }}
+                >
+                    This visualization is unavailable because
+                    there isn't enough data to generate it.
+                </p>
+
+            </div>
+
+        );
+
     }
 
     return (
