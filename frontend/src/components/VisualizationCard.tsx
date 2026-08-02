@@ -1,4 +1,4 @@
-import { theme } from "../theme";
+import { useTheme } from "../ThemeContext";
 
 type Props = {
     title: string;

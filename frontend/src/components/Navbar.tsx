@@ -1,8 +1,12 @@
 import { Link, useLocation } from "react-router-dom";
-import { theme } from "../theme";
+import { useTheme } from "../ThemeContext";
 function Navbar() {
     const location = useLocation();
-
+    const {
+        theme,
+        isDark,
+        toggleTheme,
+    } = useTheme();
     const linkStyle = (
         active: boolean
     ) => ({
@@ -45,6 +49,7 @@ function Navbar() {
                 style={{
                     display: "flex",
                     gap: "12px",
+                    alignItems: "center",
                 }}
             >
                 <Link
@@ -64,6 +69,21 @@ function Navbar() {
                 >
                     Report Dashboard
                 </Link>
+                <button
+                    onClick={toggleTheme}
+                    style={{
+                        background: theme.primary,
+                        color: "#FFFFFF",
+                        border: "none",
+                        padding: "10px 16px",
+                        borderRadius: "8px",
+                        cursor: "pointer",
+                        fontWeight: 600,
+                        transition: "all 0.2s ease",
+                    }}
+                >
+                    {isDark ? "☀️ Light" : "🌙 Dark"}
+                </button>
             </div>
         </nav>
     );

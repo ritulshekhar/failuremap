@@ -1,9 +1,11 @@
-import { theme } from "../theme";
+import { useTheme } from "../ThemeContext";
 
 type Props = {
     title: string;
     value: string | number;
 };
+
+const { theme } = useTheme();
 
 function MetricsCard({
     title,

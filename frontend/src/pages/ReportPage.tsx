@@ -16,7 +16,9 @@ import Navbar from "../components/Navbar";
 
 import LoadingOverlay from "../components/LoadingOverlay";
 
-import { theme } from "../theme";
+import { useTheme } from "../ThemeContext";
+
+const { theme } = useTheme();
 
 const tableContainerStyle = {
     background: theme.surface,

@@ -34,4 +34,12 @@ export const darkTheme = {
 
 };
 
-export const theme = lightTheme;
+let isDarkMode = false;
+
+export const theme = isDarkMode
+    ? darkTheme
+    : lightTheme;
+
+export function toggleTheme() {
+    isDarkMode = !isDarkMode;
+}
