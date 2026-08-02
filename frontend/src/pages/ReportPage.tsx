@@ -14,6 +14,8 @@ import VisualizationCard from "../components/VisualizationCard";
 
 import Navbar from "../components/Navbar";
 
+import LoadingOverlay from "../components/LoadingOverlay";
+
 const tableContainerStyle = {
     background: "#ffffff",
     borderRadius: "16px",
@@ -148,17 +150,12 @@ function ReportPage() {
         return (
             <>
                 <Navbar />
-                <div
-                    style={{
-                        padding: "30px",
-                    }}
-                >
 
-                    <h2>
-                        Loading dashboard...
-                    </h2>
+                <LoadingOverlay
+                    visible={true}
+                    message="Loading analytics dashboard..."
+                />
 
-                </div>
             </>
         );
 
