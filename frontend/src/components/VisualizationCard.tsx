@@ -1,3 +1,5 @@
+import { theme } from "../theme";
+
 type Props = {
     title: string;
     image: string | null;
@@ -17,8 +19,8 @@ function VisualizationCard({
                     border: "1px solid #ddd",
                     borderRadius: "12px",
                     padding: "20px",
-                    background: "#fff",
-                    boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
+                    background: theme.surface,
+                    boxShadow: theme.shadow,
                     transition: "all 0.25s ease",
                     cursor: "pointer",
                 }}
@@ -30,7 +32,7 @@ function VisualizationCard({
                 onMouseLeave={(e) => {
                     e.currentTarget.style.transform = "translateY(0)";
                     e.currentTarget.style.boxShadow =
-                        "0 8px 24px rgba(0,0,0,0.08)";
+                        theme.shadow;
                 }}
             >
 
@@ -45,7 +47,7 @@ function VisualizationCard({
 
                 <h3
                     style={{
-                        color: "#111827",
+                        color: theme.text,
                         marginBottom: "12px",
                     }}
                 >
@@ -54,7 +56,7 @@ function VisualizationCard({
 
                 <p
                     style={{
-                        color: "#6B7280",
+                        color: theme.secondaryText,
                         lineHeight: "26px",
                         maxWidth: "280px",
                     }}
@@ -73,12 +75,12 @@ function VisualizationCard({
 
         <div
             style={{
-                background: "#FFFFFF",
-                border: "1px solid #E5E7EB",
+                background: theme.surface,
+                border: `1px solid ${theme.border}`,
                 borderRadius: "18px",
                 padding: "22px",
                 boxShadow:
-                    "0 8px 24px rgba(0,0,0,0.08)",
+                    theme.shadow,
                 transition: "all 0.25s ease",
                 cursor: "pointer",
             }}
@@ -97,7 +99,7 @@ function VisualizationCard({
                     "translateY(0)";
 
                 e.currentTarget.style.boxShadow =
-                    "0 8px 24px rgba(0,0,0,0.08)";
+                    theme.shadow;
 
             }}
         >
@@ -106,7 +108,7 @@ function VisualizationCard({
                 style={{
                     fontSize: "22px",
                     fontWeight: 700,
-                    color: "#111827",
+                    color: theme.text,
                     marginBottom: "18px",
                 }}
             >
@@ -119,7 +121,7 @@ function VisualizationCard({
                 style={{
                     width: "100%",
                     borderRadius: "12px",
-                    border: "1px solid #E5E7EB",
+                    border: `1px solid ${theme.border}`,
                 }}
             />
 
