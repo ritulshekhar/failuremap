@@ -766,15 +766,8 @@ function ReportPage() {
                             <thead>
 
                                 <tr
-                                    key={index}
                                     style={{
-                                        transition: "background-color 0.2s ease",
-                                    }}
-                                    onMouseEnter={(e) => {
-                                        e.currentTarget.style.background = "#F9FAFB";
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        e.currentTarget.style.background = "#FFFFFF";
+                                        background: "#f5f5f5",
                                     }}
                                 >
 
@@ -1600,6 +1593,10 @@ function ReportPage() {
                                         e.currentTarget.style.background = "#FFFFFF";
                                     }}
                                 >
+
+
+
+
 
                                     <td style={{
                                         padding: "20px",
