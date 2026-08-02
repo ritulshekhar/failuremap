@@ -33,13 +33,3 @@ export const darkTheme = {
     shadow: "0 8px 24px rgba(0,0,0,0.45)",
 
 };
-
-let isDarkMode = false;
-
-export const theme = isDarkMode
-    ? darkTheme
-    : lightTheme;
-
-export function toggleTheme() {
-    isDarkMode = !isDarkMode;
-}

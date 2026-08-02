@@ -5,13 +5,12 @@ type Props = {
     value: string | number;
 };
 
-const { theme } = useTheme();
-
 function MetricsCard({
     title,
     value,
 }: Props) {
 
+    const { theme } = useTheme();
     const getIcon = () => {
 
         switch (title) {

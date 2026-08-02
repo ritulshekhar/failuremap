@@ -18,53 +18,54 @@ import LoadingOverlay from "../components/LoadingOverlay";
 
 import { useTheme } from "../ThemeContext";
 
-const { theme } = useTheme();
-
-const tableContainerStyle = {
-    background: theme.surface,
-    borderRadius: "16px",
-    overflow: "hidden" as const,
-    border: `1px solid ${theme.border}`,
-    boxShadow: "0 8px 24px rgba(0,0,0,0.06)",
-    marginTop: "20px",
-    marginBottom: "40px",
-};
-
-const cellStyle = {
-    padding: "16px",
-    borderBottom: `1px solid ${theme.border}`,
-    color: "#374151",
-    fontSize: "15px",
-};
-
-const headerCellStyle = {
-    ...cellStyle,
-    background: theme.background,
-    color: theme.text,
-    fontWeight: 700,
-    padding: "16px",
-};
-
-const bodyCellStyle = {
-    cellStyle,
-    padding: "16px",
-    color: "#374151",
-};
-
-const buttonStyle = {
-    background: "#2563EB",
-    color: "white",
-    border: "none",
-    padding: "12px 22px",
-    borderRadius: "10px",
-    fontSize: "15px",
-    fontWeight: 600,
-    cursor: "pointer",
-    boxShadow: "0 3px 8px rgba(37,99,235,0.2)",
-    transition: "all 0.25s ease",
-};
 
 function ReportPage() {
+
+    const { theme } = useTheme();
+
+    const tableContainerStyle = {
+        background: theme.surface,
+        borderRadius: "16px",
+        overflow: "hidden" as const,
+        border: `1px solid ${theme.border}`,
+        boxShadow: "0 8px 24px rgba(0,0,0,0.06)",
+        marginTop: "20px",
+        marginBottom: "40px",
+    };
+
+    const cellStyle = {
+        padding: "16px",
+        borderBottom: `1px solid ${theme.border}`,
+        color: "#374151",
+        fontSize: "15px",
+    };
+
+    const headerCellStyle = {
+        ...cellStyle,
+        background: theme.background,
+        color: theme.text,
+        fontWeight: 700,
+        padding: "16px",
+    };
+
+    const bodyCellStyle = {
+        cellStyle,
+        padding: "16px",
+        color: "#374151",
+    };
+
+    const buttonStyle = {
+        background: "#2563EB",
+        color: "white",
+        border: "none",
+        padding: "12px 22px",
+        borderRadius: "10px",
+        fontSize: "15px",
+        fontWeight: 600,
+        cursor: "pointer",
+        boxShadow: "0 3px 8px rgba(37,99,235,0.2)",
+        transition: "all 0.25s ease",
+    };
 
     const [failureMap, setFailureMap] =
         useState<any>(null);

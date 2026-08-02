@@ -9,6 +9,7 @@ function VisualizationCard({
     title,
     image,
 }: Props) {
+    const { theme } = useTheme();
 
     if (!image) {
 
