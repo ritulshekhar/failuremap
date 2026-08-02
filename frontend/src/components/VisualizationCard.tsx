@@ -14,18 +14,23 @@ function VisualizationCard({
 
             <div
                 style={{
-                    background: "#FFFFFF",
-                    border: "1px solid #E5E7EB",
-                    borderRadius: "18px",
-                    padding: "30px",
-                    boxShadow:
-                        "0 8px 24px rgba(0,0,0,0.08)",
-                    minHeight: "320px",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    textAlign: "center",
+                    border: "1px solid #ddd",
+                    borderRadius: "12px",
+                    padding: "20px",
+                    background: "#fff",
+                    boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
+                    transition: "all 0.25s ease",
+                    cursor: "pointer",
+                }}
+                onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = "translateY(-8px)";
+                    e.currentTarget.style.boxShadow =
+                        "0 20px 40px rgba(0,0,0,0.15)";
+                }}
+                onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = "translateY(0)";
+                    e.currentTarget.style.boxShadow =
+                        "0 8px 24px rgba(0,0,0,0.08)";
                 }}
             >
 

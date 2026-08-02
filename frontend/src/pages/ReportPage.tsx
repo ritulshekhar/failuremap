@@ -517,6 +517,25 @@ function ReportPage() {
                             fontWeight: 600,
                             fontSize: "15px",
                         }}
+                        onMouseEnter={(e) => {
+
+                            e.currentTarget.style.transform =
+                                "translateY(-5px) scale(1.03)";
+
+                            e.currentTarget.style.boxShadow =
+                                "0 15px 30px rgba(37,99,235,0.45)";
+
+                        }}
+
+                        onMouseLeave={(e) => {
+
+                            e.currentTarget.style.transform =
+                                "translateY(0) scale(1)";
+
+                            e.currentTarget.style.boxShadow =
+                                "0 3px 8px rgba(37,99,235,0.2)";
+
+                        }}
                     >
                         Download Full Report
                     </button>
@@ -533,6 +552,25 @@ function ReportPage() {
                             fontWeight: 600,
                             fontSize: "15px",
                         }}
+                        onMouseEnter={(e) => {
+
+                            e.currentTarget.style.transform =
+                                "translateY(-5px) scale(1.03)";
+
+                            e.currentTarget.style.boxShadow =
+                                "0 15px 30px rgba(37,99,235,0.45)";
+
+                        }}
+
+                        onMouseLeave={(e) => {
+
+                            e.currentTarget.style.transform =
+                                "translateY(0) scale(1)";
+
+                            e.currentTarget.style.boxShadow =
+                                "0 3px 8px rgba(37,99,235,0.2)";
+
+                        }}
                     >
                         Download Failure Regions
                     </button>
@@ -548,6 +586,25 @@ function ReportPage() {
                             cursor: "pointer",
                             fontWeight: 600,
                             fontSize: "15px",
+                        }}
+                        onMouseEnter={(e) => {
+
+                            e.currentTarget.style.transform =
+                                "translateY(-5px) scale(1.03)";
+
+                            e.currentTarget.style.boxShadow =
+                                "0 15px 30px rgba(37,99,235,0.45)";
+
+                        }}
+
+                        onMouseLeave={(e) => {
+
+                            e.currentTarget.style.transform =
+                                "translateY(0) scale(1)";
+
+                            e.currentTarget.style.boxShadow =
+                                "0 3px 8px rgba(37,99,235,0.2)";
+
                         }}
                     >
                         Download AI Analysis
@@ -566,6 +623,25 @@ function ReportPage() {
                             cursor: "pointer",
                             fontWeight: 600,
                             fontSize: "15px",
+                        }}
+                        onMouseEnter={(e) => {
+
+                            e.currentTarget.style.transform =
+                                "translateY(-5px) scale(1.03)";
+
+                            e.currentTarget.style.boxShadow =
+                                "0 15px 30px rgba(37,99,235,0.45)";
+
+                        }}
+
+                        onMouseLeave={(e) => {
+
+                            e.currentTarget.style.transform =
+                                "translateY(0) scale(1)";
+
+                            e.currentTarget.style.boxShadow =
+                                "0 3px 8px rgba(37,99,235,0.2)";
+
                         }}
                     >
                         Print / Save PDF
