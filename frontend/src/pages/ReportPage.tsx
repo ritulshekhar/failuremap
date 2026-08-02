@@ -766,8 +766,15 @@ function ReportPage() {
                             <thead>
 
                                 <tr
+                                    key={index}
                                     style={{
-                                        background: "#f5f5f5",
+                                        transition: "background-color 0.2s ease",
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.background = "#F9FAFB";
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.background = "#FFFFFF";
                                     }}
                                 >
 
@@ -883,10 +890,13 @@ function ReportPage() {
                                         <tr
                                             key={index}
                                             style={{
-                                                background:
-                                                    index % 2 === 0
-                                                        ? "#FFFFFF"
-                                                        : "#F9FAFB",
+                                                transition: "background-color 0.2s ease",
+                                            }}
+                                            onMouseEnter={(e) => {
+                                                e.currentTarget.style.background = "#F9FAFB";
+                                            }}
+                                            onMouseLeave={(e) => {
+                                                e.currentTarget.style.background = "#FFFFFF";
                                             }}
                                         >
 
@@ -1580,6 +1590,15 @@ function ReportPage() {
 
                                 <tr
                                     key={index}
+                                    style={{
+                                        transition: "background-color 0.2s ease",
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.background = "#F9FAFB";
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.background = "#FFFFFF";
+                                    }}
                                 >
 
                                     <td style={{
@@ -1684,7 +1703,18 @@ function ReportPage() {
                                 index: number
                             ) => (
 
-                                <tr key={index}>
+                                <tr
+                                    key={index}
+                                    style={{
+                                        transition: "background-color 0.2s ease",
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.background = "#F9FAFB";
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.background = "#FFFFFF";
+                                    }}
+                                >
 
                                     <td
                                         style={{
