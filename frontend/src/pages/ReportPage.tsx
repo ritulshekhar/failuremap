@@ -16,11 +16,13 @@ import Navbar from "../components/Navbar";
 
 import LoadingOverlay from "../components/LoadingOverlay";
 
+import { theme } from "../theme";
+
 const tableContainerStyle = {
-    background: "#ffffff",
+    background: theme.surface,
     borderRadius: "16px",
     overflow: "hidden" as const,
-    border: "1px solid #e5e7eb",
+    border: `1px solid ${theme.border}`,
     boxShadow: "0 8px 24px rgba(0,0,0,0.06)",
     marginTop: "20px",
     marginBottom: "40px",
@@ -28,15 +30,15 @@ const tableContainerStyle = {
 
 const cellStyle = {
     padding: "16px",
-    borderBottom: "1px solid #E5E7EB",
+    borderBottom: `1px solid ${theme.border}`,
     color: "#374151",
     fontSize: "15px",
 };
 
 const headerCellStyle = {
     ...cellStyle,
-    background: "#f9fafb",
-    color: "#111827",
+    background: theme.background,
+    color: theme.text,
     fontWeight: 700,
     padding: "16px",
 };
@@ -197,13 +199,13 @@ function ReportPage() {
                         justifyContent: "center",
                         alignItems: "center",
                         padding: "40px",
-                        background: "#F9FAFB",
+                        background: theme.background,
                     }}
                 >
 
                     <div
                         style={{
-                            background: "#FFFFFF",
+                            background: theme.surface,
                             border: "1px solid #FECACA",
                             borderRadius: "18px",
                             padding: "40px",
@@ -234,7 +236,7 @@ function ReportPage() {
 
                         <p
                             style={{
-                                color: "#6B7280",
+                                color: theme.secondaryText,
                                 lineHeight: "28px",
                             }}
                         >
@@ -246,7 +248,7 @@ function ReportPage() {
                             style={{
                                 marginTop: "28px",
                                 background: "#2563EB",
-                                color: "#FFFFFF",
+                                color: theme.surface,
                                 border: "none",
                                 padding: "12px 26px",
                                 borderRadius: "10px",
@@ -281,20 +283,20 @@ function ReportPage() {
                         justifyContent: "center",
                         alignItems: "center",
                         padding: "40px",
-                        background: "#F9FAFB",
+                        background: theme.background,
                     }}
                 >
 
                     <div
                         style={{
-                            background: "#FFFFFF",
+                            background: theme.surface,
                             padding: "40px",
                             borderRadius: "18px",
                             boxShadow:
                                 "0 8px 24px rgba(0,0,0,0.06)",
                             textAlign: "center",
                             maxWidth: "500px",
-                            border: "1px solid #E5E7EB",
+                            border: `1px solid ${theme.border}`,
                         }}
                     >
 
@@ -309,7 +311,7 @@ function ReportPage() {
 
                         <h2
                             style={{
-                                color: "#111827",
+                                color: theme.text,
                                 marginBottom: "12px",
                             }}
                         >
@@ -318,7 +320,7 @@ function ReportPage() {
 
                         <p
                             style={{
-                                color: "#6B7280",
+                                color: theme.secondaryText,
                                 lineHeight: "28px",
                                 marginBottom: "28px",
                             }}
@@ -332,7 +334,7 @@ function ReportPage() {
                             onClick={() => window.history.back()}
                             style={{
                                 background: "#2563EB",
-                                color: "#FFFFFF",
+                                color: theme.surface,
                                 border: "none",
                                 padding: "12px 24px",
                                 borderRadius: "10px",
@@ -483,7 +485,7 @@ function ReportPage() {
                         style={{
                             fontSize: "42px",
                             marginBottom: "12px",
-                            color: "#111827",
+                            color: theme.text,
                         }}
                     >
                         Analytics Dashboard
@@ -492,7 +494,7 @@ function ReportPage() {
                     <p
                         style={{
                             fontSize: "18px",
-                            color: "#6B7280",
+                            color: theme.secondaryText,
                             maxWidth: "760px",
                             lineHeight: "30px",
                         }}
@@ -514,10 +516,10 @@ function ReportPage() {
                         marginBottom: "45px",
                         flexWrap: "wrap",
                         alignItems: "center",
-                        background: "#ffffff",
+                        background: theme.surface,
                         padding: "22px",
                         borderRadius: "16px",
-                        border: "1px solid #E5E7EB",
+                        border: `1px solid ${theme.border}`,
                         boxShadow: "0 8px 24px rgba(0,0,0,0.06)",
                     }}
                 >
@@ -671,7 +673,7 @@ function ReportPage() {
                     style={{
                         fontSize: "34px",
                         marginBottom: "28px",
-                        color: "#111827",
+                        color: theme.text,
                     }}
                 >
                     Executive Summary
@@ -713,10 +715,10 @@ function ReportPage() {
 
                 <div
                     style={{
-                        background: "#ffffff",
+                        background: theme.surface,
                         borderRadius: "18px",
                         padding: "28px",
-                        border: "1px solid #E5E7EB",
+                        border: `1px solid ${theme.border}`,
                         boxShadow:
                             "0 8px 24px rgba(0,0,0,0.06)",
                         marginTop: "50px",
@@ -728,7 +730,7 @@ function ReportPage() {
                         style={{
                             fontSize: "34px",
                             marginBottom: "24px",
-                            color: "#111827",
+                            color: theme.text,
                         }}
                     >
                         Failure Regions
@@ -753,7 +755,7 @@ function ReportPage() {
 
                             <h3
                                 style={{
-                                    color: "#111827",
+                                    color: theme.text,
                                 }}
                             >
                                 No Failure Regions Found
@@ -761,7 +763,7 @@ function ReportPage() {
 
                             <p
                                 style={{
-                                    color: "#6B7280",
+                                    color: theme.secondaryText,
                                     marginTop: "10px",
                                     lineHeight: "28px",
                                 }}
@@ -790,7 +792,7 @@ function ReportPage() {
 
                                     <th
                                         style={{
-                                            background: "#F9FAFB",
+                                            background: theme.background,
                                             padding: "16px",
                                             textAlign: "left",
                                             borderBottom:
@@ -802,7 +804,7 @@ function ReportPage() {
 
                                     <th
                                         style={{
-                                            background: "#F9FAFB",
+                                            background: theme.background,
                                             padding: "16px",
                                             textAlign: "left",
                                             borderBottom:
@@ -816,7 +818,7 @@ function ReportPage() {
 
                                     <th
                                         style={{
-                                            background: "#F9FAFB",
+                                            background: theme.background,
                                             padding: "16px",
                                             textAlign: "left",
                                             borderBottom:
@@ -830,7 +832,7 @@ function ReportPage() {
 
                                     <th
                                         style={{
-                                            background: "#F9FAFB",
+                                            background: theme.background,
                                             padding: "16px",
                                             textAlign: "left",
                                             borderBottom:
@@ -844,7 +846,7 @@ function ReportPage() {
 
                                     <th
                                         style={{
-                                            background: "#F9FAFB",
+                                            background: theme.background,
                                             padding: "16px",
                                             textAlign: "left",
                                             borderBottom:
@@ -858,7 +860,7 @@ function ReportPage() {
 
                                     <th
                                         style={{
-                                            background: "#F9FAFB",
+                                            background: theme.background,
                                             padding: "16px",
                                             textAlign: "left",
                                             borderBottom:
@@ -872,7 +874,7 @@ function ReportPage() {
 
                                     <th
                                         style={{
-                                            background: "#F9FAFB",
+                                            background: theme.background,
                                             padding: "16px",
                                             textAlign: "left",
                                             borderBottom:
@@ -903,10 +905,10 @@ function ReportPage() {
                                                 transition: "background-color 0.2s ease",
                                             }}
                                             onMouseEnter={(e) => {
-                                                e.currentTarget.style.background = "#F9FAFB";
+                                                e.currentTarget.style.background = theme.background;
                                             }}
                                             onMouseLeave={(e) => {
-                                                e.currentTarget.style.background = "#FFFFFF";
+                                                e.currentTarget.style.background = theme.surface;
                                             }}
                                         >
 
@@ -984,11 +986,11 @@ function ReportPage() {
 
                 <div
                     style={{
-                        background: "#ffffff",
+                        background: theme.surface,
                         borderRadius: "18px",
                         padding: "30px",
                         marginTop: "50px",
-                        border: "1px solid #E5E7EB",
+                        border: `1px solid ${theme.border}`,
                         boxShadow:
                             "0 8px 24px rgba(0,0,0,0.06)",
                     }}
@@ -998,7 +1000,7 @@ function ReportPage() {
                         style={{
                             fontSize: "34px",
                             marginBottom: "12px",
-                            color: "#111827",
+                            color: theme.text,
                         }}
                     >
                         AI Analysis
@@ -1006,7 +1008,7 @@ function ReportPage() {
 
                     <p
                         style={{
-                            color: "#6B7280",
+                            color: theme.secondaryText,
                             fontSize: "17px",
                             marginBottom: "36px",
                             lineHeight: "28px",
@@ -1091,8 +1093,8 @@ function ReportPage() {
                     </div>
                     <div
                         style={{
-                            background: "#F9FAFB",
-                            border: "1px solid #E5E7EB",
+                            background: theme.background,
+                            border: `1px solid ${theme.border}`,
                             borderRadius: "12px",
                             padding: "20px",
                             marginBottom: "35px",
@@ -1102,7 +1104,7 @@ function ReportPage() {
                         <h3
                             style={{
                                 marginTop: 0,
-                                color: "#111827",
+                                color: theme.text,
                             }}
                         >
                             Report Information
@@ -1229,11 +1231,11 @@ function ReportPage() {
 
             <div
                 style={{
-                    background: "#ffffff",
+                    background: theme.surface,
                     borderRadius: "18px",
                     padding: "30px",
                     marginTop: "50px",
-                    border: "1px solid #E5E7EB",
+                    border: `1px solid ${theme.border}`,
                     boxShadow: "0 8px 24px rgba(0,0,0,0.06)",
                 }}
             >
@@ -1241,7 +1243,7 @@ function ReportPage() {
                 <h2
                     style={{
                         fontSize: "34px",
-                        color: "#111827",
+                        color: theme.text,
                         marginBottom: "12px",
                     }}
                 >
@@ -1250,7 +1252,7 @@ function ReportPage() {
 
                 <p
                     style={{
-                        color: "#6B7280",
+                        color: theme.secondaryText,
                         fontSize: "17px",
                         lineHeight: "28px",
                         marginBottom: "36px",
@@ -1264,7 +1266,7 @@ function ReportPage() {
             <h3
                 style={{
                     fontSize: "28px",
-                    color: "#111827",
+                    color: theme.text,
                     marginBottom: "24px",
                 }}
             >
@@ -1274,7 +1276,7 @@ function ReportPage() {
             <div
                 style={{
                     overflowX: "auto",
-                    border: "1px solid #E5E7EB",
+                    border: `1px solid ${theme.border}`,
                     borderRadius: "16px",
                     marginBottom: "40px",
                 }}
@@ -1297,7 +1299,7 @@ function ReportPage() {
                         >
 
                             <th style={{
-                                background: "#F9FAFB",
+                                background: theme.background,
                                 padding: "16px",
                                 textAlign: "left",
                                 borderBottom: "2px solid #E5E7EB",
@@ -1308,7 +1310,7 @@ function ReportPage() {
                             </th>
 
                             <th style={{
-                                background: "#F9FAFB",
+                                background: theme.background,
                                 padding: "16px",
                                 textAlign: "left",
                                 borderBottom: "2px solid #E5E7EB",
@@ -1319,7 +1321,7 @@ function ReportPage() {
                             </th>
 
                             <th style={{
-                                background: "#F9FAFB",
+                                background: theme.background,
                                 padding: "16px",
                                 textAlign: "left",
                                 borderBottom: "2px solid #E5E7EB",
@@ -1330,7 +1332,7 @@ function ReportPage() {
                             </th>
 
                             <th style={{
-                                background: "#F9FAFB",
+                                background: theme.background,
                                 padding: "16px",
                                 textAlign: "left",
                                 borderBottom: "2px solid #E5E7EB",
@@ -1341,7 +1343,7 @@ function ReportPage() {
                             </th>
 
                             <th style={{
-                                background: "#F9FAFB",
+                                background: theme.background,
                                 padding: "16px",
                                 textAlign: "left",
                                 borderBottom: "2px solid #E5E7EB",
@@ -1393,7 +1395,7 @@ function ReportPage() {
 
                                             <td style={{
                                                 padding: "16px",
-                                                borderBottom: "1px solid #E5E7EB",
+                                                borderBottom: `1px solid ${theme.border}`,
                                                 color: "#374151",
                                             }}>
                                                 {label}
@@ -1401,7 +1403,7 @@ function ReportPage() {
 
                                             <td style={{
                                                 padding: "16px",
-                                                borderBottom: "1px solid #E5E7EB",
+                                                borderBottom: `1px solid ${theme.border}`,
                                                 color: "#374151",
                                             }}>
                                                 {values.precision.toFixed(2)}
@@ -1409,7 +1411,7 @@ function ReportPage() {
 
                                             <td style={{
                                                 padding: "16px",
-                                                borderBottom: "1px solid #E5E7EB",
+                                                borderBottom: `1px solid ${theme.border}`,
                                                 color: "#374151",
                                             }}>
                                                 {values.recall.toFixed(2)}
@@ -1417,7 +1419,7 @@ function ReportPage() {
 
                                             <td style={{
                                                 padding: "16px",
-                                                borderBottom: "1px solid #E5E7EB",
+                                                borderBottom: `1px solid ${theme.border}`,
                                                 color: "#374151",
                                             }}>
                                                 {values["f1-score"].toFixed(2)}
@@ -1425,7 +1427,7 @@ function ReportPage() {
 
                                             <td style={{
                                                 padding: "16px",
-                                                borderBottom: "1px solid #E5E7EB",
+                                                borderBottom: `1px solid ${theme.border}`,
                                                 color: "#374151",
                                             }}>
                                                 {values.support}
@@ -1446,7 +1448,7 @@ function ReportPage() {
             <h3
                 style={{
                     fontSize: "28px",
-                    color: "#111827",
+                    color: theme.text,
                     marginTop: "50px",
                     marginBottom: "24px",
                 }}
@@ -1456,7 +1458,7 @@ function ReportPage() {
 
             <div
                 style={{
-                    border: "1px solid #E5E7EB",
+                    border: `1px solid ${theme.border}`,
                     borderRadius: "16px",
                     overflow: "hidden",
                     marginBottom: "40px",
@@ -1530,7 +1532,7 @@ function ReportPage() {
             <h3
                 style={{
                     fontSize: "28px",
-                    color: "#111827",
+                    color: theme.text,
                     marginTop: "50px",
                     marginBottom: "24px",
                 }}
@@ -1540,7 +1542,7 @@ function ReportPage() {
 
             <div
                 style={{
-                    border: "1px solid #E5E7EB",
+                    border: `1px solid ${theme.border}`,
                     borderRadius: "16px",
                     overflow: "hidden",
                     marginBottom: "40px",
@@ -1564,7 +1566,7 @@ function ReportPage() {
                         >
 
                             <th style={{
-                                background: "#F9FAFB",
+                                background: theme.background,
                                 padding: "16px",
                                 textAlign: "left",
                                 borderBottom: "2px solid #E5E7EB",
@@ -1575,7 +1577,7 @@ function ReportPage() {
                             </th>
 
                             <th style={{
-                                background: "#F9FAFB",
+                                background: theme.background,
                                 padding: "16px",
                                 textAlign: "left",
                                 borderBottom: "2px solid #E5E7EB",
@@ -1604,10 +1606,10 @@ function ReportPage() {
                                         transition: "background-color 0.2s ease",
                                     }}
                                     onMouseEnter={(e) => {
-                                        e.currentTarget.style.background = "#F9FAFB";
+                                        e.currentTarget.style.background = theme.background;
                                     }}
                                     onMouseLeave={(e) => {
-                                        e.currentTarget.style.background = "#FFFFFF";
+                                        e.currentTarget.style.background = theme.surface;
                                     }}
                                 >
 
@@ -1617,9 +1619,9 @@ function ReportPage() {
 
                                     <td style={{
                                         padding: "20px",
-                                        borderBottom: "1px solid #E5E7EB",
+                                        borderBottom: `1px solid ${theme.border}`,
                                         fontWeight: 700,
-                                        color: "#111827",
+                                        color: theme.text,
                                     }}>
                                         {item.feature}
                                     </td>
@@ -1627,7 +1629,7 @@ function ReportPage() {
                                     <td
                                         style={{
                                             padding: "20px",
-                                            borderBottom: "1px solid #E5E7EB",
+                                            borderBottom: `1px solid ${theme.border}`,
                                         }}
                                     >
                                         <span
@@ -1653,7 +1655,7 @@ function ReportPage() {
             <h3
                 style={{
                     fontSize: "28px",
-                    color: "#111827",
+                    color: theme.text,
                     marginTop: "50px",
                     marginBottom: "24px",
                 }}
@@ -1663,7 +1665,7 @@ function ReportPage() {
 
             <div
                 style={{
-                    border: "1px solid #E5E7EB",
+                    border: `1px solid ${theme.border}`,
                     borderRadius: "16px",
                     overflow: "hidden",
                     marginBottom: "40px",
@@ -1683,7 +1685,7 @@ function ReportPage() {
                         <tr>
 
                             <th style={{
-                                background: "#F9FAFB",
+                                background: theme.background,
                                 padding: "16px",
                                 textAlign: "left",
                                 borderBottom: "2px solid #E5E7EB",
@@ -1694,7 +1696,7 @@ function ReportPage() {
                             </th>
 
                             <th style={{
-                                background: "#F9FAFB",
+                                background: theme.background,
                                 padding: "16px",
                                 textAlign: "left",
                                 borderBottom: "2px solid #E5E7EB",
@@ -1723,19 +1725,19 @@ function ReportPage() {
                                         transition: "background-color 0.2s ease",
                                     }}
                                     onMouseEnter={(e) => {
-                                        e.currentTarget.style.background = "#F9FAFB";
+                                        e.currentTarget.style.background = theme.background;
                                     }}
                                     onMouseLeave={(e) => {
-                                        e.currentTarget.style.background = "#FFFFFF";
+                                        e.currentTarget.style.background = theme.surface;
                                     }}
                                 >
 
                                     <td
                                         style={{
                                             padding: "20px",
-                                            borderBottom: "1px solid #E5E7EB",
+                                            borderBottom: `1px solid ${theme.border}`,
                                             fontWeight: 700,
-                                            color: "#111827",
+                                            color: theme.text,
                                         }}
                                     >
                                         {item.feature}
@@ -1744,7 +1746,7 @@ function ReportPage() {
                                     <td
                                         style={{
                                             padding: "20px",
-                                            borderBottom: "1px solid #E5E7EB",
+                                            borderBottom: `1px solid ${theme.border}`,
                                         }}
                                     >
                                         <span
@@ -1770,7 +1772,7 @@ function ReportPage() {
             <h2
                 style={{
                     fontSize: "34px",
-                    color: "#111827",
+                    color: theme.text,
                     marginTop: "50px",
                     marginBottom: "24px",
                 }}
