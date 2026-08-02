@@ -247,11 +247,16 @@ def generate_correlation_heatmap(df):
 
     corr = numeric_df.corr()
 
-    plt.figure(figsize=(8, 6))
+    plt.figure(figsize=(8, 6), facecolor="white")
 
-    plt.imshow(corr)
+    plt.imshow(
+        corr,
+        cmap="coolwarm",
+        vmin=-1,
+        vmax=1,
+    )
 
-    plt.colorbar()
+    plt.colorbar(shrink=0.8)
 
     plt.xticks(
         range(len(corr.columns)),
@@ -265,6 +270,8 @@ def generate_correlation_heatmap(df):
     )
 
     plt.title("Correlation Heatmap")
+
+    plt.grid(False)
 
     plt.tight_layout()
 
