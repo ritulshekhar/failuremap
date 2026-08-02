@@ -224,6 +224,22 @@ function ReportPage() {
                             {error}
                         </p>
 
+                        <button
+                            onClick={() => window.location.reload()}
+                            style={{
+                                marginTop: "28px",
+                                background: "#2563EB",
+                                color: "#FFFFFF",
+                                border: "none",
+                                padding: "12px 26px",
+                                borderRadius: "10px",
+                                cursor: "pointer",
+                                fontWeight: 600,
+                                fontSize: "15px",
+                            }}
+                        >
+                            Retry
+                        </button>
                     </div>
 
                 </div>
