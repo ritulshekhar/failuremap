@@ -8,6 +8,8 @@ import {
 
 import Navbar from "../components/Navbar";
 
+import LoadingOverlay from "../components/LoadingOverlay";
+
 const primaryButtonStyle = {
   background: "#2563eb",
   color: "#ffffff",
@@ -50,6 +52,8 @@ function UploadPage() {
 
   const [isAnalyzing, setIsAnalyzing] =
     useState(false);
+
+  const [loading, setLoading] = useState(false);
 
   const [analysisComplete, setAnalysisComplete] =
     useState(false);
@@ -692,6 +696,10 @@ function UploadPage() {
         }
 
       </div>
+      <LoadingOverlay
+        visible={loading}
+        message="Uploading dataset..."
+      />
     </>
   );
 

@@ -7,6 +7,8 @@ import {
     trainModel,
 } from "../api/api";
 
+import LoadingOverlay from "../components/LoadingOverlay";
+
 function TrainPage() {
     const navigate = useNavigate();
 
@@ -18,7 +20,6 @@ function TrainPage() {
 
     const [countdown, setCountdown] =
         useState(3);
-
     const handleTrain = async () => {
         try {
             setLoading(true);
@@ -47,6 +48,11 @@ function TrainPage() {
         } catch (error) {
             console.error(error);
             setLoading(false);
+        }
+        finally {
+
+            setLoading(false);
+
         }
     };
 
@@ -307,7 +313,12 @@ function TrainPage() {
       }
     }
   `}
+
             </style>
+            <LoadingOverlay
+                visible={loading}
+                message="Training model..."
+            />
         </>
     );
 }
