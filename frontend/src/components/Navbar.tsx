@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-
+import { theme } from "../theme";
 function Navbar() {
     const location = useLocation();
 
@@ -19,9 +19,9 @@ function Navbar() {
             style={{
                 position: "sticky",
                 top: 0,
-                background: "#ffffff",
-                borderBottom: "1px solid #e5e7eb",
-                boxShadow: "0 2px 10px rgba(0,0,0,0.06)",
+                background: theme.surface,
+                borderBottom: `1px solid ${theme.border}`,
+                boxShadow: theme.shadow,
                 padding: "16px 40px",
                 display: "flex",
                 justifyContent: "space-between",
@@ -33,7 +33,7 @@ function Navbar() {
                 to="/upload"
                 style={{
                     textDecoration: "none",
-                    color: "#111827",
+                    color: theme.text,
                     fontSize: "28px",
                     fontWeight: 700,
                 }}
