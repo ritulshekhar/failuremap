@@ -315,11 +315,27 @@ def generate_error_distribution_chart(
 
     plt.figure(figsize=(10, 6))
 
-    plt.bar(labels, values)
+    plt.bar(
+        labels,
+        values,
+        color=["#10B981", "#EF4444"],
+        edgecolor="black",
+        linewidth=0.8,
+    )
 
     plt.ylabel("Samples")
 
-    plt.title("Prediction Accuracy Distribution")
+    plt.grid(
+        axis="y",
+        linestyle="--",
+        alpha=0.4,
+    )
+    
+    plt.title(
+        "Prediction Accuracy Distribution",
+        fontsize=14,
+        fontweight="bold",
+    )
 
     plt.tight_layout()
 
