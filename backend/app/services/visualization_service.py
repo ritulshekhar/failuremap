@@ -142,6 +142,16 @@ def generate_feature_importance_chart(
         rotation=45,
         ha="right",
     )
+    
+    plt.ylabel("Importance")
+
+    plt.grid(
+        axis="y",
+        linestyle="--",
+        alpha=0.4,
+    )
+
+    plt.title("Feature Importance")
 
     plt.grid(
         axis="y",
@@ -192,13 +202,18 @@ def generate_prediction_distribution_chart(
     plt.bar(
         counts.index.astype(str),
         counts.values,
-        color="#3B82F6",
+        color="#10B981",
         edgecolor="black",
         linewidth=0.8,
     )
 
     plt.xlabel("Predicted Class")
     plt.ylabel("Count")
+    plt.grid(
+        axis="y",
+        linestyle="--",
+        alpha=0.4,
+    )
     plt.title("Prediction Distribution")
     plt.tight_layout()
 
