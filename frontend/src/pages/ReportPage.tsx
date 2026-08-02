@@ -57,6 +57,7 @@ const buttonStyle = {
     fontWeight: 600,
     cursor: "pointer",
     boxShadow: "0 3px 8px rgba(37,99,235,0.2)",
+    transition: "all 0.25s ease",
 };
 
 function ReportPage() {
@@ -930,6 +931,15 @@ function ReportPage() {
                         <button
                             onClick={downloadFullReport}
                             style={buttonStyle}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = "translateY(-2px)";
+                                e.currentTarget.style.boxShadow = "0 8px 20px rgba(37,99,235,0.3)";
+                            }}
+
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = "translateY(0)";
+                                e.currentTarget.style.boxShadow = "0 3px 8px rgba(37,99,235,0.2)";
+                            }}
                         >
                             Download Report
                         </button>
@@ -937,6 +947,15 @@ function ReportPage() {
                         <button
                             onClick={downloadFailureRegions}
                             style={buttonStyle}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = "translateY(-2px)";
+                                e.currentTarget.style.boxShadow = "0 8px 20px rgba(37,99,235,0.3)";
+                            }}
+
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = "translateY(0)";
+                                e.currentTarget.style.boxShadow = "0 3px 8px rgba(37,99,235,0.2)";
+                            }}
                         >
                             Failure Regions
                         </button>
@@ -944,6 +963,15 @@ function ReportPage() {
                         <button
                             onClick={downloadAIAnalysis}
                             style={buttonStyle}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = "translateY(-2px)";
+                                e.currentTarget.style.boxShadow = "0 8px 20px rgba(37,99,235,0.3)";
+                            }}
+
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = "translateY(0)";
+                                e.currentTarget.style.boxShadow = "0 3px 8px rgba(37,99,235,0.2)";
+                            }}
                         >
                             AI Analysis
                         </button>
@@ -951,6 +979,15 @@ function ReportPage() {
                         <button
                             onClick={printDashboard}
                             style={buttonStyle}
+                            onMouseEnter={(e) => {
+                                e.currentTarget.style.transform = "translateY(-2px)";
+                                e.currentTarget.style.boxShadow = "0 8px 20px rgba(37,99,235,0.3)";
+                            }}
+
+                            onMouseLeave={(e) => {
+                                e.currentTarget.style.transform = "translateY(0)";
+                                e.currentTarget.style.boxShadow = "0 3px 8px rgba(37,99,235,0.2)";
+                            }}
                         >
                             Print Dashboard
                         </button>
