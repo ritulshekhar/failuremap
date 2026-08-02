@@ -40,7 +40,7 @@ function VisualizationCard({
                         marginBottom: "18px",
                     }}
                 >
-                    📈
+
                 </div>
 
                 <h3
@@ -79,7 +79,26 @@ function VisualizationCard({
                 padding: "22px",
                 boxShadow:
                     "0 8px 24px rgba(0,0,0,0.08)",
-                transition: "0.3s ease",
+                transition: "all 0.25s ease",
+                cursor: "pointer",
+            }}
+            onMouseEnter={(e) => {
+
+                e.currentTarget.style.transform =
+                    "translateY(-8px)";
+
+                e.currentTarget.style.boxShadow =
+                    "0 20px 40px rgba(0,0,0,0.15)";
+
+            }}
+            onMouseLeave={(e) => {
+
+                e.currentTarget.style.transform =
+                    "translateY(0)";
+
+                e.currentTarget.style.boxShadow =
+                    "0 8px 24px rgba(0,0,0,0.08)";
+
             }}
         >
 
