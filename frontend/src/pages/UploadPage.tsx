@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useTheme } from "../ThemeContext";
 import {
   uploadDataset,
   selectTarget,
@@ -10,33 +10,35 @@ import Navbar from "../components/Navbar";
 
 import LoadingOverlay from "../components/LoadingOverlay";
 
-const primaryButtonStyle = {
-  background: "#2563eb",
-  color: "#ffffff",
-  border: "none",
-  borderRadius: "10px",
-  padding: "12px 24px",
-  fontSize: "16px",
-  fontWeight: 600,
-  cursor: "pointer",
-  boxShadow: "0 4px 12px rgba(37,99,235,0.25)",
-  transition: "0.2s",
-};
-
-const uploadCardStyle = {
-  background: "#ffffff",
-  padding: "40px",
-  borderRadius: "16px",
-  boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
-  border: "1px solid #e5e7eb",
-  maxWidth: "700px",
-  transition: "0.25s ease",
-  cursor: "pointer",
-};
-
 function UploadPage() {
 
   const navigate = useNavigate();
+
+  const { theme } = useTheme();
+
+  const primaryButtonStyle = {
+    background: "#2563eb",
+    color: theme.surface,
+    border: "none",
+    borderRadius: "10px",
+    padding: "12px 24px",
+    fontSize: "16px",
+    fontWeight: 600,
+    cursor: "pointer",
+    boxShadow: "0 4px 12px rgba(37,99,235,0.25)",
+    transition: "0.2s",
+  };
+
+  const uploadCardStyle = {
+    background: theme.surface,
+    padding: "40px",
+    borderRadius: "16px",
+    boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
+    border: `1px solid ${theme.border}`,
+    maxWidth: "700px",
+    transition: "0.25s ease",
+    cursor: "pointer",
+  };
 
   const [file, setFile] =
     useState<File | null>(null);
@@ -139,7 +141,7 @@ function UploadPage() {
             style={{
               fontSize: "42px",
               marginBottom: "12px",
-              color: "#111827",
+              color: theme.text,
             }}
           >
             Upload Dataset
@@ -148,7 +150,7 @@ function UploadPage() {
           <p
             style={{
               fontSize: "18px",
-              color: "#6b7280",
+              color: theme.secondaryText,
               maxWidth: "700px",
               lineHeight: "30px",
             }}
@@ -164,7 +166,7 @@ function UploadPage() {
             style={{
               marginTop: 0,
               marginBottom: "10px",
-              color: "#111827",
+              color: theme.text,
             }}
           >
             📁 Dataset
@@ -172,7 +174,7 @@ function UploadPage() {
 
           <p
             style={{
-              color: "#6b7280",
+              color: theme.secondaryText,
               marginBottom: "24px",
             }}
           >
@@ -194,7 +196,7 @@ function UploadPage() {
             htmlFor="csv-upload"
             style={{
               display: "block",
-              border: "2px dashed #cbd5e1",
+              border: `2px dashed ${theme.border}`,
               borderRadius: "14px",
               padding: "45px",
               textAlign: "center",
@@ -216,7 +218,7 @@ function UploadPage() {
               style={{
                 fontSize: "22px",
                 fontWeight: 700,
-                color: "#111827",
+                color: theme.text,
               }}
             >
               Drag & Drop CSV Here
@@ -225,7 +227,7 @@ function UploadPage() {
             <div
               style={{
                 margin: "10px 0",
-                color: "#6b7280",
+                color: theme.secondaryText,
               }}
             >
               OR
@@ -246,7 +248,7 @@ function UploadPage() {
               padding: "12px 16px",
               borderRadius: "10px",
               background: file ? "#ECFDF3" : "#F3F4F6",
-              color: file ? "#047857" : "#6B7280",
+              color: file ? "#047857" : theme.secondaryText,
               fontWeight: 600,
               width: "fit-content",
             }}
@@ -273,7 +275,7 @@ function UploadPage() {
                 marginTop: "24px",
                 padding: "16px",
                 background: "#ECFDF3",
-                border: "1px solid #BBF7D0",
+                border: `1px solid ${theme.border}`,
                 color: "#166534",
                 borderRadius: "12px",
                 fontWeight: 600,
@@ -304,7 +306,7 @@ function UploadPage() {
                   marginTop: "50px",
                   marginBottom: "25px",
                   fontSize: "32px",
-                  color: "#111827",
+                  color: theme.text,
                 }}
               >
                 Dataset Summary
@@ -321,17 +323,17 @@ function UploadPage() {
               >
                 <div
                   style={{
-                    background: "#ffffff",
+                    background: theme.surface,
                     borderRadius: "16px",
                     padding: "24px",
                     boxShadow:
                       "0 8px 20px rgba(0,0,0,0.08)",
-                    border: "1px solid #e5e7eb",
+                    border: `1px solid ${theme.border}`,
                   }}
                 >
                   <div
                     style={{
-                      color: "#6b7280",
+                      color: theme.secondaryText,
                       marginBottom: "10px",
                     }}
                   >
@@ -342,7 +344,7 @@ function UploadPage() {
                     style={{
                       fontSize: "38px",
                       fontWeight: 700,
-                      color: "#111827",
+                      color: theme.text,
                     }}
                   >
                     {summary.rows}
@@ -351,17 +353,17 @@ function UploadPage() {
 
                 <div
                   style={{
-                    background: "#ffffff",
+                    background: theme.surface,
                     borderRadius: "16px",
                     padding: "24px",
                     boxShadow:
                       "0 8px 20px rgba(0,0,0,0.08)",
-                    border: "1px solid #e5e7eb",
+                    border: `1px solid ${theme.border}`,
                   }}
                 >
                   <div
                     style={{
-                      color: "#6b7280",
+                      color: theme.secondaryText,
                       marginBottom: "10px",
                     }}
                   >
@@ -372,7 +374,7 @@ function UploadPage() {
                     style={{
                       fontSize: "38px",
                       fontWeight: 700,
-                      color: "#111827",
+                      color: theme.text,
                     }}
                   >
                     {summary.columns}
@@ -381,17 +383,17 @@ function UploadPage() {
 
                 <div
                   style={{
-                    background: "#ffffff",
+                    background: theme.surface,
                     borderRadius: "16px",
                     padding: "24px",
                     boxShadow:
                       "0 8px 20px rgba(0,0,0,0.08)",
-                    border: "1px solid #e5e7eb",
+                    border: `1px solid ${theme.border}`,
                   }}
                 >
                   <div
                     style={{
-                      color: "#6b7280",
+                      color: theme.secondaryText,
                       marginBottom: "10px",
                     }}
                   >
@@ -402,7 +404,7 @@ function UploadPage() {
                     style={{
                       fontSize: "38px",
                       fontWeight: 700,
-                      color: "#111827",
+                      color: theme.text,
                     }}
                   >
                     {summary.missing_values}
@@ -411,17 +413,17 @@ function UploadPage() {
 
                 <div
                   style={{
-                    background: "#ffffff",
+                    background: theme.surface,
                     borderRadius: "16px",
                     padding: "24px",
                     boxShadow:
                       "0 8px 20px rgba(0,0,0,0.08)",
-                    border: "1px solid #e5e7eb",
+                    border: `1px solid ${theme.border}`,
                   }}
                 >
                   <div
                     style={{
-                      color: "#6b7280",
+                      color: theme.secondaryText,
                       marginBottom: "10px",
                     }}
                   >
@@ -432,7 +434,7 @@ function UploadPage() {
                     style={{
                       fontSize: "38px",
                       fontWeight: 700,
-                      color: "#111827",
+                      color: theme.text,
                     }}
                   >
                     {summary.duplicates}
@@ -442,11 +444,11 @@ function UploadPage() {
 
               <div
                 style={{
-                  background: "#ffffff",
+                  background: theme.surface,
                   borderRadius: "16px",
                   padding: "28px",
                   boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
-                  border: "1px solid #e5e7eb",
+                  border: `1px solid ${theme.border}`,
                   marginBottom: "40px",
                 }}
               >
@@ -454,7 +456,7 @@ function UploadPage() {
                   style={{
                     marginTop: 0,
                     marginBottom: "20px",
-                    color: "#111827",
+                    color: theme.text,
                   }}
                 >
                   Dataset Columns
@@ -489,11 +491,11 @@ function UploadPage() {
 
               <div
                 style={{
-                  background: "#ffffff",
+                  background: theme.surface,
                   borderRadius: "16px",
                   padding: "30px",
                   boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
-                  border: "1px solid #e5e7eb",
+                  border: `1px solid ${theme.border}`,
                   marginBottom: "40px",
                 }}
               >
@@ -501,7 +503,7 @@ function UploadPage() {
                   style={{
                     marginTop: 0,
                     marginBottom: "10px",
-                    color: "#111827",
+                    color: theme.text,
                   }}
                 >
                   Target Selection
@@ -509,7 +511,7 @@ function UploadPage() {
 
                 <p
                   style={{
-                    color: "#6b7280",
+                    color: theme.secondaryText,
                     marginBottom: "20px",
                   }}
                 >
@@ -527,7 +529,7 @@ function UploadPage() {
                     padding: "14px",
                     fontSize: "16px",
                     borderRadius: "10px",
-                    border: "1px solid #d1d5db",
+                    border: `1px solid ${theme.border}`,
                     marginBottom: "24px",
                   }}
                 >
@@ -577,7 +579,7 @@ function UploadPage() {
                       marginBottom: "24px",
                       padding: "18px",
                       background: "#ECFDF3",
-                      border: "1px solid #BBF7D0",
+                      border: `1px solid ${theme.border}`,
                       borderRadius: "12px",
                       color: "#166534",
                     }}
@@ -604,11 +606,11 @@ function UploadPage() {
                 taskType && (
                   <div
                     style={{
-                      background: "#ffffff",
+                      background: theme.surface,
                       borderRadius: "16px",
                       padding: "32px",
                       boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
-                      border: "1px solid #e5e7eb",
+                      border: `1px solid ${theme.border}`,
                       marginTop: "40px",
                     }}
                   >
@@ -633,7 +635,7 @@ function UploadPage() {
                       <div>
                         <div
                           style={{
-                            color: "#6b7280",
+                            color: theme.secondaryText,
                             marginBottom: "8px",
                           }}
                         >
@@ -657,7 +659,7 @@ function UploadPage() {
                       <div>
                         <div
                           style={{
-                            color: "#6b7280",
+                            color: theme.secondaryText,
                             marginBottom: "8px",
                           }}
                         >
